@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <!--一月-->
+            <LinearLayout
+                android:id="@+id/ll_january"
+                android:layout_width="0dp"
+                android:layout_height="110dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="39dp"
+                    android:src="@mipmap/ic_january"/>
+
+                <TextView
+                    style="@style/text13"
+                    android:layout_marginTop="14.5dp"
+                    android:text="@string/shuxinting"/>
+
+            </LinearLayout>
+            <!--二月-->
+            <LinearLayout
+                android:id="@+id/ll_fabruary"
+                android:layout_width="0dp"
+                android:layout_height="110dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@mipmap/ic_fabruary"/>
+
+                <TextView
+                    style="@style/text13"
+                    android:layout_marginTop="15.5dp"
+                    android:text="@string/wenqingxu"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <!--三月-->
+            <LinearLayout
+                android:id="@+id/ll_march"
+                android:layout_width="0dp"
+                android:layout_height="110dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="48.5dp"
+                    android:src="@mipmap/ic_march"/>
+
+                <TextView
+                    style="@style/text13"
+                    android:layout_marginTop="14.5dp"
+                    android:text="@string/tinghuankuai"/>
+
+            </LinearLayout>
+            <!--四-->
+            <LinearLayout
+                android:id="@+id/ll_aril"
+                android:layout_width="0dp"
+                android:layout_height="110dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40.5dp"
+                    android:src="@mipmap/ic_april"/>
+
+                <TextView
+                    style="@style/text13"
+                    android:layout_marginTop="22dp"
+                    android:text="@string/xuehengqu"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <!--五月-->
+            <LinearLayout
+                android:id="@+id/ll_may"
+                android:layout_width="0dp"
+                android:layout_height="110dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="43.5dp"
+                    android:src="@mipmap/ic_may"/>
+
+                <TextView
+                    style="@style/text13"
+                    android:layout_marginTop="16.5dp"
+                    android:text="@string/laihudong"/>
+
+            </LinearLayout>
+            <!--六月-->
+            <LinearLayout
+                android:id="@+id/ll_june"
+                android:layout_width="0dp"
+                android:layout_height="110dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="48.5dp"
+                    android:src="@mipmap/ic_june"/>
+
+                <TextView
+                    style="@style/text13"
+                    android:layout_marginTop="22dp"
+                    android:text="@string/gongjiaoliu"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <!--七月-->
+            <LinearLayout
+                android:id="@+id/ll_july"
+                android:layout_width="0dp"
+                android:layout_height="110dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="39.5dp"
+                    android:src="@mipmap/ic_july"/>
+
+                <TextView
+                    style="@style/text13"
+                    android:layout_marginTop="16.5dp"
+                    android:text="@string/jiaoganzhi"/>
+
+            </LinearLayout>
+            <!--八月-->
+            <LinearLayout
+                android:id="@+id/ll_august"
+                android:layout_width="0dp"
+                android:layout_height="110dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="42dp"
+                    android:src="@mipmap/ic_august"/>
+
+                <TextView
+                    style="@style/text13"
+                    android:layout_marginTop="13.5dp"
+                    android:text="@string/xiangleshi"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <!--九月-->
+            <LinearLayout
+                android:id="@+id/ll_september"
+                android:layout_width="0dp"
+                android:layout_height="110dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="22dp"
+                    android:src="@mipmap/ic_september"/>
+
+                <TextView
+                    style="@style/text13"
+                    android:layout_marginTop="26dp"
+                    android:text="@string/zuoyundong"/>
+
+            </LinearLayout>
+            <!--八月-->
+            <LinearLayout
+                android:id="@+id/ll_october"
+                android:layout_width="0dp"
+                android:layout_height="110dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="50dp"
+                    android:src="@mipmap/ic_october"/>
+
+                <TextView
+                    style="@style/text13"
+                    android:layout_marginTop="5.5dp"
+                    android:text="@string/gongjiaoliu"/>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</android.support.v4.widget.NestedScrollView>

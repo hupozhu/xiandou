@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center">
+
+    <LinearLayout
+        android:layout_width="280dp"
+        android:layout_height="150dp"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="23dp"
+            android:text="@string/pick_avatar"
+            android:textColor="@color/black_title"
+            android:textSize="17sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_take_photo"
+            android:layout_width="match_parent"
+            android:layout_height="33dp"
+            android:layout_margin="9dp"
+            android:gravity="center"
+            android:text="@string/take_photo"
+            android:textColor="@color/colorPrimary"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tv_pick_photo"
+            android:layout_width="match_parent"
+            android:layout_height="33dp"
+            android:layout_margin="9dp"
+            android:gravity="center"
+            android:text="@string/album_photo"
+            android:textColor="@color/colorPrimary"
+            android:textSize="15sp" />
+
+    </LinearLayout>
+
+</RelativeLayout>

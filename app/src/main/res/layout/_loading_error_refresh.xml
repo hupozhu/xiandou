@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/common_gray">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="100dp"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="115dp"
+            android:layout_height="99dp"
+            android:layout_gravity="center_horizontal"
+            android:src="@mipmap/ss_no_network" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="26dp"
+            android:text="欧耶!网络不太给力"
+            android:textColor="@color/gray_hint" />
+
+        <Button
+            android:id="@+id/refresh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="15dp"
+            android:text="点击刷新"
+            android:textSize="13sp"
+            android:background="@drawable/ss_selectable_refresh_button"
+            android:textColor="@color/white" />
+
+    </LinearLayout>
+
+</FrameLayout>
