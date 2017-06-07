@@ -1,5 +1,6 @@
 package cn.sampson.android.xiandou.ui.guide;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -13,12 +14,13 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import cn.sampson.android.xiandou.R;
 import cn.sampson.android.xiandou.ui.BaseFragment;
+import cn.sampson.android.xiandou.ui.guide.fortyweeks.FortyWeeksActivity;
 
 /**
  * Created by Administrator on 2017/6/5.
  */
 
-public class GuideFragment extends BaseFragment {
+public class GuideFragment extends BaseFragment implements View.OnClickListener {
 
     @Bind(R.id.iv_banner)
     ImageView mIvBanner;
@@ -46,12 +48,27 @@ public class GuideFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_guide, null);
         ButterKnife.bind(this, view);
+        initView();
         return view;
+    }
+
+    private void initView() {
+        mSizhizhou.setOnClickListener(this);
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.sizhizhou:
+                Intent intent = new Intent(getActivity(), FortyWeeksActivity.class);
+                getActivity().startActivity(intent);
+                break;
+        }
     }
 }

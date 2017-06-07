@@ -6,6 +6,7 @@
 
 
     <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
     <color name="yellow">#ffba26</color>
     <color name="common_gray">#f2f2f2</color>
     <color name="gray_hint">#cccccc</color>
@@ -21,8 +22,11 @@
     <color name="gray4">#bbbbbb</color>
     <color name="gray5">#9da1a7</color>
     <color name="gray6">#222222</color>
+    <color name="gray7">#616161</color>
+    <color name="gray8">#a6a3a3</color>
 
     <color name="pink">#fe397a</color>
     <color name="pink1">#f8afb7</color>
     <color name="pink2">#ff4c4c</color>
+    <color name="pink3">#ff9696</color>
 </resources>

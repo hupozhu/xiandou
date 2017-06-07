@@ -15,7 +15,6 @@ import cn.sampson.android.xiandou.utils.widget.TabFragmentAdapter;
 public class MainActivity extends BaseActivity {
 
     private static String POSITION = "position";
-    private static int TAB_INDICATOR_MARIN = 38;
 
     @Bind(R.id.pager)
     ViewPager mPager;
@@ -27,7 +26,6 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        StatusBarUtil.StatusBarLightMode(this);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 

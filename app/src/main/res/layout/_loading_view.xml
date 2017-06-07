@@ -10,7 +10,7 @@
         android:layout_height="70dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="160dp"
-        wheel:matProg_barColor="@color/colorPrimary"
+        wheel:matProg_barColor="@color/gray7"
         wheel:matProg_barWidth="3dp"
         wheel:matProg_progressIndeterminate="true"
         wheel:matProg_rimColor="@color/common_gray"

@@ -31,4 +31,73 @@
 
     <string name="play_settings">播放设置</string>
     <string name="current_version">当前版本</string>
+
+    <string name="example_image">示例图</string>
+    <string name="shipin_tuijian">饮食推荐：%1$s</string>
+    <string name="zuofa">做法</string>
+    <string name="cailiao">材料</string>
+
+    <string-array name="pregnancy_week">
+        <item>第1周</item>
+        <item>第2周</item>
+        <item>第3周</item>
+        <item>第4周</item>
+        <item>第5周</item>
+        <item>第6周</item>
+        <item>第7周</item>
+        <item>第8周</item>
+        <item>第9周</item>
+        <item>第10周</item>
+        <item>第11周</item>
+        <item>第12周</item>
+        <item>第13周</item>
+        <item>第14周</item>
+        <item>第15周</item>
+        <item>第16周</item>
+        <item>第17周</item>
+        <item>第18周</item>
+        <item>第19周</item>
+        <item>第20周</item>
+        <item>第21周</item>
+        <item>第22周</item>
+        <item>第23周</item>
+        <item>第24周</item>
+        <item>第25周</item>
+        <item>第26周</item>
+        <item>第27周</item>
+        <item>第28周</item>
+        <item>第29周</item>
+        <item>第30周</item>
+        <item>第31周</item>
+        <item>第32周</item>
+        <item>第33周</item>
+        <item>第34周</item>
+        <item>第35周</item>
+        <item>第36周</item>
+        <item>第37周</item>
+        <item>第38周</item>
+        <item>第39周</item>
+        <item>第40周</item>
+    </string-array>
+
+    <string-array name="two_hundred_eighty">
+        <item>孕妇早起</item>
+        <item>孕妇中期</item>
+        <item>孕妇后期</item>
+    </string-array>
+
+    <string-array name="read_days1">
+        <item>第1天</item>
+        <item>第90天</item>
+    </string-array>
+
+    <string-array name="read_days2">
+        <item>第91天</item>
+        <item>第150天</item>
+    </string-array>
+
+    <string-array name="read_days3">
+        <item>第151天</item>
+        <item>第280天</item>
+    </string-array>
 </resources>
