@@ -14,6 +14,8 @@ import java.util.Set;
 
 import cn.sampson.android.xiandou.BaseApp;
 import cn.sampson.android.xiandou.R;
+import cn.sampson.android.xiandou.core.AppCache;
+import cn.sampson.android.xiandou.utils.ContextUtil;
 import cn.sampson.android.xiandou.utils.NetworkUtil;
 import cn.sampson.android.xiandou.utils.Tip;
 import rx.Observable;
@@ -85,7 +87,7 @@ public abstract class BasePresenter<T extends IView> {
      */
     protected void requestData(Observable observable, final String key, final AnsyResultTask ansyTask) {
         requestComeIn(observable, key);
-        if (NetworkUtil.isNetworkAvailable(BaseApp.getInstance().getApplicationContext())) {
+        if (NetworkUtil.isNetworkAvailable(ContextUtil.getContext())) {
             observable
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
@@ -93,11 +95,9 @@ public abstract class BasePresenter<T extends IView> {
                         @Override
                         public void call(Result result) {
                             if (view == null) return;
-
-                           Tip.i("========> result = " + result.toString());
-
+                            Tip.i("========> result = " + result.toString());
                             switch (result.code) {
-                                case 200://获取数据成功
+                                case 1://获取数据成功
                                     successReturn();
                                     if (null != ansyTask) {
                                         new AnsyProcessResultTask(ansyTask).execute(result);
@@ -105,16 +105,11 @@ public abstract class BasePresenter<T extends IView> {
                                     } else {
                                         onResult(result, key);
                                     }
-
-                                    break;
-                                case 204://没有数据
-                                    successReturn();
-                                    onError(result.code, result.show_msg, key);
                                     break;
 
                                 default:
                                     exceptionReturn();
-                                    onError(result.code, result.show_msg, key);
+                                    onError(result.code, result.massage, key);
                                     break;
                             }
 
@@ -241,7 +236,7 @@ public abstract class BasePresenter<T extends IView> {
     //重连网络的view关闭就代表初次的所有请求都过来了
     protected void showLoadingView() {
         showLoadingLayout = true;
-        loadingView = LayoutInflater.from(BaseApp.getInstance()).inflate(R.layout._loading_view, rootView, false);
+        loadingView = LayoutInflater.from(ContextUtil.getContext()).inflate(R.layout._loading_view, rootView, false);
         rootView.addView(loadingView, rootView.getChildCount());
     }
 
@@ -250,7 +245,7 @@ public abstract class BasePresenter<T extends IView> {
         if (errorView != null && errorView.getVisibility() == View.GONE) {
             errorView.setVisibility(View.VISIBLE);
         } else if (errorView == null) {
-            errorView = LayoutInflater.from(BaseApp.getInstance()).inflate(R.layout._loading_error_refresh, rootView, false);
+            errorView = LayoutInflater.from(ContextUtil.getContext()).inflate(R.layout._loading_error_refresh, rootView, false);
             errorView.findViewById(R.id.refresh).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -271,7 +266,7 @@ public abstract class BasePresenter<T extends IView> {
         Tip.w(key + "===>" + errorStr);
 
         if (!TextUtils.isEmpty(errorStr))
-            Toast.makeText(BaseApp.getInstance(), errorStr, Toast.LENGTH_SHORT).show();
+            Toast.makeText(ContextUtil.getContext(), errorStr, Toast.LENGTH_SHORT).show();
 
         view.setError(errorCode, errorStr, key);
         setError(errorCode, errorStr, key);

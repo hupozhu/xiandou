@@ -37,6 +37,12 @@
     <string name="zuofa">做法</string>
     <string name="cailiao">材料</string>
 
+    <string name="play_time_start">00:00</string>
+    <string name="music_notify_subtitle">怀孕%1$s月胎教精选</string>
+    <string name="mode_loop">列表循环</string>
+    <string name="mode_shuffle">随机播放</string>
+    <string name="mode_one">单曲循环</string>
+
     <string-array name="pregnancy_week">
         <item>第1周</item>
         <item>第2周</item>
@@ -84,11 +90,6 @@
         <item>孕妇早起</item>
         <item>孕妇中期</item>
         <item>孕妇后期</item>
-    </string-array>
-
-    <string-array name="read_days1">
-        <item>第1天</item>
-        <item>第90天</item>
     </string-array>
 
     <string-array name="read_days2">

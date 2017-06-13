@@ -31,7 +31,7 @@ public class NetworkUtil {
      */
     public static String getCurrentNetType() {
         String type = "";
-        ConnectivityManager cm = (ConnectivityManager) BaseApp.getInstance().getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager cm = (ConnectivityManager) ContextUtil.getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo info = cm.getActiveNetworkInfo();
         if (info == null) {
             type = "null";

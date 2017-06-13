@@ -8,6 +8,7 @@ import android.support.v4.view.ViewPager;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import cn.sampson.android.xiandou.R;
+import cn.sampson.android.xiandou.core.AppCache;
 import cn.sampson.android.xiandou.ui.BaseActivity;
 import cn.sampson.android.xiandou.utils.systembar.StatusBarUtil;
 import cn.sampson.android.xiandou.utils.widget.TabFragmentAdapter;
@@ -28,7 +29,8 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-
+        //用来判断首页是否存在
+        AppCache.setMainActiivty(this);
         initView();
     }
 

@@ -6,6 +6,7 @@ import android.content.res.Resources;
 import android.view.View;
 
 import cn.sampson.android.xiandou.BaseApp;
+import cn.sampson.android.xiandou.core.AppCache;
 
 
 /**
@@ -31,7 +32,7 @@ public class ContextUtil {
      * 得到上下文
      */
     public static Context getContext(){
-        return BaseApp.getInstance();
+        return AppCache.getContext();
     }
 
     /**

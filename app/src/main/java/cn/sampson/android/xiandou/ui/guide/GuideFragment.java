@@ -15,6 +15,7 @@ import butterknife.ButterKnife;
 import cn.sampson.android.xiandou.R;
 import cn.sampson.android.xiandou.ui.BaseFragment;
 import cn.sampson.android.xiandou.ui.guide.fortyweeks.FortyWeeksActivity;
+import cn.sampson.android.xiandou.ui.guide.twohundredeighty.TwoHundredEightyActivity;
 
 /**
  * Created by Administrator on 2017/6/5.
@@ -54,6 +55,7 @@ public class GuideFragment extends BaseFragment implements View.OnClickListener 
 
     private void initView() {
         mSizhizhou.setOnClickListener(this);
+        mErbaibashitian.setOnClickListener(this);
     }
 
     @Override
@@ -68,6 +70,10 @@ public class GuideFragment extends BaseFragment implements View.OnClickListener 
             case R.id.sizhizhou:
                 Intent intent = new Intent(getActivity(), FortyWeeksActivity.class);
                 getActivity().startActivity(intent);
+                break;
+            case R.id.erbaibashitian:
+                Intent intent280 = new Intent(getActivity(), TwoHundredEightyActivity.class);
+                getActivity().startActivity(intent280);
                 break;
         }
     }

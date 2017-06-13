@@ -1,5 +1,6 @@
 package cn.sampson.android.xiandou.utils;
 
+import android.content.Context;
 import android.os.StatFs;
 
 
@@ -17,7 +18,7 @@ public class CacheUtil {
      * 获取默认的缓存路径
      */
     public static File getDefaultCacheDir() {
-        return BaseApp.getInstance().getExternalCacheDir();
+        return ContextUtil.getContext().getExternalCacheDir();
     }
 
     /**
@@ -37,7 +38,7 @@ public class CacheUtil {
     }
 
     public static File createDefaultCacheDir() {
-        return BaseApp.getInstance().getExternalCacheDir();
+        return ContextUtil.getContext().getExternalCacheDir();
     }
 
 }

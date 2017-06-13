@@ -34,7 +34,7 @@ public class ReadEveryDayDBHelper {
 
         String sql = "SELECT * FROM todays";
         Cursor cursor = mDBHelper.getReadableDatabase().rawQuery(sql, null);
-        if (cursor.moveToFirst()) {
+        while (cursor.moveToNext()) {
             infos.put(cursor.getInt(cursor.getColumnIndex("id")), cursor.getString(cursor.getColumnIndex("info")));
         }
         cursor.close();

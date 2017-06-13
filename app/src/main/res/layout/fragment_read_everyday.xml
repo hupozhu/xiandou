@@ -2,18 +2,34 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_days"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="11dp"
+        android:layout_marginTop="25dp"
+        android:overScrollMode="@null"
+        android:paddingLeft="16dp" />
+
+    <TextView
+        android:id="@+id/tv_info"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <WebView
-        android:id="@+id/web_info"
+    <FrameLayout
+        android:id="@+id/web_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="9dp"
-        android:layout_marginTop="25dp"></WebView>
+        android:layout_height="match_parent">
+
+        <WebView
+            android:id="@+id/web_info"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="9dp"
+            android:layout_marginTop="25dp"></WebView>
+    </FrameLayout>
 
 </LinearLayout>

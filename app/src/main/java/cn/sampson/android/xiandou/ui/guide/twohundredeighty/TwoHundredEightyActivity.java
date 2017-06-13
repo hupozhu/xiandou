@@ -11,14 +11,12 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 import java.lang.ref.WeakReference;
-import java.util.ArrayList;
 import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import cn.sampson.android.xiandou.R;
 import cn.sampson.android.xiandou.ui.BaseActivity;
-import cn.sampson.android.xiandou.ui.guide.fortyweeks.FortyWeeksActivity;
 import cn.sampson.android.xiandou.ui.guide.twohundredeighty.db.ReadEveryDayDBHelper;
 import cn.sampson.android.xiandou.utils.widget.adapter.TabStateFragmentAdapter;
 
@@ -58,6 +56,10 @@ public class TwoHundredEightyActivity extends BaseActivity {
         tabs.setupWithViewPager(pager);
     }
 
+    public Map<Integer, String> getInfos() {
+        return infos;
+    }
+
     private void getDataFromDB() {
         loadingView = LayoutInflater.from(TwoHundredEightyActivity.this).inflate(R.layout._loading_view, null);
         flRoot.addView(loadingView);
@@ -67,9 +69,9 @@ public class TwoHundredEightyActivity extends BaseActivity {
             public void run() {
                 ReadEveryDayDBHelper helper = new ReadEveryDayDBHelper(TwoHundredEightyActivity.this);
                 infos = helper.getInfos();
+                myHandler.sendEmptyMessage(1);
             }
         }).start();
-
     }
 
     private MyHandler myHandler = new MyHandler(TwoHundredEightyActivity.this);
@@ -99,6 +101,5 @@ public class TwoHundredEightyActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         myHandler.removeMessages(1);
-        myHandler.removeMessages(2);
     }
 }

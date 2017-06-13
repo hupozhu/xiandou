@@ -1,13 +1,15 @@
 package cn.sampson.android.xiandou.ui;
 
 import android.content.Intent;
+import android.media.AudioManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.View;
 
 import cn.sampson.android.xiandou.R;
 import cn.sampson.android.xiandou.utils.systembar.StatusBarUtil;
@@ -17,6 +19,7 @@ import cn.sampson.android.xiandou.utils.systembar.StatusBarUtil;
  */
 
 public class BaseActivity extends AppCompatActivity {
+    protected Handler mHandler = new Handler(Looper.getMainLooper());
 
     protected Toolbar mToolbar;
     protected ActionBar mActionToolbar;
@@ -25,6 +28,7 @@ public class BaseActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         StatusBarUtil.StatusBarLightMode(this);
+        setVolumeControlStream(AudioManager.STREAM_MUSIC);
     }
 
     protected void setActionBarBack() {

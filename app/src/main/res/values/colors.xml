@@ -3,7 +3,10 @@
     <color name="colorPrimary">#ffffff</color>
     <color name="colorPrimaryDark">#ffffff</color>
     <color name="colorAccent">#FF4081</color>
-
+    <color name="black_50p">#80000000</color>
+    <color name="white_8p">#14FFFFFF</color>
+    <color name="white_24p">#3DFFFFFF</color>
+    <color name="white_50p">#80FFFFFF</color>
 
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
@@ -29,4 +32,7 @@
     <color name="pink1">#f8afb7</color>
     <color name="pink2">#ff4c4c</color>
     <color name="pink3">#ff9696</color>
+
+    <color name="red">#F44336</color>
+    <color name="red_30p">#4CF44336</color>
 </resources>
