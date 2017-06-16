@@ -78,4 +78,10 @@ public class MainActivity extends BaseActivity {
         super.onRestoreInstanceState(savedInstanceState);
         mPager.setCurrentItem(savedInstanceState.getInt(POSITION));
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        AppCache.setMainActiivty(null);
+    }
 }

@@ -3,9 +3,7 @@ package cn.sampson.android.xiandou.utils;
 import android.content.Context;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.os.Environment;
 import android.util.Log;
 
 import java.io.File;
@@ -22,13 +20,15 @@ public class DBHelper extends SQLiteOpenHelper {
     private final Context mContext;
 
     private static String DATABASE_PATH = "/data/data/cn.sampson.android.xiaodou/databases/";
-    private static final String DATABASE_NAME = "read_everyday.db";
-    private static final int DATABASE_VERSION = 1;
+    private static String DATABASE_NAME = "read_everyday280.db";
+    private static int DATABASE_VERSION = 3;
 
-    public DBHelper(Context context) {
-        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    public DBHelper(Context context, String dbName, int version) {
+        super(context, dbName, null, version);
+        DATABASE_NAME = dbName;
+        DATABASE_VERSION = version;
         this.mContext = context;
-        DATABASE_PATH = mContext.getApplicationContext().getFilesDir().getParent() + "/databases/";
+        DATABASE_PATH = mContext.getApplicationContext().getFilesDir() + File.separator + "databases" + File.separator;
     }
 
     public DBHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
@@ -91,13 +91,13 @@ public class DBHelper extends SQLiteOpenHelper {
      */
     private void copyDataBase() throws IOException {
         Log.d(LOG_TAG, "copyDataBase");
-        String outFileName = DATABASE_NAME + DATABASE_NAME;
+        String outFileName = DATABASE_PATH + DATABASE_NAME;
 
         Log.d(LOG_TAG, "database path = " + outFileName);
         // 检查 SQLite 数据库文件是否存在
         if (!(new File(outFileName)).exists()) {
             // 如 SQLite 数据库文件不存在，再检查一下 database 目录是否存在
-            File f = new File(DATABASE_NAME);
+            File f = new File(DATABASE_PATH);
             // 如 database 目录不存在，新建该目录
             if (!f.exists()) {
                 f.mkdir();
@@ -130,7 +130,10 @@ public class DBHelper extends SQLiteOpenHelper {
         Log.d(LOG_TAG, "openDataBase");
         String myPath = DATABASE_PATH + DATABASE_NAME;
         mDataBase = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READONLY);
+    }
 
+    public SQLiteDatabase getDataBase() {
+        return mDataBase;
     }
 
     @Override
@@ -143,12 +146,14 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        // TODO Auto-generated method stub  
+        // TODO Auto-generated method stub
+        Log.i("xinye", "#############数据库创建了##############:" + DATABASE_VERSION);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // TODO Auto-generated method stub  
+        // TODO Auto-generated method stub
+        Log.i("xinye", "#############数据库创建了##############:" + DATABASE_VERSION);
     }
 
 }

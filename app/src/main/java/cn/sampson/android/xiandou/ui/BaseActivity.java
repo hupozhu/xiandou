@@ -12,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import cn.sampson.android.xiandou.R;
+import cn.sampson.android.xiandou.ui.main.MainActivity;
 import cn.sampson.android.xiandou.utils.systembar.StatusBarUtil;
 
 /**
@@ -21,7 +22,6 @@ import cn.sampson.android.xiandou.utils.systembar.StatusBarUtil;
 public class BaseActivity extends AppCompatActivity {
     protected Handler mHandler = new Handler(Looper.getMainLooper());
 
-    protected Toolbar mToolbar;
     protected ActionBar mActionToolbar;
 
     @Override
@@ -29,6 +29,8 @@ public class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         StatusBarUtil.StatusBarLightMode(this);
         setVolumeControlStream(AudioManager.STREAM_MUSIC);
+        if (!(this instanceof MainActivity || this instanceof SplashActivity))
+            setActionBarBack();
     }
 
     protected void setActionBarBack() {

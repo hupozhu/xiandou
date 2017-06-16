@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="match_parent"
-                                            android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -10,11 +10,17 @@
         android:orientation="vertical">
 
 
-        <ImageView
-            android:id="@+id/iv_banner"
+        <RelativeLayout
+            android:id="@+id/rl_ad_container"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:src="@mipmap/ic_main_banner"/>
+            android:layout_height="150dp">
+
+            <ImageView
+                android:id="@+id/iv_banner"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@mipmap/ic_main_banner" />
+        </RelativeLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -34,13 +40,13 @@
                     android:layout_width="61.5dp"
                     android:layout_height="61.5dp"
                     android:layout_centerHorizontal="true"
-                    android:src="@mipmap/huaiyunsishizhou"/>
+                    android:src="@mipmap/huaiyunsishizhou" />
 
                 <TextView
                     style="@style/text13"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="10dp"
-                    android:text="@string/huaiyunsishizhou"/>
+                    android:text="@string/huaiyunsishizhou" />
             </LinearLayout>
 
             <!--280天-->
@@ -56,13 +62,13 @@
                     android:layout_width="61.5dp"
                     android:layout_height="61.5dp"
                     android:layout_centerHorizontal="true"
-                    android:src="@mipmap/erbaibashitian"/>
+                    android:src="@mipmap/erbaibashitian" />
 
                 <TextView
                     style="@style/text13"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="10dp"
-                    android:text="@string/erbaibashitian"/>
+                    android:text="@string/erbaibashitian" />
             </LinearLayout>
             <!--孕期注意-->
             <LinearLayout
@@ -77,20 +83,20 @@
                     android:layout_width="61.5dp"
                     android:layout_height="61.5dp"
                     android:layout_centerHorizontal="true"
-                    android:src="@mipmap/yunqizhuyi"/>
+                    android:src="@mipmap/yunqizhuyi" />
 
                 <TextView
                     style="@style/text13"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="10dp"
-                    android:text="@string/yunqizhuyi"/>
+                    android:text="@string/yunqizhuyi" />
             </LinearLayout>
         </LinearLayout>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="13dp"
-            android:background="#f1f1f1"/>
+            android:background="#f1f1f1" />
         <!--胎教早知道-->
         <LinearLayout
             android:layout_width="wrap_content"
@@ -102,13 +108,13 @@
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="19dp"
-                android:src="@mipmap/ic_main_book"/>
+                android:src="@mipmap/ic_main_book" />
 
             <ImageView
                 android:layout_width="68dp"
                 android:layout_height="12.5dp"
                 android:layout_marginLeft="4dp"
-                android:src="@mipmap/ic_main_taijiao"/>
+                android:src="@mipmap/ic_main_taijiao" />
         </LinearLayout>
 
         <LinearLayout
@@ -123,27 +129,27 @@
                 android:id="@+id/iv_taijiao1"
                 android:layout_width="111.5dp"
                 android:layout_height="87.5dp"
-                android:src="@mipmap/iv_taijiao1"/>
+                android:src="@mipmap/iv_taijiao1" />
 
             <ImageView
                 android:id="@+id/iv_taijiao2"
                 android:layout_width="111.5dp"
                 android:layout_height="87.5dp"
                 android:layout_marginLeft="10dp"
-                android:src="@mipmap/ic_taijiao2"/>
+                android:src="@mipmap/ic_taijiao2" />
 
             <ImageView
                 android:id="@+id/iv_taijiao3"
                 android:layout_width="111.5dp"
                 android:layout_height="87.5dp"
                 android:layout_marginLeft="10dp"
-                android:src="@mipmap/ic_taijiao3"/>
+                android:src="@mipmap/ic_taijiao3" />
         </LinearLayout>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="5dp"
-            android:background="#f1f1f1"/>
+            android:background="#f1f1f1" />
 
         <!--爸爸讲故事-->
         <LinearLayout
@@ -157,13 +163,13 @@
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="19dp"
-                android:src="@mipmap/ic_main_star"/>
+                android:src="@mipmap/ic_main_star" />
 
             <ImageView
                 android:layout_width="68dp"
                 android:layout_height="12.5dp"
                 android:layout_marginLeft="4dp"
-                android:src="@mipmap/ic_main_babajianggushi"/>
+                android:src="@mipmap/ic_main_babajianggushi" />
         </LinearLayout>
         <!--一千零一夜-->
         <RelativeLayout
@@ -178,14 +184,14 @@
                 android:layout_marginBottom="13dp"
                 android:layout_marginLeft="35dp"
                 android:layout_marginTop="13dp"
-                android:src="@mipmap/ic_main_yiqianyiye"/>
+                android:src="@mipmap/ic_main_yiqianyiye" />
 
             <TextView
                 style="@style/text15"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="18dp"
                 android:layout_toRightOf="@+id/anchor"
-                android:text="@string/yiqianyiye"/>
+                android:text="@string/yiqianyiye" />
 
             <ImageView
                 android:layout_width="13.5dp"
@@ -193,7 +199,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="23dp"
-                android:src="@mipmap/ic_main_next"/>
+                android:src="@mipmap/ic_main_next" />
         </RelativeLayout>
 
         <View
@@ -201,7 +207,7 @@
             android:layout_height="1dp"
             android:layout_marginLeft="29dp"
             android:layout_marginRight="29dp"
-            android:background="#f1f1f1"/>
+            android:background="#f1f1f1" />
 
         <!--安徒生童话-->
         <RelativeLayout
@@ -216,14 +222,14 @@
                 android:layout_marginBottom="13dp"
                 android:layout_marginLeft="35dp"
                 android:layout_marginTop="13dp"
-                android:src="@mipmap/ic_main_antusheng"/>
+                android:src="@mipmap/ic_main_antusheng" />
 
             <TextView
                 style="@style/text15"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="18dp"
                 android:layout_toRightOf="@+id/anchor1"
-                android:text="@string/antusheng"/>
+                android:text="@string/antusheng" />
 
             <ImageView
                 android:layout_width="13.5dp"
@@ -231,7 +237,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="23dp"
-                android:src="@mipmap/ic_main_next"/>
+                android:src="@mipmap/ic_main_next" />
         </RelativeLayout>
 
         <View
@@ -239,7 +245,7 @@
             android:layout_height="1dp"
             android:layout_marginLeft="29dp"
             android:layout_marginRight="29dp"
-            android:background="#f1f1f1"/>
+            android:background="#f1f1f1" />
 
         <!--格林童话-->
         <RelativeLayout
@@ -254,14 +260,14 @@
                 android:layout_marginBottom="13dp"
                 android:layout_marginLeft="35dp"
                 android:layout_marginTop="13dp"
-                android:src="@mipmap/ic_main_gelin"/>
+                android:src="@mipmap/ic_main_gelin" />
 
             <TextView
                 style="@style/text15"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="18dp"
                 android:layout_toRightOf="@+id/anchor2"
-                android:text="@string/gelintonghua"/>
+                android:text="@string/gelintonghua" />
 
             <ImageView
                 android:layout_width="13.5dp"
@@ -269,7 +275,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="23dp"
-                android:src="@mipmap/ic_main_next"/>
+                android:src="@mipmap/ic_main_next" />
         </RelativeLayout>
 
     </LinearLayout>

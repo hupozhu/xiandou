@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -21,6 +23,9 @@ import butterknife.ButterKnife;
 import cn.sampson.android.xiandou.R;
 import cn.sampson.android.xiandou.ui.BaseActivity;
 import cn.sampson.android.xiandou.ui.guide.fortyweeks.doman.PregnancyWeek;
+import cn.sampson.android.xiandou.utils.MD5Util;
+import cn.sampson.android.xiandou.utils.des.DES3Model;
+import cn.sampson.android.xiandou.utils.plist.PListUtils;
 import cn.sampson.android.xiandou.utils.plist.PListXMLHandler;
 import cn.sampson.android.xiandou.utils.plist.PListXMLParser;
 import cn.sampson.android.xiandou.utils.plist.domain.Array;
@@ -60,7 +65,6 @@ public class FortyWeeksActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forty_weeks);
         ButterKnife.bind(this);
-        setActionBarBack();
 
         asynParserData();
     }
@@ -114,11 +118,8 @@ public class FortyWeeksActivity extends BaseActivity {
         PListXMLHandler handler = new PListXMLHandler();
         parser.setHandler(handler);
         try {
-            // hsk.plist是你要解析的文件，该文件需放在assets文件夹下
-            parser.parse(this.getClass().getClassLoader().getResourceAsStream("assets/huaiyun40.plist"));
-        } catch (IllegalStateException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+            parser.parse(PListUtils.getFiles(this,"huaiyun40"));
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -140,11 +141,10 @@ public class FortyWeeksActivity extends BaseActivity {
         PListXMLHandler handler = new PListXMLHandler();
         parser.setHandler(handler);
         try {
-            // hsk.plist是你要解析的文件，该文件需放在assets文件夹下
-            parser.parse(this.getClass().getClassLoader().getResourceAsStream("assets/yingyangtuijian.plist"));
+            parser.parse(PListUtils.getFiles(this,"yingyangtuijian"));
         } catch (IllegalStateException e) {
             e.printStackTrace();
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -230,6 +230,5 @@ public class FortyWeeksActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         myHandler.removeMessages(1);
-        myHandler.removeMessages(2);
     }
 }

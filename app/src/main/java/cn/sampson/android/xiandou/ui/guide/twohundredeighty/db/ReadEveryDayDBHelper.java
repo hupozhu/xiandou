@@ -16,11 +16,9 @@ import cn.sampson.android.xiandou.utils.DBHelper;
 public class ReadEveryDayDBHelper {
 
     private DBHelper mDBHelper;
-    private Context mContext;
 
     public ReadEveryDayDBHelper(Context context) {
-        mContext = context;
-        mDBHelper = new DBHelper(context);
+        mDBHelper = new DBHelper(context, "read_everyday280.db", 3);
         try {
             mDBHelper.createDataBase();
             mDBHelper.openDataBase();
@@ -32,12 +30,13 @@ public class ReadEveryDayDBHelper {
     public Map<Integer, String> getInfos() {
         Map<Integer, String> infos = new HashMap<>();
 
-        String sql = "SELECT * FROM todays";
-        Cursor cursor = mDBHelper.getReadableDatabase().rawQuery(sql, null);
+        String sql = "select * from todays";
+        Cursor cursor = mDBHelper.getDataBase().rawQuery(sql, null);
         while (cursor.moveToNext()) {
             infos.put(cursor.getInt(cursor.getColumnIndex("id")), cursor.getString(cursor.getColumnIndex("info")));
         }
         cursor.close();
+        mDBHelper.close();
         return infos;
     }
 

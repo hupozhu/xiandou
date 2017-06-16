@@ -18,6 +18,8 @@
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:name=".BaseApp"
@@ -27,31 +29,57 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".ui.SplashActivity">
+        <activity
+            android:name=".ui.SplashActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/ActivityNoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.main.MainActivity" />
+        <activity
+            android:name=".ui.main.MainActivity"
+            android:screenOrientation="portrait" />
 
         <!--怀孕四十周-->
         <activity
             android:name=".ui.guide.fortyweeks.FortyWeeksActivity"
-            android:label="@string/huaiyunsishizhou" />
+            android:label="@string/huaiyunsishizhou"
+            android:screenOrientation="portrait" />
 
         <!--280天-->
         <activity
             android:name=".ui.guide.twohundredeighty.TwoHundredEightyActivity"
-            android:label="@string/erbaibashitian" />
+            android:label="@string/erbaibashitian"
+            android:screenOrientation="portrait" />
+
+        <!--孕期注意，胎教-->
+        <activity
+            android:name=".ui.guide.attention.PregnancyAttentionActivity"
+            android:label="@string/yunqizhuyi"
+            android:screenOrientation="portrait" />
+
+        <!--爸爸讲故事-->
+        <activity
+            android:name=".ui.guide.information.StoryActivity"
+            android:screenOrientation="portrait" />
 
         <!--歌曲列表-->
-        <activity android:name=".ui.training.music.MusicListActivity" />
+        <activity
+            android:name=".ui.training.music.MusicListActivity"
+            android:screenOrientation="portrait" />
+
+        <!--歌曲列表-->
+        <activity
+            android:name=".ui.guide.information.InformationActivity"
+            android:screenOrientation="portrait" />
 
         <!--播放歌曲-->
         <activity
             android:name=".ui.training.music.PlayActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/ActivityNoActionBar" />
 
 
@@ -62,6 +90,9 @@
         </receiver>
 
         <service android:name=".ui.training.music.service.PlayService" />
+
+        <service android:name="com.qq.e.comm.DownloadService" android:exported="false" />
+        <activity android:name="com.qq.e.ads.ADActivity" android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
 
     </application>
 

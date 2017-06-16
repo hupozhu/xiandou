@@ -7,8 +7,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatSeekBar;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -19,7 +19,6 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import cn.sampson.android.xiandou.R;
 import cn.sampson.android.xiandou.core.AppCache;
-import cn.sampson.android.xiandou.ui.BaseActivity;
 import cn.sampson.android.xiandou.ui.SplashActivity;
 import cn.sampson.android.xiandou.ui.training.model.Musics;
 import cn.sampson.android.xiandou.ui.training.music.receiver.RemoteControlReceiver;
@@ -33,6 +32,8 @@ import cn.sampson.android.xiandou.utils.ToastUtils;
 import cn.sampson.android.xiandou.utils.systembar.StatusBarUtil;
 import cn.sampson.android.xiandou.utils.widget.playmusic.AlbumCoverView;
 
+import static android.R.attr.duration;
+
 /**
  * 音乐播放页面
  * Created by chengyang on 2017/6/12.
@@ -40,7 +41,7 @@ import cn.sampson.android.xiandou.utils.widget.playmusic.AlbumCoverView;
 
 public class PlayActivity extends AppCompatActivity implements OnPlayerEventListener, View.OnClickListener, SeekBar.OnSeekBarChangeListener {
 
-    public  static final String MUSIC_POSITION = "music_position";
+    public static final String MUSIC_POSITION = "music_position";
 
     @Bind(R.id.iv_play_page_bg)
     ImageView ivPlayPageBg;
@@ -49,7 +50,7 @@ public class PlayActivity extends AppCompatActivity implements OnPlayerEventList
     @Bind(R.id.tv_title)
     TextView tvTitle;
     @Bind(R.id.sb_progress)
-    SeekBar sbProgress;
+    AppCompatSeekBar sbProgress;
     @Bind(R.id.tv_total_time)
     TextView tvTotalTime;
     @Bind(R.id.iv_mode)
@@ -212,15 +213,13 @@ public class PlayActivity extends AppCompatActivity implements OnPlayerEventList
 
     @Override
     public void onStopTrackingTouch(SeekBar seekBar) {
-        if (seekBar == sbProgress) {
-            if (getPlayService().isPlaying() || getPlayService().isPausing()) {
-                int progress = seekBar.getProgress();
-                getPlayService().seekTo(progress);
-                tvCurrentTime.setText(formatTime(progress));
-                mLastProgress = progress;
-            } else {
-                seekBar.setProgress(0);
-            }
+        if (getPlayService().isPlaying() || getPlayService().isPausing()) {
+            int progress = seekBar.getProgress();
+            getPlayService().seekTo(progress);
+            tvCurrentTime.setText(formatTime(progress));
+            mLastProgress = progress;
+        } else {
+            seekBar.setProgress(0);
         }
     }
 
@@ -246,6 +245,12 @@ public class PlayActivity extends AppCompatActivity implements OnPlayerEventList
         onPlay(music);
     }
 
+    @Override
+    public void updateDuration(int duration) {
+        sbProgress.setMax(duration);
+        tvTotalTime.setText(formatTime(duration));
+    }
+
     private void onPlay(Musics music) {
         if (music == null) {
             return;
@@ -254,10 +259,13 @@ public class PlayActivity extends AppCompatActivity implements OnPlayerEventList
         tvTitle.setText(music.name);
         sbProgress.setProgress(0);
         sbProgress.setSecondaryProgress(0);
-        sbProgress.setMax((int) music.duration);
+        if (music.duration > 0) {
+            sbProgress.setMax(music.duration);
+            tvTotalTime.setText(formatTime(duration));
+        }
         mLastProgress = 0;
         tvCurrentTime.setText(R.string.play_time_start);
-        tvTotalTime.setText(formatTime(music.duration));
+
         if (getPlayService().isPlaying() || getPlayService().isPreparing()) {
             ivPlay.setSelected(true);
             albumCoverView.start();
@@ -269,11 +277,13 @@ public class PlayActivity extends AppCompatActivity implements OnPlayerEventList
 
     @Override
     public void onPlayerPause() {
+        ivPlay.setSelected(false);
         albumCoverView.pause();
     }
 
     @Override
     public void onPlayerResume() {
+        ivPlay.setSelected(true);
         albumCoverView.start();
     }
 

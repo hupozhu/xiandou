@@ -37,5 +37,10 @@ public interface OnPlayerEventListener {
      */
     void onTimer(long remain);
 
+    /**
+     * 更新音乐时长
+     */
+    void updateDuration(int duration);
+
     void onMusicListUpdate();
 }

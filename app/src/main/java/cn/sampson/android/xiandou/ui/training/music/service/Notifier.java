@@ -20,6 +20,7 @@ import java.util.List;
 import cn.sampson.android.xiandou.R;
 import cn.sampson.android.xiandou.ui.SplashActivity;
 import cn.sampson.android.xiandou.ui.training.model.Musics;
+import cn.sampson.android.xiandou.ui.training.music.PlayActivity;
 import cn.sampson.android.xiandou.ui.training.music.receiver.StatusBarReceiver;
 
 /**
@@ -49,7 +50,7 @@ public class Notifier {
     }
 
     private static Notification buildNotification(Context context, Musics music, boolean isPlaying) {
-        Intent intent = new Intent(context, SplashActivity.class);
+        Intent intent = new Intent(context, PlayActivity.class);
         intent.putExtra(Extras.EXTRA_NOTIFICATION, true);
         intent.setAction(Intent.ACTION_VIEW);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

@@ -13,6 +13,6 @@ public class Musics extends SelectBase {
     public int month;
 
     // 持续时间
-    public long duration;
+    public int duration = 0;
 
 }

@@ -14,7 +14,6 @@ import android.text.format.DateUtils;
 import android.util.Log;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -307,6 +306,11 @@ public class PlayService extends Service implements MediaPlayer.OnCompletionList
     private MediaPlayer.OnPreparedListener mPreparedListener = new MediaPlayer.OnPreparedListener() {
         @Override
         public void onPrepared(MediaPlayer mp) {
+            int duration = mp.getDuration();
+            mPlayingMusic.duration = duration;
+            if (mListener != null) {
+                mListener.updateDuration(duration);
+            }
             start();
         }
     };

@@ -109,11 +109,13 @@ public class TwoHundredEightyFragment extends BaseFragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        webContainer.removeView(webInfo);
-        webInfo.stopLoading();
-        webInfo.getSettings().setJavaScriptEnabled(false);
-        webInfo.clearHistory();
-        webInfo.removeAllViews();
-        webInfo.destroy();
+        if (null != webInfo) {
+            webContainer.removeView(webInfo);
+            webInfo.stopLoading();
+            webInfo.getSettings().setJavaScriptEnabled(false);
+            webInfo.clearHistory();
+            webInfo.removeAllViews();
+            webInfo.destroy();
+        }
     }
 }

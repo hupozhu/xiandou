@@ -10,6 +10,7 @@
     <string name="yunyu_zhinan">孕育指南</string>
     <string name="meiyue_taijiao">每月胎教</string>
     <string name="settings">设置</string>
+    <string name="click_to_skip">点击跳过</string>
 
     <string name="huaiyunsishizhou">怀孕四十周</string>
     <string name="erbaibashitian">280天</string>
@@ -42,7 +43,39 @@
     <string name="mode_loop">列表循环</string>
     <string name="mode_shuffle">随机播放</string>
     <string name="mode_one">单曲循环</string>
+    <string name="menu_timer">定时停止播放</string>
+    <string name="timer_set">设置成功，将于%s分钟后关闭</string>
+    <string name="timer_cancel">定时停止播放已取消</string>
 
+    <string name="pregnancy_work">工作孕期注意</string>
+    <string name="renchenfanying">妊娠反应怎么办</string>
+    <string name="yunqijiancha">孕期检查知几点</string>
+    <string name="yunqixingshenghuo">孕期生活要素</string>
+    <string name="yunqijibing">孕期疾病注意</string>
+    <string name="yunqiyingyang">孕期营养与发育</string>
+
+    <string name="taijiao1">早期胎教</string>
+    <string name="taijiao2">中期胎教</string>
+    <string name="taijiao3">末期胎教</string>
+
+    <integer-array name="timer_int">
+        <item>0</item>
+        <item>10</item>
+        <item>20</item>
+        <item>30</item>
+        <item>45</item>
+        <item>60</item>
+        <item>90</item>
+    </integer-array>
+    <string-array name="timer_text">
+        <item>不开启</item>
+        <item>10分钟后</item>
+        <item>20分钟后</item>
+        <item>30分钟后</item>
+        <item>45分钟后</item>
+        <item>60分钟后</item>
+        <item>90分钟后</item>
+    </string-array>
     <string-array name="pregnancy_week">
         <item>第1周</item>
         <item>第2周</item>
@@ -92,13 +125,4 @@
         <item>孕妇后期</item>
     </string-array>
 
-    <string-array name="read_days2">
-        <item>第91天</item>
-        <item>第150天</item>
-    </string-array>
-
-    <string-array name="read_days3">
-        <item>第151天</item>
-        <item>第280天</item>
-    </string-array>
 </resources>
