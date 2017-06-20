@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -54,6 +55,8 @@ public class GuideFragment extends BaseFragment implements View.OnClickListener 
     RelativeLayout mRlGeling;
     @Bind(R.id.rl_ad_container)
     RelativeLayout mRlAdContainer;
+    @Bind(R.id.ad_container)
+    FrameLayout adContainer;
 
     @Nullable
     @Override
@@ -80,7 +83,7 @@ public class GuideFragment extends BaseFragment implements View.OnClickListener 
                 Log.i("AD_DEMO", "ONBannerReceive");
             }
         });
-        mRlAdContainer.addView(banner);
+        adContainer.addView(banner);
         /* 发起广告请求，收到广告数据后会展示数据 */
         banner.loadAD();
 

@@ -5,13 +5,19 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.qq.e.ads.banner.ADSize;
+import com.qq.e.ads.banner.AbstractBannerADListener;
+import com.qq.e.ads.banner.BannerView;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import cn.sampson.android.xiandou.R;
+import cn.sampson.android.xiandou.config.Constants;
 import cn.sampson.android.xiandou.ui.BaseFragment;
 import cn.sampson.android.xiandou.ui.guide.twohundredeighty.domain.MyString;
 import cn.sampson.android.xiandou.utils.widget.adapter.baseadapter.QuickRecycleViewAdapter;
@@ -57,6 +63,25 @@ public class ListFragment extends BaseFragment {
             }
         };
         list.setAdapter(mAdapter);
+
+        BannerView banner = new BannerView(getActivity(), ADSize.BANNER, Constants.APPID, Constants.BannerPosID);
+        //设置广告轮播时间，为0或30~120之间的数字，单位为s,0标识不自动轮播
+        banner.setRefresh(30);
+        banner.setADListener(new AbstractBannerADListener() {
+
+            @Override
+            public void onNoAD(int arg0) {
+                Log.i("AD_DEMO", "BannerNoAD，eCode=" + arg0);
+            }
+
+            @Override
+            public void onADReceiv() {
+                Log.i("AD_DEMO", "ONBannerReceive");
+            }
+        });
+        mAdapter.addHeaderView(banner);
+        /* 发起广告请求，收到广告数据后会展示数据 */
+        banner.loadAD();
     }
 
     @Override

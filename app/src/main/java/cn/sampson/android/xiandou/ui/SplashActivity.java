@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,6 +34,7 @@ import butterknife.ButterKnife;
 import cn.sampson.android.xiandou.R;
 import cn.sampson.android.xiandou.config.Constants;
 import cn.sampson.android.xiandou.ui.main.MainActivity;
+import cn.sampson.android.xiandou.utils.ScreenUtils;
 import cn.sampson.android.xiandou.utils.systembar.StatusBarUtil;
 
 /**
@@ -48,6 +50,8 @@ public class SplashActivity extends BaseActivity implements SplashADListener {
     TextView skipView;
     @Bind(R.id.splash_holder)
     ImageView splashHolder;
+    @Bind(R.id.fl_container)
+    RelativeLayout flContainer;
     private int count;
 
     private SplashAD splashAD;
@@ -88,12 +92,23 @@ public class SplashActivity extends BaseActivity implements SplashADListener {
         }
     }
 
+    /**
+     * 沉浸式状态栏
+     */
+    private void initSystemBar() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            int top = ScreenUtils.getSystemBarHeight();
+            flContainer.setPadding(0, top, 0, 0);
+        }
+    }
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         ButterKnife.bind(this);
         StatusBarUtil.transparencyBar(this);
+        initSystemBar();
 
         // 如果targetSDKVersion >= 23，就要申请好权限。如果您的App没有适配到Android6.0（即targetSDKVersion < 23），那么只需要在这里直接调用fetchSplashAD接口。
         if (Build.VERSION.SDK_INT >= 23) {

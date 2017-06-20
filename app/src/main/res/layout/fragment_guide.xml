@@ -18,7 +18,7 @@
             <ImageView
                 android:id="@+id/iv_banner"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="150dp"
                 android:src="@mipmap/ic_main_banner" />
         </RelativeLayout>
 
@@ -92,6 +92,13 @@
                     android:text="@string/yunqizhuyi" />
             </LinearLayout>
         </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/ad_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </FrameLayout>
 
         <View
             android:layout_width="match_parent"

@@ -9,15 +9,21 @@ import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+
+import com.qq.e.ads.banner.ADSize;
+import com.qq.e.ads.banner.AbstractBannerADListener;
+import com.qq.e.ads.banner.BannerView;
 
 import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import cn.sampson.android.xiandou.R;
+import cn.sampson.android.xiandou.config.Constants;
 import cn.sampson.android.xiandou.core.AppCache;
 import cn.sampson.android.xiandou.core.retroft.Api.FetalTrainingApi;
 import cn.sampson.android.xiandou.core.retroft.RetrofitWapper;
@@ -115,6 +121,25 @@ public class MusicListActivity extends BaseActivity implements IView {
             }
         };
         list.setAdapter(mAdapter);
+
+        BannerView banner = new BannerView(this, ADSize.BANNER, Constants.APPID, Constants.BannerPosID);
+        //设置广告轮播时间，为0或30~120之间的数字，单位为s,0标识不自动轮播
+        banner.setRefresh(30);
+        banner.setADListener(new AbstractBannerADListener() {
+
+            @Override
+            public void onNoAD(int arg0) {
+                Log.i("AD_DEMO", "BannerNoAD，eCode=" + arg0);
+            }
+
+            @Override
+            public void onADReceiv() {
+                Log.i("AD_DEMO", "ONBannerReceive");
+            }
+        });
+        mAdapter.addHeaderView(banner);
+        /* 发起广告请求，收到广告数据后会展示数据 */
+        banner.loadAD();
     }
 
     public void setMusicList(ArrayList<Musics> datas) {
