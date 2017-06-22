@@ -27,6 +27,7 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        StatusBarUtil.StatusBarLightMode(this);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         //用来判断首页是否存在
@@ -34,7 +35,7 @@ public class MainActivity extends BaseActivity {
         initView();
     }
 
-    private void initView() {
+    protected void initView() {
         initPager();
     }
 

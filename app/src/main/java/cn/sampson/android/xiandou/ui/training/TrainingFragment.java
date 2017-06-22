@@ -12,7 +12,7 @@ import butterknife.ButterKnife;
 import cn.sampson.android.xiandou.R;
 import cn.sampson.android.xiandou.ui.BaseActivity;
 import cn.sampson.android.xiandou.ui.BaseFragment;
-import cn.sampson.android.xiandou.ui.training.music.MusicListActivity;
+import cn.sampson.android.xiandou.ui.haoyun.yunyu.taijiaoyinyue.MusicListActivity;
 
 /**
  * Created by Administrator on 2017/6/5.
@@ -44,7 +44,7 @@ public class TrainingFragment extends BaseFragment implements View.OnClickListen
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_training, null);
+        View view = inflater.inflate(R.layout.activity_taijiao_yinyue, null);
         ButterKnife.bind(this, view);
 
         mLlJanuary.setOnClickListener(this);

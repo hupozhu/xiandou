@@ -7,17 +7,42 @@
     <string name="msg_no_camera">无法启动相机！请在设置中开启相机权限</string>
     <string name="pick_avatar">头像选择</string>
 
-    <string name="yunyu_zhinan">孕育指南</string>
+    <string name="haoyun">好孕</string>
+    <string name="shequ">社区</string>
+    <string name="wode">我的</string>
+
+    <string name="beiyun">备孕</string>
+    <string name="yunyu">孕育</string>
+    <string name="yuer">育儿</string>
+
+    <!--备孕-->
+    <string name="jintianhaoyun">今天好孕率</string>
+    <string name="zhangzishi">涨姿势</string>
+    <string name="baidailasi">白带拉丝</string>
+    <string name="bchaocepai">B超测排</string>
+    <string name="qiyuan">祈愿</string>
+
+    <string name="beiyunzhilan">备孕指南</string>
+    <string name="tiwei">体位（射精时）</string>
+    <string name="tiwei_brief">备孕的过程中，良好的射精体位是不可或缺的一部分，一起看看常见的射精体位，助您好孕</string>
+    <string name="zishi_tip">（ 请选择查看对应姿势 ）</string>
+    <string name="xueming">学名：%1$s</string>
+    <string name="female_comfort_label">女方舒适度：</string>
+    <string name="male_comfort_label">男方努力值：</string>
+    <string name="describe">描述：</string>
+
+    <!--孕育-->
+    <string name="huaiyunsishizhou">怀孕40周</string>
+    <string name="erbaibashitian">280天</string>
+    <string name="yunqizhuyi">孕期注意</string>
+    <string name="taijiaoyinyue">胎教音乐</string>
+    <string name="taijiaozhishi">胎教知识</string>
+
+    <string name="yunyuzhilan">孕育指南</string>
+
     <string name="meiyue_taijiao">每月胎教</string>
     <string name="settings">设置</string>
     <string name="click_to_skip">点击跳过</string>
-
-    <string name="huaiyunsishizhou">怀孕四十周</string>
-    <string name="erbaibashitian">280天</string>
-    <string name="yunqizhuyi">孕期注意</string>
-    <string name="yiqianyiye">一千零一夜 系列大全</string>
-    <string name="antusheng">安徒生童话</string>
-    <string name="gelintonghua">格林童话</string>
 
     <string name="shuxinting">舒心听</string>
     <string name="wenqingxu">稳情绪</string>
@@ -29,6 +54,14 @@
     <string name="xiangleshi">享乐事</string>
     <string name="zuoyundong">做运动</string>
     <string name="huanyali">缓压力</string>
+
+    <!--育儿-->
+    <string name="yiqianyiye">一千零一夜</string>
+    <string name="antusheng">安徒生童话</string>
+    <string name="gelintonghua">格林童话</string>
+    <string name="yuerzhinan">育儿指南</string>
+
+
 
     <string name="play_settings">播放设置</string>
     <string name="current_version">当前版本</string>
@@ -58,6 +91,11 @@
     <string name="taijiao2">中期胎教</string>
     <string name="taijiao3">末期胎教</string>
 
+    <string-array name="taijiao">
+        <item>早期胎教</item>
+        <item>中期胎教</item>
+        <item>末期胎教</item>
+    </string-array>
     <integer-array name="timer_int">
         <item>0</item>
         <item>10</item>

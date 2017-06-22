@@ -14,7 +14,7 @@ import butterknife.ButterKnife;
 import cn.sampson.android.xiandou.R;
 import cn.sampson.android.xiandou.core.AppCache;
 import cn.sampson.android.xiandou.ui.BaseFragment;
-import cn.sampson.android.xiandou.ui.training.music.service.PlayService;
+import cn.sampson.android.xiandou.ui.haoyun.yunyu.taijiaoyinyue.service.PlayService;
 import cn.sampson.android.xiandou.utils.ToastUtils;
 
 /**

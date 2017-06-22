@@ -3,7 +3,7 @@ package cn.sampson.android.xiandou.core.retroft.Api;
 import java.util.ArrayList;
 
 import cn.sampson.android.xiandou.core.retroft.base.Result;
-import cn.sampson.android.xiandou.ui.training.model.Musics;
+import cn.sampson.android.xiandou.model.Musics;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 import rx.Observable;

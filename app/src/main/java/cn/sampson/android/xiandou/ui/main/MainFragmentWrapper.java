@@ -3,7 +3,7 @@ package cn.sampson.android.xiandou.ui.main;
 import android.support.v4.app.Fragment;
 
 import cn.sampson.android.xiandou.R;
-import cn.sampson.android.xiandou.ui.guide.GuideFragment;
+import cn.sampson.android.xiandou.ui.haoyun.HaoYunFragment;
 import cn.sampson.android.xiandou.ui.settings.SettingsFragment;
 import cn.sampson.android.xiandou.ui.training.TrainingFragment;
 import cn.sampson.android.xiandou.utils.ContextUtil;
@@ -22,21 +22,21 @@ public class MainFragmentWrapper implements IFragmentsWrapper {
     public MainFragmentWrapper() {
 
         mTitles = new String[]{
-                ContextUtil.getString(R.string.yunyu_zhinan),
-                ContextUtil.getString(R.string.meiyue_taijiao),
-                ContextUtil.getString(R.string.settings)
+                ContextUtil.getString(R.string.haoyun),
+                ContextUtil.getString(R.string.shequ),
+                ContextUtil.getString(R.string.wode)
         };
 
         mFragments = new Fragment[]{
-                new GuideFragment(),
+                new HaoYunFragment(),
                 new TrainingFragment(),
                 new SettingsFragment()
         };
 
         mTitleImgs = new int[]{
-                R.drawable.selector_main_guide,
-                R.drawable.selector_main_training,
-                R.drawable.selector_main_settings
+                R.drawable.selector_main_haoyun,
+                R.drawable.selector_main_community,
+                R.drawable.selector_main_mine
         };
     }
 

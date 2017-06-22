@@ -4,33 +4,34 @@ import android.content.Intent;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Looper;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+
+import java.lang.ref.WeakReference;
 
 import cn.sampson.android.xiandou.R;
-import cn.sampson.android.xiandou.ui.main.MainActivity;
-import cn.sampson.android.xiandou.utils.systembar.StatusBarUtil;
 
 /**
  * Created by Administrator on 2017/6/5.
  */
 
 public class BaseActivity extends AppCompatActivity {
-    protected Handler mHandler = new Handler(Looper.getMainLooper());
+
+    public MyHandler mHandler = new MyHandler(this);
+    private View loadingView;
 
     protected ActionBar mActionToolbar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        StatusBarUtil.StatusBarLightMode(this);
         setVolumeControlStream(AudioManager.STREAM_MUSIC);
-        if (!(this instanceof MainActivity || this instanceof SplashActivity))
-            setActionBarBack();
     }
 
     protected void setActionBarBack() {
@@ -74,5 +75,52 @@ public class BaseActivity extends AppCompatActivity {
     public void goBack() {
         finish();
     }
+
+    // ======================================   异步处理数据的handle ===========================================
+    private static class MyHandler extends Handler {
+        private final WeakReference<BaseActivity> mActivity;
+
+        public MyHandler(BaseActivity activity) {
+            mActivity = new WeakReference<>(activity);
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            BaseActivity activity = mActivity.get();
+            if (activity != null) {
+                switch (msg.what) {
+                    case 1:
+                        activity.onDataComplete();
+                        break;
+                }
+            }
+        }
+    }
+
+    protected void onDataComplete() {
+    }
+
+    protected void sendHandlerMessage() {
+        mHandler.sendEmptyMessage(1);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mHandler.removeMessages(1);
+    }
+
+    protected void showLoadingView(ViewGroup rlRoot) {
+        loadingView = LayoutInflater.from(BaseActivity.this).inflate(R.layout._loading_view, rlRoot, false);
+        rlRoot.addView(loadingView);
+    }
+
+    protected void removeLoadingView(ViewGroup rlRoot) {
+        if (loadingView != null) {
+            rlRoot.removeView(loadingView);
+            loadingView = null;
+        }
+    }
+
 
 }

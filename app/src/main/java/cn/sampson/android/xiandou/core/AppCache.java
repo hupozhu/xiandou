@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.sampson.android.xiandou.ui.main.MainActivity;
-import cn.sampson.android.xiandou.ui.training.model.Musics;
-import cn.sampson.android.xiandou.ui.training.music.service.PlayService;
+import cn.sampson.android.xiandou.model.Musics;
+import cn.sampson.android.xiandou.ui.haoyun.yunyu.taijiaoyinyue.service.PlayService;
 
 /**
  * Created by chengyang on 2017/6/13.
