@@ -1,6 +1,6 @@
 package cn.sampson.android.xiandou.model;
 
-import cn.sampson.android.xiandou.utils.widget.adapter.baseadapter.SelectBase;
+import cn.sampson.android.xiandou.widget.adapter.baseadapter.SelectBase;
 
 /**
  * Created by chengyang on 2017/6/10.

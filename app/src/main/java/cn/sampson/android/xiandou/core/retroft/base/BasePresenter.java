@@ -95,9 +95,8 @@ public abstract class BasePresenter<T extends IView> {
                         @Override
                         public void call(Result result) {
                             if (view == null) return;
-                            Tip.i("========> result = " + result.toString());
                             switch (result.code) {
-                                case 1://获取数据成功
+                                case 0://获取数据成功
                                     successReturn();
                                     if (null != ansyTask) {
                                         new AnsyProcessResultTask(ansyTask).execute(result);
@@ -109,7 +108,7 @@ public abstract class BasePresenter<T extends IView> {
 
                                 default:
                                     exceptionReturn();
-                                    onError(result.code, result.massage, key);
+                                    onError(result.code, result.message, key);
                                     break;
                             }
 
@@ -118,6 +117,7 @@ public abstract class BasePresenter<T extends IView> {
                     }, new Action1<Throwable>() {
                         @Override
                         public void call(Throwable throwable) {
+                            Tip.d("network  error ====>" + throwable.toString());
                             if (view == null) return;
 
                             errorNetReturn();

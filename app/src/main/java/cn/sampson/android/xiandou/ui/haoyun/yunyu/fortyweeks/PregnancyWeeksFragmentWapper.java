@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 import cn.sampson.android.xiandou.R;
 import cn.sampson.android.xiandou.utils.ContextUtil;
-import cn.sampson.android.xiandou.utils.widget.IFragmentsWrapper;
+import cn.sampson.android.xiandou.widget.IFragmentsWrapper;
 
 /**
  * Created by chengyang on 2017/6/6.

@@ -20,8 +20,8 @@ import cn.sampson.android.xiandou.R;
 import cn.sampson.android.xiandou.config.Constants;
 import cn.sampson.android.xiandou.ui.BaseFragment;
 import cn.sampson.android.xiandou.model.MyString;
-import cn.sampson.android.xiandou.utils.widget.adapter.baseadapter.QuickRecycleViewAdapter;
-import cn.sampson.android.xiandou.utils.widget.adapter.baseadapter.ViewHelper;
+import cn.sampson.android.xiandou.widget.adapter.baseadapter.QuickRecycleViewAdapter;
+import cn.sampson.android.xiandou.widget.adapter.baseadapter.ViewHelper;
 
 /**
  * Created by chengyang on 2017/6/14.

@@ -8,6 +8,7 @@ public class Result<T extends Object> {
 
     public int code;
     public String massage;
+    public String message;
     public T data;
 
 }

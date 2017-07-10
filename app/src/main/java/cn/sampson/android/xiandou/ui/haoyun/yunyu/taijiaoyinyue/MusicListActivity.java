@@ -36,8 +36,8 @@ import cn.sampson.android.xiandou.ui.BaseActivity;
 import cn.sampson.android.xiandou.model.Musics;
 import cn.sampson.android.xiandou.ui.haoyun.yunyu.taijiaoyinyue.service.PlayService;
 import cn.sampson.android.xiandou.utils.systembar.StatusBarUtil;
-import cn.sampson.android.xiandou.utils.widget.adapter.baseadapter.QuickRecycleViewAdapter;
-import cn.sampson.android.xiandou.utils.widget.adapter.baseadapter.ViewHelper;
+import cn.sampson.android.xiandou.widget.adapter.baseadapter.QuickRecycleViewAdapter;
+import cn.sampson.android.xiandou.widget.adapter.baseadapter.ViewHelper;
 
 /**
  * Created by chengyang on 2017/6/12.

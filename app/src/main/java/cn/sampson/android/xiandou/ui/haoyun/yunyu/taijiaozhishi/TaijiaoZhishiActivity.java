@@ -23,7 +23,7 @@ import cn.sampson.android.xiandou.utils.plist.domain.Dict;
 import cn.sampson.android.xiandou.utils.plist.domain.PList;
 import cn.sampson.android.xiandou.utils.plist.domain.PListObject;
 import cn.sampson.android.xiandou.utils.systembar.StatusBarUtil;
-import cn.sampson.android.xiandou.utils.widget.adapter.TabStateFragmentAdapter;
+import cn.sampson.android.xiandou.widget.adapter.TabStateFragmentAdapter;
 
 /**
  * Created by chengyang on 2017/6/21.

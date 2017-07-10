@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f7f7f7"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="8dp"
+        android:background="@drawable/shape_round_corner_white">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!--头像-->
+            <RelativeLayout
+                android:id="@+id/rl_avatar"
+                android:layout_width="match_parent"
+                android:layout_height="72dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/selectable_common_white_pressed_bg"
+                android:paddingLeft="13dp"
+                android:paddingRight="13dp">
+
+                <TextView
+                    style="@style/text16"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:text="@string/avatar" />
+
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:id="@+id/riv_avatar"
+                    android:layout_width="52dp"
+                    android:layout_height="52dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="68dp"
+                    android:layout_marginRight="24dp"
+                    android:src="@mipmap/default_avatar"
+                    app:riv_oval="true" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_alignParentBottom="true"
+                    android:background="#c1c1c1" />
+            </RelativeLayout>
+
+            <!--昵称-->
+            <RelativeLayout
+                android:id="@+id/rl_nickname"
+                android:layout_width="match_parent"
+                android:layout_height="72dp"
+                android:background="@drawable/selectable_common_white_pressed_bg"
+                android:paddingLeft="13dp"
+                android:paddingRight="13dp">
+
+                <TextView
+                    style="@style/text16"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:text="@string/nickname" />
+
+                <TextView
+                    android:id="@+id/tv_nickname"
+                    style="@style/text16"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="55dp"
+                    android:text="@string/nickname"
+                    android:visibility="gone" />
+
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:src="@mipmap/ic_setting_next" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_alignParentBottom="true"
+                    android:background="#c1c1c1" />
+            </RelativeLayout>
+
+            <!--性别-->
+            <RelativeLayout
+                android:id="@+id/rl_sex"
+                android:layout_width="match_parent"
+                android:layout_height="72dp"
+                android:background="@drawable/selectable_common_white_pressed_bg"
+                android:paddingLeft="13dp"
+                android:paddingRight="13dp">
+
+                <TextView
+                    style="@style/text16"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:text="@string/sex" />
+
+                <TextView
+                    android:id="@+id/tv_sex"
+                    style="@style/text16"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="55dp"
+                    android:text="@string/nickname"
+                    android:visibility="gone" />
+
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:src="@mipmap/ic_setting_next" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_alignParentBottom="true"
+                    android:background="#c1c1c1" />
+            </RelativeLayout>
+
+            <!--所在地区-->
+            <RelativeLayout
+                android:id="@+id/rl_location"
+                android:layout_width="match_parent"
+                android:layout_height="72dp"
+                android:background="@drawable/selectable_common_white_pressed_bg"
+                android:paddingLeft="13dp"
+                android:paddingRight="13dp">
+
+                <TextView
+                    style="@style/text16"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:text="@string/location" />
+
+                <TextView
+                    android:id="@+id/tv_location"
+                    style="@style/text16"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="55dp"
+                    android:text="@string/nickname"
+                    android:visibility="gone" />
+
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:src="@mipmap/ic_setting_next" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_alignParentBottom="true"
+                    android:background="#c1c1c1" />
+            </RelativeLayout>
+
+            <!--设置日期-->
+            <RelativeLayout
+                android:id="@+id/rl_date"
+                android:layout_width="match_parent"
+                android:layout_height="72dp"
+                android:background="@drawable/selectable_common_white_pressed_bg"
+                android:paddingLeft="13dp"
+                android:paddingRight="13dp">
+
+                <TextView
+                    style="@style/text16"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:text="@string/date" />
+
+                <TextView
+                    android:id="@+id/tv_date"
+                    style="@style/text16"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="55dp"
+                    android:text="@string/nickname"
+                    android:visibility="gone" />
+
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:src="@mipmap/ic_setting_next" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_alignParentBottom="true"
+                    android:background="#c1c1c1" />
+            </RelativeLayout>
+
+            <!--已绑定手机-->
+            <RelativeLayout
+                android:id="@+id/rl_phone"
+                android:layout_width="match_parent"
+                android:layout_height="72dp"
+                android:background="@drawable/selectable_common_white_pressed_bg"
+                android:paddingLeft="13dp"
+                android:paddingRight="13dp">
+
+                <TextView
+                    style="@style/text16"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:text="@string/phone" />
+
+                <TextView
+                    android:id="@+id/tv_phone"
+                    style="@style/text16"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="55dp"
+                    android:text="@string/nickname"
+                    android:visibility="gone" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_alignParentBottom="true"
+                    android:background="#c1c1c1" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tv_logout"
+                android:layout_width="175dp"
+                android:layout_height="44dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/shape_logout_background"
+                android:gravity="center"
+                android:text="@string/logout"
+                android:textColor="@color/white"
+                android:textSize="15sp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</FrameLayout>

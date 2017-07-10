@@ -14,7 +14,7 @@ import cn.sampson.android.xiandou.R;
 import cn.sampson.android.xiandou.ui.BaseActivity;
 import cn.sampson.android.xiandou.db.ReadEveryDayDBHelper;
 import cn.sampson.android.xiandou.utils.systembar.StatusBarUtil;
-import cn.sampson.android.xiandou.utils.widget.adapter.TabStateFragmentAdapter;
+import cn.sampson.android.xiandou.widget.adapter.TabStateFragmentAdapter;
 
 /**
  * Created by chengyang on 2017/6/7.

@@ -48,7 +48,7 @@
                 android:textSize="20sp" />
         </RelativeLayout>
 
-        <cn.sampson.android.xiandou.utils.widget.playmusic.AlbumCoverView
+        <cn.sampson.android.xiandou.widget.playmusic.AlbumCoverView
             android:id="@+id/album_cover_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"

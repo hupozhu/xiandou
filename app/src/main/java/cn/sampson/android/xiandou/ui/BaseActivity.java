@@ -5,7 +5,9 @@ import android.media.AudioManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.content.PermissionChecker;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
@@ -16,6 +18,10 @@ import android.view.ViewGroup;
 import java.lang.ref.WeakReference;
 
 import cn.sampson.android.xiandou.R;
+import cn.sampson.android.xiandou.utils.ToastUtils;
+import cn.sampson.android.xiandou.utils.permission.PermissionReq;
+import cn.sampson.android.xiandou.utils.permission.PermissionResult;
+import cn.sampson.android.xiandou.widget.dialog.PhotoPickDialog;
 
 /**
  * Created by Administrator on 2017/6/5.
@@ -120,6 +126,96 @@ public class BaseActivity extends AppCompatActivity {
             rlRoot.removeView(loadingView);
             loadingView = null;
         }
+    }
+
+    // =========================================== 拍照 =============================================
+
+    protected static final int RESULT_PHOTO = 1;
+    //图片压缩质量
+    private int photo_compression_quality = 100;
+
+    /**
+     * 点击头像弹出选择头像对话框，拍照 或者 从相册选择
+     */
+    protected void showPhotoPickDialog(int quality) {
+        photo_compression_quality = quality;
+        showPhotoPickDialog();
+    }
+
+    /**
+     * 点击头像弹出选择头像对话框，拍照 或者 从相册选择
+     */
+    protected void showPhotoPickDialog() {
+        PhotoPickDialog dialog = new PhotoPickDialog(BaseActivity.this);
+        dialog.setClickListener(new PhotoPickDialog.PhotoPickListener() {
+            @Override
+            public void fromCamera() {
+                openCamera();
+            }
+
+            @Override
+            public void fromAlbum() {
+                openAlbum("get_photo");
+            }
+        });
+        dialog.setCanceledOnTouchOutside(true);
+        dialog.show();
+    }
+
+    private void openCamera() {
+        PermissionReq.with(BaseActivity.this)
+                .permissions(android.Manifest.permission.CAMERA)
+                .result(new PermissionResult() {
+                    @Override
+                    public void onGranted() {
+                        openAlbum("take_photo");
+                    }
+
+                    @Override
+                    public void onDenied() {
+                        ToastUtils.show(R.string.msg_no_camera);
+                    }
+                }).request();
+    }
+
+    private void openAlbum(final String type) {
+        PermissionReq.with(BaseActivity.this)
+                .permissions(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                .result(new PermissionResult() {
+                    @Override
+                    public void onGranted() {
+                        Intent mIntent = new Intent(BaseActivity.this, ImageCropActivity.class);
+                        mIntent.putExtra("state", type);
+                        mIntent.putExtra(ImageCropActivity.QUALITY, photo_compression_quality);
+                        startActivityForResult(mIntent, RESULT_PHOTO);
+                    }
+
+                    @Override
+                    public void onDenied() {
+                        ToastUtils.show(R.string.please_open_write_sdcard_permission);
+                    }
+                }).request();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (data != null && resultCode == 200) {
+            switch (requestCode) {
+                case RESULT_PHOTO:
+                    uploadPhoto(data.getStringExtra(ImageCropActivity.RESULT_PHOTO_PATH));
+                    break;
+            }
+        }
+    }
+
+    protected void uploadPhoto(String photoPath) {
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        PermissionReq.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
 

@@ -7,7 +7,8 @@ package cn.sampson.android.xiandou.config;
 public class AppConfig {
 
     public static final String[] ENVIRONMENT = {
-            "http://hope.gvrc.cn/",
+            "http://xd.gvrc.cn",
+            "http://hope.gvrc.cn/"
     };
 
     public static int index = 0;

@@ -1,5 +1,7 @@
 package cn.sampson.android.xiandou.core.retroft;
 
+import android.text.TextUtils;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -20,7 +22,10 @@ import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
 import cn.sampson.android.xiandou.config.AppConfig;
+import cn.sampson.android.xiandou.core.persistence.UserPreference;
+import cn.sampson.android.xiandou.core.presenter.UserPresenter;
 import cn.sampson.android.xiandou.utils.CacheUtil;
+import cn.sampson.android.xiandou.utils.JsonUtil;
 import cn.sampson.android.xiandou.utils.Tip;
 import okhttp3.Cache;
 import okhttp3.Interceptor;
@@ -75,18 +80,16 @@ public class RetrofitWapper {
                 public Response intercept(Chain chain) throws IOException {
                     try {
                         Request originalRequest = chain.request();
-                        Request newRequest = null;
-                        //可以从Request中取到HttpUrl，对HttpUrl进行修改。
-
-//                        if (originalRequest.method() == "GET") {
-//                            //加入自己的请求头
-//                            newRequest = originalRequest.newBuilder().url(NetParamsUtils.processAdditionParamsInGetMethod(originalRequest)).build();
-//                        } else if (originalRequest.method() == "POST") {
-//                            newRequest = interceptRequest(originalRequest, NetParamsUtils.getAdditionParamsInPostMethod());
-//                        } else {
+                        Request newRequest;
+                        if (!TextUtils.isEmpty(UserPreference.getToken()) && !TextUtils.isEmpty(UserPreference.getSign())) {
+                            newRequest = originalRequest
+                                    .newBuilder()
+                                    .addHeader("token", UserPreference.getToken())
+                                    .addHeader("sign", UserPreference.getSign())
+                                    .build();
+                        } else {
                             newRequest = originalRequest;
-//                        }
-
+                        }
                         return chain.proceed(newRequest);
 
                     } catch (SocketTimeoutException exception) {
@@ -127,7 +130,7 @@ public class RetrofitWapper {
                 final SSLSocketFactory sslSocketFactory = sslContext.getSocketFactory();
 
                 //log开关
-                HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+                HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor(new HttpLogger());
                 if (Tip.isTesting)
                     interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
                 else
@@ -145,7 +148,7 @@ public class RetrofitWapper {
                         .connectTimeout(AppConfig.NET_CONNECT_TIMEOUT, TimeUnit.SECONDS) //设置连接超时时间
                         .writeTimeout(AppConfig.NET_WRITE_TIMEOUT, TimeUnit.SECONDS)
                         .readTimeout(AppConfig.NET_READ_TIMEOUT, TimeUnit.SECONDS)
-//                        .addInterceptor(requestInterceptor)
+                        .addInterceptor(requestInterceptor)
                         .cache(new Cache(cache, CacheUtil.calculateDiskCacheSize(cache)))
                         .addInterceptor(interceptor)
                         .build();
@@ -154,6 +157,7 @@ public class RetrofitWapper {
                 throw new RuntimeException(e);
             }
         }
+
 
         if (retrofit == null || refresh) {
             refresh = false;
@@ -167,49 +171,28 @@ public class RetrofitWapper {
         return retrofit.create(tClass);
     }
 
-    public static Request interceptRequest(Request request, String parameter)
-            throws IOException {
+    private class HttpLogger implements HttpLoggingInterceptor.Logger {
+        private StringBuilder mMessage = new StringBuilder();
 
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-
-        Sink sink = Okio.sink(baos);
-        BufferedSink bufferedSink = Okio.buffer(sink);
-
-        /**
-         * write to buffer additional params
-         * */
-        if (request.body().contentLength() > 0) {
-            bufferedSink.writeString(parameter + "&", Charset.defaultCharset());
-        } else {
-            bufferedSink.writeString(parameter, Charset.defaultCharset());
+        @Override
+        public void log(String message) {
+            // 请求或者响应开始
+            if (message.startsWith("--> POST") || message.startsWith("--> GET")) {
+                mMessage.setLength(0);
+            }
+            // 以{}或者[]形式的说明是响应结果的json数据，需要进行格式化
+            if ((message.startsWith("{") && message.endsWith("}"))
+                    || (message.startsWith("[") && message.endsWith("]"))) {
+                message = JsonUtil.formatJson(JsonUtil.decodeUnicode(message));
+            }
+            mMessage.append(message.concat("\n"));
+            // 响应结束，打印整条日志
+            if (message.startsWith("<-- END HTTP")) {
+                Tip.d(mMessage.toString());
+            } else if (message.startsWith("<-- HTTP FAILED")) {
+                Tip.d("网络错误");
+            }
         }
-        /**
-         * Write old params
-         * */
-        request.body().writeTo(bufferedSink);
-
-        RequestBody newRequestBody = RequestBody.create(
-                request.body().contentType(),
-                bufferedSink.buffer().readUtf8()
-        );
-
-        return request.newBuilder().post(newRequestBody).build();
     }
-
-//    public static Request interceptMultipartRequest(Request request) {
-//
-//        MultipartBody.Builder builder = new MultipartBody.Builder();
-//        builder.addPart(request.body());
-//
-//        HashMap<String, String> map = NetParamsUtils.processAdditionInMulitpartBody();
-//        Iterator<Map.Entry<String, String>> iterator = map.entrySet().iterator();
-//
-//        while (iterator.hasNext()) {
-//            Map.Entry<String, String> item = iterator.next();
-//            builder.addPart(MultipartBody.Part.createFormData(item.getKey(), item.getValue()));
-//        }
-//        return request.newBuilder().post(builder.build()).build();
-//    }
-
 
 }

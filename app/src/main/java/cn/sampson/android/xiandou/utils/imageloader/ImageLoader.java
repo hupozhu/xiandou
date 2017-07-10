@@ -13,6 +13,7 @@ import com.squareup.picasso.Picasso;
 import java.io.File;
 import java.io.IOException;
 
+import cn.sampson.android.xiandou.R;
 import cn.sampson.android.xiandou.utils.CacheUtil;
 import cn.sampson.android.xiandou.utils.DataUtil;
 import cn.sampson.android.xiandou.utils.imageloader.transformation.BlurTransformation;
@@ -44,6 +45,11 @@ public class ImageLoader {
     public static void load(Context context, String url, ImageView img) {
         if (!TextUtils.isEmpty(url))
             getPicasso(context).load(url).config(Bitmap.Config.RGB_565).fit().centerCrop().into(img);
+    }
+
+    public static void loadAvatar(Context context, String url, ImageView img) {
+        if (!TextUtils.isEmpty(url))
+            getPicasso(context).load(url).error(R.mipmap.default_avatar).config(Bitmap.Config.RGB_565).fit().centerCrop().into(img);
     }
 
     public static void loadWithBlur(Context context, String url, ImageView img) {

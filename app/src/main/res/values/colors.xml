@@ -18,6 +18,8 @@
     <color name="black_title">#323436</color>
     <color name="transparent">#00000000</color>
 
+    <color name="white_pressed">#eeeff1</color>
+
     <color name="gray">#888888</color>
     <color name="gray1">#999999</color>
     <color name="gray2">#505050</color>
@@ -27,6 +29,7 @@
     <color name="gray6">#222222</color>
     <color name="gray7">#616161</color>
     <color name="gray8">#a6a3a3</color>
+    <color name="gray9">#dcdcdc</color>
 
     <color name="pink">#fe397a</color>
     <color name="pink1">#f8afb7</color>
@@ -37,4 +40,6 @@
     <color name="red_30p">#4CF44336</color>
 
     <color name="blue">#6fa8fe</color>
+
+    <color name="dialog_bg">#44000000</color>
 </resources>

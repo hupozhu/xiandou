@@ -1,7 +1,6 @@
 package cn.sampson.android.xiandou.ui.haoyun.yunyu.taijiaozhishi;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,16 +9,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import cn.sampson.android.xiandou.R;
 import cn.sampson.android.xiandou.model.MyString;
 import cn.sampson.android.xiandou.ui.BaseFragment;
-import cn.sampson.android.xiandou.utils.widget.adapter.baseadapter.QuickRecycleViewAdapter;
-import cn.sampson.android.xiandou.utils.widget.adapter.baseadapter.ViewHelper;
+import cn.sampson.android.xiandou.widget.adapter.baseadapter.QuickRecycleViewAdapter;
+import cn.sampson.android.xiandou.widget.adapter.baseadapter.ViewHelper;
 
 /**
  * Created by chengyang on 2017/6/21.

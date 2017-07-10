@@ -11,7 +11,7 @@ import cn.sampson.android.xiandou.R;
 import cn.sampson.android.xiandou.core.AppCache;
 import cn.sampson.android.xiandou.ui.BaseActivity;
 import cn.sampson.android.xiandou.utils.systembar.StatusBarUtil;
-import cn.sampson.android.xiandou.utils.widget.TabFragmentAdapter;
+import cn.sampson.android.xiandou.widget.TabFragmentAdapter;
 
 public class MainActivity extends BaseActivity {
 

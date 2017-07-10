@@ -62,7 +62,6 @@
     <string name="yuerzhinan">育儿指南</string>
 
 
-
     <string name="play_settings">播放设置</string>
     <string name="current_version">当前版本</string>
 
@@ -90,6 +89,30 @@
     <string name="taijiao1">早期胎教</string>
     <string name="taijiao2">中期胎教</string>
     <string name="taijiao3">末期胎教</string>
+
+
+    <string name="my_note">我的帖子</string>
+    <string name="my_reply">我的回复</string>
+    <string name="my_collect">我的收藏</string>
+    <string name="about_us">关于我们</string>
+    <string name="login_register">登录/注册</string>
+    <string name="use_phone_login">请使用手机登录</string>
+    <string name="enter_phone_num">请输入手机号码</string>
+    <string name="enter_auth_code">请输入验证码</string>
+    <string name="get_auth_code">获取验证码</string>
+    <string name="login">登录</string>
+    <string name="user_protocol_prefix">温馨提示：未注册用户登录时</string>
+    <string name="user_protocol_suffix1">将自动注册，即表示同意</string>
+    <string name="user_protocol_suffix2">《用户协议》</string>
+
+    <string name="avatar">头像</string>
+    <string name="nickname">昵称</string>
+    <string name="sex">性别</string>
+    <string name="location">所在地区</string>
+    <string name="date">设置日期</string>
+    <string name="phone">已绑定手机</string>
+    <string name="logout">退出当前帐号</string>
+    <string name="user_info">用户详情</string>
 
     <string-array name="taijiao">
         <item>早期胎教</item>

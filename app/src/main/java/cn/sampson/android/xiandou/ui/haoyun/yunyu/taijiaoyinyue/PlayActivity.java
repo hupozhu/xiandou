@@ -30,7 +30,7 @@ import cn.sampson.android.xiandou.utils.ScreenUtils;
 import cn.sampson.android.xiandou.utils.StringUtils;
 import cn.sampson.android.xiandou.utils.ToastUtils;
 import cn.sampson.android.xiandou.utils.systembar.StatusBarUtil;
-import cn.sampson.android.xiandou.utils.widget.playmusic.AlbumCoverView;
+import cn.sampson.android.xiandou.widget.playmusic.AlbumCoverView;
 
 import static android.R.attr.duration;
 

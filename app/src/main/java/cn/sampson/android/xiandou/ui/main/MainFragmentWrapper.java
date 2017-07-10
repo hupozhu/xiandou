@@ -4,10 +4,10 @@ import android.support.v4.app.Fragment;
 
 import cn.sampson.android.xiandou.R;
 import cn.sampson.android.xiandou.ui.haoyun.HaoYunFragment;
-import cn.sampson.android.xiandou.ui.settings.SettingsFragment;
+import cn.sampson.android.xiandou.ui.mine.MineFragment;
 import cn.sampson.android.xiandou.ui.training.TrainingFragment;
 import cn.sampson.android.xiandou.utils.ContextUtil;
-import cn.sampson.android.xiandou.utils.widget.IFragmentsWrapper;
+import cn.sampson.android.xiandou.widget.IFragmentsWrapper;
 
 /**
  * Created by chengyang on 2017/1/4.
@@ -30,7 +30,7 @@ public class MainFragmentWrapper implements IFragmentsWrapper {
         mFragments = new Fragment[]{
                 new HaoYunFragment(),
                 new TrainingFragment(),
-                new SettingsFragment()
+                new MineFragment()
         };
 
         mTitleImgs = new int[]{
