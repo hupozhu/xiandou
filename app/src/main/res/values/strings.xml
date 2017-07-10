@@ -5,6 +5,7 @@
     <string name="album_photo">相册</string>
 
     <string name="msg_no_camera">无法启动相机！请在设置中开启相机权限</string>
+    <string name="please_open_write_sdcard_permission">请开启读写存储权限</string>
     <string name="pick_avatar">头像选择</string>
 
     <string name="haoyun">好孕</string>

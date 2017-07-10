@@ -29,6 +29,8 @@ public class AppCache {
 
     private MainActivity mainActivity;
 
+    public static int cropNum = 0;
+
     //============== instance ================
     private AppCache() {
     }
