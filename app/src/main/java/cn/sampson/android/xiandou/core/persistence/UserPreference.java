@@ -1,7 +1,10 @@
 package cn.sampson.android.xiandou.core.persistence;
 
 import android.content.SharedPreferences;
+import android.text.TextUtils;
 
+import cn.sampson.android.xiandou.R;
+import cn.sampson.android.xiandou.ui.mine.domain.User;
 import cn.sampson.android.xiandou.utils.ContextUtil;
 
 /**
@@ -152,24 +155,24 @@ public class UserPreference {
     }
 
     /**
-     * 获取电话
+     * 获取是否为女性
      */
-    public static String getUserSex() {
+    public static boolean getIsMan() {
         instance();
-        String s = null;
+        boolean s = false;
         if (preference.contains(USERSEX)) {
-            s = preference.getString(USERSEX, null);
+            s = preference.getBoolean(USERSEX, false);
         }
         return s;
     }
 
     /**
-     * 设置电话
+     * 设置是否为女性
      */
-    public static void setUserSex(String token) {
+    public static void setIsMan(boolean isMan) {
         instance();
         SharedPreferences.Editor ed = preference.edit();
-        ed.putString(USERSEX, token);
+        ed.putBoolean(USERSEX, isMan);
         ed.commit();
     }
 
@@ -257,6 +260,23 @@ public class UserPreference {
         ed.commit();
     }
 
+    public static void setUser(User user) {
+        instance();
+        SharedPreferences.Editor ed = preference.edit();
+        ed.putString(AREA, user.area);
+        ed.putString(BIRTHDAY, user.birthday);
+        ed.putString(NICKNAME, user.nickname);
+        ed.putString(USERNAME, user.username);
+        ed.putString(USERPIC, user.userPic);
+        if (TextUtils.equals(user.userSex, ContextUtil.getString(R.string.man))) {
+            ed.putBoolean(USERSEX, true);
+        } else {
+            ed.putBoolean(USERSEX, false);
+        }
+        ed.putString(USERTEL, user.userTel);
+        ed.commit();
+    }
+
 
     private final static String TOKEN = "token";
     private final static String SIGN = "sign";
@@ -265,7 +285,7 @@ public class UserPreference {
     private final static String USERNAME = "username";
     private final static String NICKNAME = "nickname";
     private final static String USERTEL = "userTel";
-    private final static String USERSEX = "userSex";
+    private final static String USERSEX = "user_Sex";
     private final static String AREA = "area";
     private final static String USERPIC = "userPic";
     private final static String BIRTHDAY = "birthday";

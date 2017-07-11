@@ -45,6 +45,11 @@ public class BeiYunActivity extends BaseActivity {
         tvTitle.setText(getString(R.string.beiyun));
     }
 
+    @OnClick(R.id.fl_back)
+    public void onBackClick() {
+        onBackPressed();
+    }
+
     /**
      * 沉浸式状态栏
      */

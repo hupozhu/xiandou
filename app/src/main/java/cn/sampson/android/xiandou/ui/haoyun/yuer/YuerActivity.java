@@ -39,6 +39,11 @@ public class YuerActivity extends BaseActivity {
         tvTitle.setText(getString(R.string.yuer));
     }
 
+    @OnClick(R.id.fl_back)
+    public void onBackClick() {
+        onBackPressed();
+    }
+
     /**
      * 沉浸式状态栏
      */

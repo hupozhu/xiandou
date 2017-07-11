@@ -1,4 +1,4 @@
-package cn.sampson.android.xiandou.ui.training;
+package cn.sampson.android.xiandou.ui.community;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

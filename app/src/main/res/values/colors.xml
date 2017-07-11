@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#ffffff</color>
     <color name="colorPrimaryDark">#ffffff</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#323436</color>
     <color name="black_50p">#80000000</color>
     <color name="white_8p">#14FFFFFF</color>
     <color name="white_24p">#3DFFFFFF</color>
@@ -17,6 +17,7 @@
     <color name="mask">#44000000</color>
     <color name="black_title">#323436</color>
     <color name="transparent">#00000000</color>
+    <color name="common_background">#f2f2f2</color>
 
     <color name="white_pressed">#eeeff1</color>
 
@@ -42,4 +43,8 @@
     <color name="blue">#6fa8fe</color>
 
     <color name="dialog_bg">#44000000</color>
+
+    <color name="man">#87CEFF</color>
+    <color name="woman">#FF83FA</color>
+    <color name="woman_30">#80FF83FA</color>
 </resources>

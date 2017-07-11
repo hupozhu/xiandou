@@ -237,6 +237,7 @@ public class LoginDialog extends Dialog implements View.OnClickListener, IView {
         UserPreference.setToken(user.token);
         UserPreference.setSign(user.sign);
         UserPreference.setUid(user.uid);
+        UserPreference.setUserTel(etPhone.getText().toString());
         dismissDialog();
         EventBus.getDefault().post(new GetUserInfoEvent());
     }

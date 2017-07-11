@@ -21,7 +21,7 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <!-- 在 屏幕最顶部显示addview-->
     <uses-permission android:name="android.permission.SYSTEM_OVERLAY_WINDOW" />
 
@@ -125,6 +125,12 @@
         <activity
             android:name=".ui.mine.UserInfoActivity"
             android:label="@string/user_info"
+            android:screenOrientation="portrait" />
+
+        <!-- 修改资料 -->
+        <activity
+            android:name=".ui.mine.UserInfoSettingsActivity"
+            android:label="@string/update_info"
             android:screenOrientation="portrait" />
 
         <!-- 播放歌曲 -->

@@ -116,13 +116,22 @@
                     android:text="@string/nickname"
                     android:visibility="gone" />
 
-                <ImageView
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
+
+                <android.support.v7.widget.SwitchCompat
+                    android:id="@+id/sc_switch_compat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="10dp"
-                    android:src="@mipmap/ic_setting_next" />
+                    android:layout_marginRight="55dp"
+                    android:longClickable="false"
+                    android:textColor="@color/white"
+                    android:textOff="女"
+                    android:textOn="男"
+                    app:showText="true"
+                    app:switchPadding="5dp"
+                    app:switchTextAppearance="@style/SwitchCompat.Text"
+                    app:theme="@style/SwitchCompat.Control" />
 
                 <View
                     android:layout_width="match_parent"

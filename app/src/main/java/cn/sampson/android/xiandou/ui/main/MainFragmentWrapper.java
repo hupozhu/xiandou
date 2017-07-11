@@ -3,9 +3,10 @@ package cn.sampson.android.xiandou.ui.main;
 import android.support.v4.app.Fragment;
 
 import cn.sampson.android.xiandou.R;
+import cn.sampson.android.xiandou.ui.community.CommunityFragment;
 import cn.sampson.android.xiandou.ui.haoyun.HaoYunFragment;
 import cn.sampson.android.xiandou.ui.mine.MineFragment;
-import cn.sampson.android.xiandou.ui.training.TrainingFragment;
+import cn.sampson.android.xiandou.ui.community.TrainingFragment;
 import cn.sampson.android.xiandou.utils.ContextUtil;
 import cn.sampson.android.xiandou.widget.IFragmentsWrapper;
 
@@ -29,7 +30,7 @@ public class MainFragmentWrapper implements IFragmentsWrapper {
 
         mFragments = new Fragment[]{
                 new HaoYunFragment(),
-                new TrainingFragment(),
+                new CommunityFragment(),
                 new MineFragment()
         };
 

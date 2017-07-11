@@ -52,6 +52,11 @@ public class YunyuActivity extends BaseActivity {
         }
     }
 
+    @OnClick(R.id.fl_back)
+    public void onBackClick() {
+        onBackPressed();
+    }
+
     @OnClick(R.id.huaiyun40zhou)
     public void jumpToHuaiyun40zhou() {
         jumpTo(FortyWeeksActivity.class);

@@ -95,6 +95,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
             }
         });
         checkLogin();
+        mPresenter.getUserInfo();
     }
 
     public void onEvent(GetUserInfoEvent event) {
@@ -177,6 +178,8 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
         checkLogin();
         tvNickname.setText(user.nickname);
         ImageLoader.loadAvatar(getContext(), user.userPic, rivAvatar);
+
+        UserPreference.setUser(user);
     }
 
     public class UserPresenterImpl extends BasePresenter<MineFragment> implements UserPresenter {

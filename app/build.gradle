@@ -41,17 +41,6 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 
-    //----- Picasso
-
-    //----- Retrofit
-
-    //----- ButterKnife
-
-    //----- material progress dialog
-
-    //----- Rounded imageView
-
-    // 6.0 runtime permissions based on rxJava
     compile 'com.pnikosis:materialish-progress:1.7'
 
     compile 'com.android.support:appcompat-v7:25.3.0'

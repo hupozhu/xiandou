@@ -10,14 +10,17 @@ import android.support.annotation.Nullable;
 import android.support.v4.content.PermissionChecker;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 
 import java.lang.ref.WeakReference;
 
 import cn.sampson.android.xiandou.R;
+import cn.sampson.android.xiandou.config.Constants;
 import cn.sampson.android.xiandou.utils.ToastUtils;
 import cn.sampson.android.xiandou.utils.permission.PermissionReq;
 import cn.sampson.android.xiandou.utils.permission.PermissionResult;
@@ -40,6 +43,8 @@ public class BaseActivity extends AppCompatActivity {
         setVolumeControlStream(AudioManager.STREAM_MUSIC);
     }
 
+    // =========================================== menu处理 =============================================
+
     protected void setActionBarBack() {
         mActionToolbar = getSupportActionBar();
         mActionToolbar.setHomeAsUpIndicator(R.mipmap.ic_title_back);
@@ -51,11 +56,24 @@ public class BaseActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 onBackPressed();
-                return true;
+                break;
+            case R.id.action_save:
+                onToolbarSave();
+                break;
         }
         return true;
     }
 
+    protected void onToolbarSave(){}
+
+    /**
+     * 让view获取焦点
+     */
+    public void requestFocus(View view) {
+        if (view.requestFocus()) {
+            getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+        }
+    }
     // ========================================== 跳转 ====================================================
 
     public void jumpTo(Class activityClazz) {
@@ -128,9 +146,10 @@ public class BaseActivity extends AppCompatActivity {
         }
     }
 
+
     // =========================================== 拍照 =============================================
 
-    protected static final int RESULT_PHOTO = 1;
+
     //图片压缩质量
     private int photo_compression_quality = 100;
 
@@ -184,15 +203,15 @@ public class BaseActivity extends AppCompatActivity {
                 .result(new PermissionResult() {
                     @Override
                     public void onGranted() {
-                        Intent mIntent = new Intent(BaseActivity.this, ImageCropActivity.class);
-                        mIntent.putExtra("state", type);
-                        mIntent.putExtra(ImageCropActivity.QUALITY, photo_compression_quality);
-                        startActivityForResult(mIntent, RESULT_PHOTO);
+//                        Intent mIntent = new Intent(BaseActivity.this, ImageCropActivity.class);
+//                        mIntent.putExtra("state", type);
+//                        mIntent.putExtra(ImageCropActivity.QUALITY, photo_compression_quality);
+//                        startActivityForResult(mIntent, RESULT_PHOTO);
                     }
 
                     @Override
                     public void onDenied() {
-                        ToastUtils.show(R.string.please_open_write_sdcard_permission);
+//                        ToastUtils.show(R.string.please_open_write_sdcard_permission);
                     }
                 }).request();
     }
@@ -202,8 +221,8 @@ public class BaseActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (data != null && resultCode == 200) {
             switch (requestCode) {
-                case RESULT_PHOTO:
-                    uploadPhoto(data.getStringExtra(ImageCropActivity.RESULT_PHOTO_PATH));
+                case Constants.REQUEST_PHOTO:
+//                    uploadPhoto(data.getStringExtra(ImageCropActivity.RESULT_PHOTO_PATH));
                     break;
             }
         }

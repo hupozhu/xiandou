@@ -15,6 +15,10 @@
     <string name="yunyu">孕育</string>
     <string name="yuer">育儿</string>
 
+    <string name="finish">完成</string>
+    <string name="man">男</string>
+    <string name="woman">女</string>
+
     <!--备孕-->
     <string name="jintianhaoyun">今天好孕率</string>
     <string name="zhangzishi">涨姿势</string>
@@ -90,7 +94,7 @@
     <string name="taijiao2">中期胎教</string>
     <string name="taijiao3">末期胎教</string>
 
-
+    <!--我的-->
     <string name="my_note">我的帖子</string>
     <string name="my_reply">我的回复</string>
     <string name="my_collect">我的收藏</string>
@@ -113,6 +117,15 @@
     <string name="phone">已绑定手机</string>
     <string name="logout">退出当前帐号</string>
     <string name="user_info">用户详情</string>
+    <string name="update_info">修改资料</string>
+
+    <string name="input_nickname">请输入昵称</string>
+    <string name="input_nickname_not_null">昵称不能为空</string>
+    <string name="input_address">请输入地址</string>
+    <string name="input_address_not_null">地址不能为空</string>
+
+    <!--社区-->
+    <string name="yaobaobao">我要宝宝</string>
 
     <string-array name="taijiao">
         <item>早期胎教</item>
