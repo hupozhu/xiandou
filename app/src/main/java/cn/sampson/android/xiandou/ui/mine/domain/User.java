@@ -15,4 +15,6 @@ public class User {
     public String userPic;
     public String birthday;
 
+    public String regtime;
+    public String lasttime;
 }

@@ -65,6 +65,21 @@
         <item name="android:layout_height">wrap_content</item>
     </style>
 
+    <style name="name_content">
+        <item name="android:textColor">@color/name_content</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="article_title">
+        <item name="android:textColor">@color/article_title</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
     <!-- tabLayout没有触摸的波浪反馈 -->
     <style name="no_ripple" parent="AppTheme">
         <item name="colorControlHighlight">@color/transparent</item>

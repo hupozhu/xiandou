@@ -62,5 +62,6 @@ dependencies {
     compile 'org.jsoup:jsoup:1.10.2'
     testCompile 'junit:junit:4.12'
     compile 'de.greenrobot:eventbus:2.4.0'
+    compile 'com.nineoldandroids:library:2.4.0'
     apt 'com.github.hotchemi:permissionsdispatcher-processor:2.1.3'
 }

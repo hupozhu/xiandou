@@ -8,7 +8,10 @@ import cn.sampson.android.xiandou.widget.adapter.baseadapter.SelectBase;
 
 public class CommunityCategory extends SelectBase {
 
-    public String logo;
+    public long cateId;
     public String name;
+    public String tag;
+    public String intro;
+    public String img;
 
 }

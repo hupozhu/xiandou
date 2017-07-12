@@ -20,6 +20,7 @@
     <color name="common_background">#f2f2f2</color>
 
     <color name="white_pressed">#eeeff1</color>
+    <color name="black_split">#979797</color>
 
     <color name="gray">#888888</color>
     <color name="gray1">#999999</color>
@@ -31,6 +32,9 @@
     <color name="gray7">#616161</color>
     <color name="gray8">#a6a3a3</color>
     <color name="gray9">#dcdcdc</color>
+
+    <color name="name_content">#585656</color>
+    <color name="article_title">#222222</color>
 
     <color name="pink">#fe397a</color>
     <color name="pink1">#f8afb7</color>

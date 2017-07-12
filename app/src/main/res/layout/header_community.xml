@@ -1,26 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/common_background"
     android:orientation="vertical">
 
-    <RelativeLayout
-        android:id="@+id/rl_ad_container"
+    <cn.sampson.android.xiandou.widget.banner.MainPageImageBanner
+        android:id="@+id/banner"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:background="@color/white">
+        android:layout_height="200dp"
+        app:bb_indicatorCornerRadius="6dp"
+        app:bb_indicatorGap="7dp"
+        app:bb_indicatorHeight="6dp"
+        app:bb_indicatorSelectColor="@color/man"
+        app:bb_indicatorStyle="CORNER_RECTANGLE"
+        app:bb_indicatorUnselectColor="@color/black"
+        app:bb_indicatorWidth="6dp"
+        app:bb_scale="0.5625" />
 
-        <ImageView
-            android:id="@+id/iv_banner"
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:src="@mipmap/ic_main_banner" />
-    </RelativeLayout>
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/category_container"
+    <View
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="5dp"
         android:background="@color/white" />
+
+    <LinearLayout
+        android:id="@+id/ll_category_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="@color/white" />
+
+    <!--热门推荐-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/shape_top_corner_white"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/ll_hot_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/text15"
+                android:layout_marginLeft="21dp"
+                android:layout_marginTop="18dp"
+                android:text="@string/hot_recommend"
+                android:textColor="@color/gray1"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/ll_hot_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:background="@color/black_split"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="15dp" />
+    </LinearLayout>
 
 </LinearLayout>

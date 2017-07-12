@@ -133,6 +133,11 @@
             android:label="@string/update_info"
             android:screenOrientation="portrait" />
 
+        <!-- 社区文章列表 -->
+        <activity
+            android:name=".ui.community.CommunityActivity"
+            android:screenOrientation="portrait" />
+
         <!-- 播放歌曲 -->
         <activity
             android:name=".ui.haoyun.yunyu.taijiaoyinyue.PlayActivity"

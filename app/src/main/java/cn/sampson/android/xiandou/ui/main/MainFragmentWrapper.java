@@ -6,7 +6,6 @@ import cn.sampson.android.xiandou.R;
 import cn.sampson.android.xiandou.ui.community.CommunityFragment;
 import cn.sampson.android.xiandou.ui.haoyun.HaoYunFragment;
 import cn.sampson.android.xiandou.ui.mine.MineFragment;
-import cn.sampson.android.xiandou.ui.community.TrainingFragment;
 import cn.sampson.android.xiandou.utils.ContextUtil;
 import cn.sampson.android.xiandou.widget.IFragmentsWrapper;
 
