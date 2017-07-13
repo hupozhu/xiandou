@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,6 +20,7 @@ import java.lang.ref.WeakReference;
 
 import cn.sampson.android.xiandou.R;
 import cn.sampson.android.xiandou.config.Constants;
+import cn.sampson.android.xiandou.utils.ContextUtil;
 import cn.sampson.android.xiandou.utils.ToastUtils;
 import cn.sampson.android.xiandou.utils.permission.PermissionReq;
 import cn.sampson.android.xiandou.utils.permission.PermissionResult;
@@ -49,6 +51,24 @@ public class BaseActivity extends AppCompatActivity {
         mActionToolbar.setDisplayHomeAsUpEnabled(true);
     }
 
+    protected void setSupportToolbar(Toolbar toolbar, String title) {
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationIcon(R.mipmap.ic_title_back);
+        toolbar.setTitleTextColor(ContextUtil.getColor(R.color.black));
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
+
+        if (null != title)
+            getSupportActionBar().setTitle(title);
+        else
+            getSupportActionBar().setTitle(" ");
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -62,7 +82,8 @@ public class BaseActivity extends AppCompatActivity {
         return true;
     }
 
-    protected void onToolbarSave(){}
+    protected void onToolbarSave() {
+    }
 
     /**
      * 让view获取焦点

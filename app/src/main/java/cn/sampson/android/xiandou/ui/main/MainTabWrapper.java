@@ -13,24 +13,16 @@ import cn.sampson.android.xiandou.widget.IFragmentsWrapper;
  * Created by chengyang on 2017/1/4.
  */
 
-public class MainFragmentWrapper implements IFragmentsWrapper {
+public class MainTabWrapper implements IFragmentsWrapper {
 
     private String[] mTitles;
-    private Fragment[] mFragments;
     private int[] mTitleImgs;
 
-    public MainFragmentWrapper() {
-
+    public MainTabWrapper() {
         mTitles = new String[]{
                 ContextUtil.getString(R.string.haoyun),
                 ContextUtil.getString(R.string.shequ),
                 ContextUtil.getString(R.string.wode)
-        };
-
-        mFragments = new Fragment[]{
-                new HaoYunFragment(),
-                new CommunityFragment(),
-                new MineFragment()
         };
 
         mTitleImgs = new int[]{
@@ -42,7 +34,7 @@ public class MainFragmentWrapper implements IFragmentsWrapper {
 
     @Override
     public int getCount() {
-        return mFragments.length;
+        return mTitles.length;
     }
 
     @Override
@@ -52,7 +44,7 @@ public class MainFragmentWrapper implements IFragmentsWrapper {
 
     @Override
     public Fragment getFragment(int index) {
-        return mFragments[index];
+        return null;
     }
 
     @Override

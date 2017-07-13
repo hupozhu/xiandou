@@ -1,139 +1,159 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    android:orientation="vertical">
+    android:background="@color/white">
 
-    <RelativeLayout
+    <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:background="@mipmap/yuer_background">
+        android:layout_height="wrap_content">
 
-        <!--title-->
-        <RelativeLayout
-            android:id="@+id/rlTitle"
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/toolbar_layout"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:layout_height="match_parent"
+            app:contentScrim="@color/white"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:titleEnabled="false">
 
-            <FrameLayout
-                android:id="@+id/fl_back"
-                android:layout_width="?attr/actionBarSize"
-                android:layout_height="30dp">
-
-                <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_gravity="center"
-                    android:src="@mipmap/ic_title_back" />
-            </FrameLayout>
-
-            <TextView
-                android:id="@+id/tv_title"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:layout_marginLeft="20dp"
-                android:text="闲豆"
-                android:textColor="@color/gray7"
-                android:textSize="18sp" />
-        </RelativeLayout>
-    </RelativeLayout>
+                android:background="@color/white"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:background="@mipmap/yuer_background"></RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal">
+
+                    <!--一千零一夜-->
+                    <LinearLayout
+                        android:id="@+id/yiqianlinyiye"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="40dp"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@mipmap/ic_main_yiqianyiye" />
+
+                        <TextView
+                            style="@style/text13"
+                            android:layout_marginTop="14dp"
+                            android:text="@string/yiqianyiye" />
+                    </LinearLayout>
+
+                    <!--安徒生-->
+                    <LinearLayout
+                        android:id="@+id/antusheng"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="40dp"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@mipmap/ic_main_antusheng" />
+
+                        <TextView
+                            style="@style/text13"
+                            android:layout_marginTop="14dp"
+                            android:text="@string/antusheng" />
+                    </LinearLayout>
+
+                    <!--格林-->
+                    <LinearLayout
+                        android:id="@+id/gelin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@mipmap/ic_main_gelin" />
+
+                        <TextView
+                            style="@style/text13"
+                            android:layout_marginTop="14dp"
+                            android:text="@string/gelintonghua" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@color/common_gray" />
+
+            </LinearLayout>
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/transparent"
+                app:layout_collapseMode="pin" />
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+    </android.support.design.widget.AppBarLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="40dp"
-        android:orientation="horizontal">
-
-        <!--一千零一夜-->
-        <LinearLayout
-            android:id="@+id/yiqianlinyiye"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="40dp"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_width="64dp"
-                android:layout_height="64dp"
-                android:src="@mipmap/ic_main_yiqianyiye" />
-
-            <TextView
-                style="@style/text13"
-                android:layout_marginTop="14dp"
-                android:text="@string/yiqianyiye" />
-        </LinearLayout>
-
-        <!--安徒生-->
-        <LinearLayout
-            android:id="@+id/antusheng"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="40dp"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_width="64dp"
-                android:layout_height="64dp"
-                android:src="@mipmap/ic_main_antusheng" />
-
-            <TextView
-                style="@style/text13"
-                android:layout_marginTop="14dp"
-                android:text="@string/antusheng" />
-        </LinearLayout>
-
-        <!--格林-->
-        <LinearLayout
-            android:id="@+id/gelin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_width="64dp"
-                android:layout_height="64dp"
-                android:src="@mipmap/ic_main_gelin" />
-
-            <TextView
-                style="@style/text13"
-                android:layout_marginTop="14dp"
-                android:text="@string/gelintonghua" />
-        </LinearLayout>
-    </LinearLayout>
-
-    <View
         android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:layout_marginTop="20dp"
-        android:background="@color/common_gray" />
-
-    <LinearLayout
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="16dp"
-        android:gravity="center_vertical">
+        android:orientation="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <View
-            android:layout_width="35dp"
-            android:layout_height="1dp"
-            android:background="@color/gray1" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:paddingBottom="16dp"
+            android:paddingTop="16dp"
+            android:gravity="center">
 
-        <TextView
-            style="@style/text15"
-            android:layout_marginLeft="12dp"
-            android:layout_marginRight="12dp"
-            android:text="@string/yuerzhinan" />
+            <View
+                android:layout_width="35dp"
+                android:layout_height="1dp"
+                android:background="@color/gray1" />
 
-        <View
-            android:layout_width="35dp"
-            android:layout_height="1dp"
-            android:background="@color/gray1" />
+            <TextView
+                style="@style/text15"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:text="@string/yuerzhinan" />
+
+            <View
+                android:layout_width="35dp"
+                android:layout_height="1dp"
+                android:background="@color/gray1" />
+        </LinearLayout>
+
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/refresh"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </android.support.v4.widget.SwipeRefreshLayout>
     </LinearLayout>
 
-</LinearLayout>
+</android.support.design.widget.CoordinatorLayout>

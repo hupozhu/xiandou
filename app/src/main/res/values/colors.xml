@@ -32,6 +32,7 @@
     <color name="gray7">#616161</color>
     <color name="gray8">#a6a3a3</color>
     <color name="gray9">#dcdcdc</color>
+    <color name="gray10">#747474</color>
 
     <color name="name_content">#585656</color>
     <color name="article_title">#222222</color>
@@ -45,6 +46,7 @@
     <color name="red_30p">#4CF44336</color>
 
     <color name="blue">#6fa8fe</color>
+    <color name="green">#50e3c2</color>
 
     <color name="dialog_bg">#44000000</color>
 

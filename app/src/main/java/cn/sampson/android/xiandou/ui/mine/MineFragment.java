@@ -67,6 +67,15 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
     UserPresenter mPresenter;
     LoginDialog loginDialog;
 
+    private static MineFragment mineFragment;
+
+    public static MineFragment getInstance() {
+        if (mineFragment == null) {
+            mineFragment = new MineFragment();
+        }
+        return mineFragment;
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

@@ -32,6 +32,7 @@ import cn.sampson.android.xiandou.ui.BaseFragment;
 import cn.sampson.android.xiandou.ui.community.domain.ArticleItem;
 import cn.sampson.android.xiandou.ui.community.domain.CommunityCategory;
 import cn.sampson.android.xiandou.ui.community.domain.CommunityIndex;
+import cn.sampson.android.xiandou.ui.mine.MineFragment;
 import cn.sampson.android.xiandou.utils.UiUtils;
 import cn.sampson.android.xiandou.utils.imageloader.ImageLoader;
 import cn.sampson.android.xiandou.widget.adapter.baseadapter.QuickRecycleViewAdapter;
@@ -64,6 +65,15 @@ public class CommunityFragment extends BaseFragment implements SwipeRefreshLayou
 
     int page = 1;
     int num = 10;
+
+    private static CommunityFragment communityFragment;
+
+    public static CommunityFragment getInstance() {
+        if (communityFragment == null) {
+            communityFragment = new CommunityFragment();
+        }
+        return communityFragment;
+    }
 
     @Nullable
     @Override

@@ -1,183 +1,200 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    android:orientation="vertical">
+    android:background="@color/white">
 
-    <RelativeLayout
+    <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:background="@mipmap/yunyu_background">
+        android:layout_height="wrap_content">
 
-        <!--title-->
-        <RelativeLayout
-            android:id="@+id/rlTitle"
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/toolbar_layout"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:layout_height="match_parent"
+            app:contentScrim="@color/white"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:titleEnabled="false">
 
-            <FrameLayout
-                android:id="@+id/fl_back"
-                android:layout_width="?attr/actionBarSize"
-                android:layout_height="30dp">
-
-                <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_gravity="center"
-                    android:src="@mipmap/ic_title_back" />
-            </FrameLayout>
-
-            <TextView
-                android:id="@+id/tv_title"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:layout_marginLeft="20dp"
-                android:text="闲豆"
-                android:textColor="@color/gray7"
-                android:textSize="18sp" />
-        </RelativeLayout>
+                android:background="@color/white"
+                android:orientation="vertical">
 
-    </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:background="@mipmap/yunyu_background">
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
+                    android:layout_marginTop="20dp">
+
+                    <!--怀孕40周-->
+                    <LinearLayout
+                        android:id="@+id/huaiyun40zhou"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40.5dp"
+                            android:src="@mipmap/ic_huaiyun40zhou" />
+
+                        <TextView
+                            style="@style/text13"
+                            android:layout_marginTop="7dp"
+                            android:text="@string/huaiyunsishizhou" />
+                    </LinearLayout>
+
+                    <!--280天-->
+                    <LinearLayout
+                        android:id="@+id/m280tian"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@mipmap/ic_280tian" />
+
+                        <TextView
+                            style="@style/text13"
+                            android:layout_marginTop="7dp"
+                            android:text="@string/erbaibashitian" />
+                    </LinearLayout>
+
+                    <!--孕期注意-->
+                    <LinearLayout
+                        android:id="@+id/yunqizhuyi"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40.5dp"
+                            android:src="@mipmap/ic_yunqizhuyi" />
+
+                        <TextView
+                            style="@style/text13"
+                            android:layout_marginTop="7dp"
+                            android:text="@string/yunqizhuyi" />
+                    </LinearLayout>
+
+                    <!--胎教音乐-->
+                    <LinearLayout
+                        android:id="@+id/taijiaoyinyue"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@mipmap/ic_taijiaoyinyue" />
+
+                        <TextView
+                            style="@style/text13"
+                            android:layout_marginTop="7dp"
+                            android:text="@string/taijiaoyinyue" />
+                    </LinearLayout>
+
+                    <!--胎教知识-->
+                    <LinearLayout
+                        android:id="@+id/taijiaozhishi"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@mipmap/ic_taijiaozhishi" />
+
+                        <TextView
+                            style="@style/text13"
+                            android:layout_marginTop="7dp"
+                            android:text="@string/taijiaozhishi" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:layout_marginTop="38dp"
+                    android:background="@color/common_gray" />
+            </LinearLayout>
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/transparent"
+                app:layout_collapseMode="pin" />
+        </android.support.design.widget.CollapsingToolbarLayout>
+    </android.support.design.widget.AppBarLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="12dp"
-        android:layout_marginRight="12dp"
-        android:layout_marginTop="20dp">
+        android:orientation="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <!--怀孕40周-->
         <LinearLayout
-            android:id="@+id/huaiyun40zhou"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:paddingBottom="16dp"
+            android:paddingTop="16dp">
 
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40.5dp"
-                android:src="@mipmap/ic_huaiyun40zhou" />
+            <View
+                android:layout_width="35dp"
+                android:layout_height="1dp"
+                android:background="@color/gray1" />
 
             <TextView
-                style="@style/text13"
-                android:layout_marginTop="7dp"
-                android:text="@string/huaiyunsishizhou" />
+                style="@style/text15"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:text="@string/beiyunzhilan" />
+
+            <View
+                android:layout_width="35dp"
+                android:layout_height="1dp"
+                android:background="@color/gray1" />
         </LinearLayout>
 
-        <!--280天-->
-        <LinearLayout
-            android:id="@+id/m280tian"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/refresh"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@mipmap/ic_280tian" />
-
-            <TextView
-                style="@style/text13"
-                android:layout_marginTop="7dp"
-                android:text="@string/erbaibashitian" />
-        </LinearLayout>
-
-        <!--孕期注意-->
-        <LinearLayout
-            android:id="@+id/yunqizhuyi"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40.5dp"
-                android:src="@mipmap/ic_yunqizhuyi" />
-
-            <TextView
-                style="@style/text13"
-                android:layout_marginTop="7dp"
-                android:text="@string/yunqizhuyi" />
-        </LinearLayout>
-
-        <!--胎教音乐-->
-        <LinearLayout
-            android:id="@+id/taijiaoyinyue"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@mipmap/ic_taijiaoyinyue" />
-
-            <TextView
-                style="@style/text13"
-                android:layout_marginTop="7dp"
-                android:text="@string/taijiaoyinyue" />
-        </LinearLayout>
-
-        <!--胎教知识-->
-        <LinearLayout
-            android:id="@+id/taijiaozhishi"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@mipmap/ic_taijiaozhishi" />
-
-            <TextView
-                style="@style/text13"
-                android:layout_marginTop="7dp"
-                android:text="@string/taijiaozhishi" />
-        </LinearLayout>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </android.support.v4.widget.SwipeRefreshLayout>
     </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:layout_marginTop="38dp"
-        android:background="@color/common_gray" />
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="16dp"
-        android:gravity="center_vertical">
-
-        <View
-            android:layout_width="35dp"
-            android:layout_height="1dp"
-            android:background="@color/gray1" />
-
-        <TextView
-            style="@style/text15"
-            android:layout_marginLeft="12dp"
-            android:layout_marginRight="12dp"
-            android:text="@string/beiyunzhilan" />
-
-        <View
-            android:layout_width="35dp"
-            android:layout_height="1dp"
-            android:background="@color/gray1" />
-    </LinearLayout>
-</LinearLayout>
+</android.support.design.widget.CoordinatorLayout>

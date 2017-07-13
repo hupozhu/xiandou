@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/iv_poster"
+        android:layout_width="match_parent"
+        android:layout_height="135dp"
+        android:layout_margin="15dp" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        style="@style/text16"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:maxLines="2"
+        android:text="阿西巴拉那阿西巴拉那阿西巴拉那阿西巴拉那阿西巴拉那" />
+
+    <TextView
+        android:id="@+id/tv_content"
+        style="@style/text15"
+        android:layout_margin="15dp"
+        android:maxLines="2"
+        android:text="阿西巴拉那阿西巴拉那阿西巴拉那阿西巴拉那阿西巴拉那" />
+
+</LinearLayout>

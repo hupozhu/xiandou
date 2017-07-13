@@ -138,6 +138,11 @@
             android:name=".ui.community.CommunityActivity"
             android:screenOrientation="portrait" />
 
+        <!-- 白带拉丝 -->
+        <activity
+            android:name=".ui.haoyun.beiyun.BaidaiLaSiActivity"
+            android:screenOrientation="portrait" />
+
         <!-- 播放歌曲 -->
         <activity
             android:name=".ui.haoyun.yunyu.taijiaoyinyue.PlayActivity"
