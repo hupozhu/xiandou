@@ -9,10 +9,9 @@ import cn.sampson.android.xiandou.widget.adapter.baseadapter.SelectBase;
 public class ArticleItem extends SelectBase {
 
     public long articleId;
-    public String articleAuthor;
     public String articleTitle;
     public String articleSummary;
     public int articleType;
-    public String articleContent;
-    
+    public String cover;
+
 }

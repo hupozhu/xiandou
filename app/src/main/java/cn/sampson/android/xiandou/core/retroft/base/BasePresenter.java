@@ -221,6 +221,7 @@ public abstract class BasePresenter<T extends IView> {
 
     public void resetData() {
         allRequestCount = 0;
+        errorNetRequestCount = 0;
         exceptionRequestCount = 0;
         successRequestCount = 0;
     }

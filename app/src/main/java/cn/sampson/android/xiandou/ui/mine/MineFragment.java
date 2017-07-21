@@ -85,6 +85,22 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (!TextUtils.isEmpty(UserPreference.getAvatar())) {
+            ImageLoader.loadAvatar(getContext(), UserPreference.getArea(), rivAvatar);
+        } else {
+            rivAvatar.setImageResource(R.mipmap.default_avatar);
+        }
+
+        if (!TextUtils.isEmpty(UserPreference.getNickname())) {
+            tvNickname.setText(UserPreference.getNickname());
+        }
+
+        checkLogin();
+    }
+
     private void initView() {
         loginDialog = new LoginDialog(getActivity());
         mPresenter = new UserPresenterImpl(this);
@@ -92,6 +108,8 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
 
         llNotLogin.setOnClickListener(this);
         rlLogin.setOnClickListener(this);
+        llReply.setOnClickListener(this);
+        llCollect.setOnClickListener(this);
 
         rivAvatar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -170,6 +188,16 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
             case R.id.rl_login:
                 //跳转到设置详情页面
                 startActivity(new Intent(getActivity(), UserInfoActivity.class));
+                break;
+
+            case R.id.ll_reply:
+                //跳转到我的回复
+                startActivity(new Intent(getActivity(), MyReplyActivity.class));
+                break;
+
+            case R.id.ll_collect:
+                //跳转到我的收藏
+                startActivity(new Intent(getActivity(), MyCollectActivity.class));
                 break;
         }
     }

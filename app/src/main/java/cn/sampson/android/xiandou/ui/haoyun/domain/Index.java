@@ -9,7 +9,8 @@ import cn.sampson.android.xiandou.widget.banner.BannerItem;
 
 public class Index {
 
-    public ListItem<BannerItem> bannsers;
+    public ListItem<BannerItem> banners;
+    public ListItem<BannerItem> advs;
     public ListItem<ArticleItem> hots;
     public ListItem<ArticleItem> news;
 

@@ -57,6 +57,11 @@ public class ImageLoader {
             getPicasso(context).load(url).transform(new BlurTransformation(context, 1, 10)).config(Bitmap.Config.RGB_565).fit().centerCrop().into(img);
     }
 
+    public static void loadFixXY(Context context, String url, ImageView img) {
+        if (!TextUtils.isEmpty(url))
+            getPicasso(context).load(url).config(Bitmap.Config.RGB_565).fit().into(img);
+    }
+
     /**
      * Singleton Picasso shared cache with OkH ttp/Retrofit
      */

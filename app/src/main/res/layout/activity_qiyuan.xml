@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="144dp"
+        android:layout_height="143dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="16dp"
+        android:src="@mipmap/ic_qiyuan_poaster" />
+
+    <TextView
+        style="@style/text15"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="26dp"
+        android:text="@string/qiyuan_describe"
+        android:textSize="18sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_marginTop="30dp"
+        android:background="@color/common_background" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_margin="15dp">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/shape_round_corner_gray"
+            android:gravity="top"
+            android:hint="@string/qiyuan_input_hint"
+            android:padding="13dp"
+            android:text="一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十"
+            android:textSize="14sp" />
+
+        <TextView
+            style="@style/text15"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="20dp"
+            android:text="0/140"
+            android:textColor="@color/green" />
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="216dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/shape_logout_background"
+        android:gravity="center"
+        android:text="@string/qiyuan1"
+        android:textColor="@color/white"
+        android:textSize="18sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_marginTop="30dp"
+        android:background="@color/common_background" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="20.5dp"
+            android:layout_height="19dp"
+            android:src="@mipmap/ic_qiyuan1" />
+
+        <TextView
+            style="@style/text15"
+            android:layout_marginLeft="4dp"
+            android:text="@string/qiyuan_wall"
+            android:textColor="@color/article_title" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/common_background" />
+
+</LinearLayout>

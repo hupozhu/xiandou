@@ -4,10 +4,14 @@ import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.io.File;
@@ -19,8 +23,10 @@ import butterknife.ButterKnife;
 import cn.sampson.android.xiandou.R;
 import cn.sampson.android.xiandou.ui.BaseActivity;
 import cn.sampson.android.xiandou.utils.FileUtils;
+import cn.sampson.android.xiandou.utils.ScreenUtils;
 import cn.sampson.android.xiandou.utils.Tip;
 import cn.sampson.android.xiandou.utils.ToastUtils;
+import cn.sampson.android.xiandou.utils.systembar.StatusBarUtil;
 import rx.Observable;
 import rx.functions.Action1;
 import rx.subscriptions.CompositeSubscription;
@@ -49,6 +55,8 @@ public class ImageCropActivity extends BaseActivity implements View.OnTouchListe
     TextView reset;
     @Bind(R.id.sure)
     TextView sure;
+    @Bind(R.id.root)
+    RelativeLayout root;
 
     private int currentType;
     private Uri tempUri;
@@ -62,11 +70,20 @@ public class ImageCropActivity extends BaseActivity implements View.OnTouchListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout._activity_crop_bitmap);
         ButterKnife.bind(this);
-
+        StatusBarUtil.transparencyBar(this);
         init(savedInstanceState);
+    }
+
+    /**
+     * 沉浸式状态栏
+     */
+    private void initSystemBar() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            int top = ScreenUtils.getSystemBarHeight();
+            ((FrameLayout.LayoutParams) root.getLayoutParams()).topMargin = top;
+        }
     }
 
     @Override

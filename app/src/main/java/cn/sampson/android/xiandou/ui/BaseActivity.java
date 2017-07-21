@@ -16,10 +16,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 
+import java.io.File;
 import java.lang.ref.WeakReference;
 
 import cn.sampson.android.xiandou.R;
 import cn.sampson.android.xiandou.config.Constants;
+import cn.sampson.android.xiandou.core.UpdatePhotoManager;
+import cn.sampson.android.xiandou.ui.takephoto.ImageCropActivity;
 import cn.sampson.android.xiandou.utils.ContextUtil;
 import cn.sampson.android.xiandou.utils.ToastUtils;
 import cn.sampson.android.xiandou.utils.permission.PermissionReq;
@@ -222,15 +225,15 @@ public class BaseActivity extends AppCompatActivity {
                 .result(new PermissionResult() {
                     @Override
                     public void onGranted() {
-//                        Intent mIntent = new Intent(BaseActivity.this, ImageCropActivity.class);
-//                        mIntent.putExtra("state", type);
-//                        mIntent.putExtra(ImageCropActivity.QUALITY, photo_compression_quality);
-//                        startActivityForResult(mIntent, RESULT_PHOTO);
+                        Intent mIntent = new Intent(BaseActivity.this, ImageCropActivity.class);
+                        mIntent.putExtra("state", type);
+                        mIntent.putExtra(ImageCropActivity.QUALITY, photo_compression_quality);
+                        startActivityForResult(mIntent, Constants.REQUEST_PHOTO);
                     }
 
                     @Override
                     public void onDenied() {
-//                        ToastUtils.show(R.string.please_open_write_sdcard_permission);
+                        ToastUtils.show(R.string.please_open_write_sdcard_permission);
                     }
                 }).request();
     }
@@ -241,13 +244,15 @@ public class BaseActivity extends AppCompatActivity {
         if (data != null && resultCode == 200) {
             switch (requestCode) {
                 case Constants.REQUEST_PHOTO:
-//                    uploadPhoto(data.getStringExtra(ImageCropActivity.RESULT_PHOTO_PATH));
+                    uploadPhoto(data.getStringExtra(ImageCropActivity.RESULT_PHOTO_PATH));
                     break;
             }
         }
     }
 
     protected void uploadPhoto(String photoPath) {
+        UpdatePhotoManager.getInstance().updatePhoto(new File(photoPath));
+
     }
 
     @Override

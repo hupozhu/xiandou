@@ -103,6 +103,9 @@ public abstract class AutoHeightLayout extends SoftKeyboardSizeWatchLayout imple
     public void OnSoftClose() {
     }
 
+    /**
+     * 一定要看这个方法子类有没有调用
+     */
     public abstract void onSoftKeyboardHeightChanged(int var1);
 
     public void setOnMaxParentHeightChangeListener(AutoHeightLayout.OnMaxParentHeightChangeListener listener) {

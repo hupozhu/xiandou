@@ -20,12 +20,17 @@
     <string name="man">男</string>
     <string name="woman">女</string>
 
+    <string name="community_content">社区帖子</string>
+    <string name="category_tag">#%1$s#</string>
+
     <!--备孕-->
     <string name="jintianhaoyun">今天好孕率</string>
     <string name="zhangzishi">涨姿势</string>
     <string name="baidailasi">白带拉丝</string>
     <string name="bchaocepai">B超测排</string>
     <string name="qiyuan">祈愿</string>
+    <string name="qiyuan1">祈&#160;&#160;愿</string>
+    <string name="new_detail">资讯详情</string>
 
     <string name="beiyunzhilan">备孕指南</string>
     <string name="tiwei">体位（射精时）</string>
@@ -35,6 +40,9 @@
     <string name="female_comfort_label">女方舒适度：</string>
     <string name="male_comfort_label">男方努力值：</string>
     <string name="describe">描述：</string>
+    <string name="qiyuan_describe">祈愿，愿诸天菩萨赐福好孕</string>
+    <string name="qiyuan_input_hint">请输入祈愿内容</string>
+    <string name="qiyuan_wall">祈愿墙</string>
 
     <!--孕育-->
     <string name="huaiyunsishizhou">怀孕40周</string>
@@ -128,6 +136,8 @@
     <!--社区-->
     <string name="yaobaobao">我要宝宝</string>
     <string name="hot_recommend">热门推荐</string>
+    <string name="comment">评论</string>
+    <string name="comment_num">评论 (%1$s)</string>
 
     <string-array name="taijiao">
         <item>早期胎教</item>

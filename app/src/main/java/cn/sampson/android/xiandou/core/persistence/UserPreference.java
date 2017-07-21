@@ -253,7 +253,7 @@ public class UserPreference {
         ed.putString(USERNAME, "");
         ed.putString(NICKNAME, "");
         ed.putString(USERTEL, "");
-        ed.putString(USERSEX, "");
+        ed.putBoolean(USERSEX, false);
         ed.putString(AREA, "");
         ed.putString(USERPIC, "");
         ed.putString(BIRTHDAY, "");

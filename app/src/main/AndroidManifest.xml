@@ -25,6 +25,9 @@
     <!-- 在 屏幕最顶部显示addview-->
     <uses-permission android:name="android.permission.SYSTEM_OVERLAY_WINDOW" />
 
+    <uses-permission android:name="android.permission.CAMERA" />
+
+
     <application
         android:name=".BaseApp"
         android:allowBackup="true"
@@ -138,9 +141,46 @@
             android:name=".ui.community.CommunityActivity"
             android:screenOrientation="portrait" />
 
+        <!-- 资讯详情 -->
+        <activity
+            android:name=".ui.haoyun.NewArticleDetailActivity"
+            android:label="@string/new_detail"
+            android:screenOrientation="portrait" />
+
         <!-- 白带拉丝 -->
         <activity
             android:name=".ui.haoyun.beiyun.BaidaiLaSiActivity"
+            android:label="@string/baidailasi"
+            android:screenOrientation="portrait" />
+
+        <!-- B超排测 -->
+        <activity
+            android:name=".ui.haoyun.beiyun.BichaoPaiceActivity"
+            android:label="@string/bchaocepai"
+            android:screenOrientation="portrait" />
+
+        <!-- 祈愿 -->
+        <activity
+            android:name=".ui.haoyun.beiyun.QiyuanActivity"
+            android:label="@string/qiyuan"
+            android:screenOrientation="portrait" />
+
+        <!-- 我的回复 -->
+        <activity
+            android:name=".ui.mine.MyReplyActivity"
+            android:label="@string/my_reply"
+            android:screenOrientation="portrait" />
+
+        <!-- 我的回复 -->
+        <activity
+            android:name=".ui.mine.MyCollectActivity"
+            android:label="@string/my_collect"
+            android:screenOrientation="portrait" />
+
+        <!-- 社区帖子详情 -->
+        <activity
+            android:name=".ui.community.CommunityArticleDetailActivity"
+            android:label="@string/community_content"
             android:screenOrientation="portrait" />
 
         <!-- 播放歌曲 -->
@@ -148,6 +188,12 @@
             android:name=".ui.haoyun.yunyu.taijiaoyinyue.PlayActivity"
             android:screenOrientation="portrait"
             android:theme="@style/ActivityNoActionBar" />
+
+        <!-- 图片裁剪 -->
+        <activity
+            android:name=".ui.takephoto.ImageCropActivity"
+            android:theme="@style/ActivityNoActionBar"
+            android:screenOrientation="portrait" />
 
         <receiver android:name=".ui.haoyun.yunyu.taijiaoyinyue.receiver.StatusBarReceiver">
             <intent-filter>

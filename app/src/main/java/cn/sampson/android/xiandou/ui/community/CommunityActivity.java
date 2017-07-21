@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -39,6 +40,7 @@ import cn.sampson.android.xiandou.widget.adapter.baseadapter.ViewHelper;
 public class CommunityActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener, IView {
 
     public static final String ARTICLE_TAG = "article_tag";
+    public static final String COMMUNITY_NAME = "community_name";
 
     @Bind(R.id.list)
     RecyclerView list;
@@ -53,32 +55,45 @@ public class CommunityActivity extends BaseActivity implements SwipeRefreshLayou
     int page = 1;
     int num = 10;
     String tag;
+    String name;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         StatusBarUtil.StatusBarLightMode(this);
         setContentView(R.layout.common_refresh_list);
+        setActionBarBack();
         ButterKnife.bind(this);
         initView();
     }
 
     private void initView() {
         tag = getIntent().getStringExtra(ARTICLE_TAG);
+        name = getIntent().getStringExtra(COMMUNITY_NAME);
+        getSupportActionBar().setTitle(name);
+
         refresh.setOnRefreshListener(this);
         mPresenter = new CommunityPresenterImpl(this, viewRoot);
 
         list.setLayoutManager(new LinearLayoutManager(this));
         mAdapter = new QuickRecycleViewAdapter<ArticleItem>(R.layout.item_community, new ArrayList<ArticleItem>(), list) {
             @Override
-            protected void onBindData(Context context, int position, ArticleItem item, int itemLayoutId, ViewHelper helper) {
-                ImageLoader.loadAvatar(context, item.userinfo.userPic, (ImageView) helper.getView(R.id.riv_avatar));
-                helper.setText(R.id.tv_name, item.userinfo.nickname);
+            protected void onBindData(Context context, int position, final ArticleItem item, int itemLayoutId, ViewHelper helper) {
+//                ImageLoader.loadAvatar(context, item.userinfo.userPic, (ImageView) helper.getView(R.id.riv_avatar));
+//                helper.setText(R.id.tv_name, item.userinfo.nickname);
                 helper.setText(R.id.article_title, item.title);
                 helper.setText(R.id.tv_content, item.content);
                 helper.setText(R.id.tv_time, item.addTime);
                 helper.setText(R.id.tv_comment, String.valueOf(item.commentNum));
                 showImages((RelativeLayout) helper.getView(R.id.image_container));
+                helper.getRootView().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Bundle bundle = new Bundle();
+                        bundle.putLong(CommunityArticleDetailActivity.ARTICLE_ID, item.articleId);
+                        jumpTo(CommunityArticleDetailActivity.class, bundle);
+                    }
+                });
             }
         };
         mAdapter.setOnLoadMoreListener(new QuickRecycleViewAdapter.OnLoadMoreListener() {
@@ -112,6 +127,7 @@ public class CommunityActivity extends BaseActivity implements SwipeRefreshLayou
     }
 
     private void setList(List<ArticleItem> list) {
+        refresh.setRefreshing(false);
         if (page == 1) {
             mAdapter.setRefresh(list, num);
         } else {

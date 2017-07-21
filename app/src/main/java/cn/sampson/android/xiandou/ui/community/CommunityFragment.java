@@ -98,8 +98,9 @@ public class CommunityFragment extends BaseFragment implements SwipeRefreshLayou
                 helper.setRootOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent = new Intent(getActivity(), CommunityActivity.class);
-                        intent.putExtra(CommunityActivity.ARTICLE_TAG, item.cateTag);
+                        //跳转到社区帖子详情
+                        Intent intent = new Intent(getActivity(), CommunityArticleDetailActivity.class);
+                        intent.putExtra(CommunityArticleDetailActivity.ARTICLE_ID, item.articleId);
                         startActivity(intent);
                     }
                 });
@@ -148,7 +149,7 @@ public class CommunityFragment extends BaseFragment implements SwipeRefreshLayou
     /**
      * 展示类别
      */
-    private void showCategory(ListItem<CommunityCategory> categories) {
+    private void showCategory(final ListItem<CommunityCategory> categories) {
         if (categories != null && categories.total > 0) {
             llCategoryContainer.removeAllViews();
             boolean newLine = false;
@@ -164,13 +165,30 @@ public class CommunityFragment extends BaseFragment implements SwipeRefreshLayou
                 TextView cateName = UiUtils.find(item, R.id.tv_name);
                 ImageView cateImg = UiUtils.find(item, R.id.iv_logo);
                 cateName.setText(categories.lists.get(i).name);
-                //TODO:类目图片
+                ImageLoader.loadFixXY(getContext(), categories.lists.get(i).img, cateImg);
+                final int finalI = i;
+                item.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(getActivity(), CommunityActivity.class);
+                        intent.putExtra(CommunityActivity.ARTICLE_TAG, categories.lists.get(finalI).tag);
+                        intent.putExtra(CommunityActivity.COMMUNITY_NAME, categories.lists.get(finalI).name);
+                        startActivity(intent);
+                    }
+                });
                 row.addView(item);
 
                 if (newLine) {
                     newLine = false;
                     llCategoryContainer.addView(row);
                 }
+            }
+
+            int deltaSize = categories.lists.size() % 3;
+            LinearLayout lastRow = ((LinearLayout) llCategoryContainer.getChildAt(llCategoryContainer.getChildCount() - 1));
+            for (int i = 0; i < 3 - deltaSize; i++) {
+                View item = LayoutInflater.from(getContext()).inflate(R.layout.item_community_category, lastRow, false);
+                lastRow.addView(item);
             }
         }
     }

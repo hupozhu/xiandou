@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.makeramen.roundedimageview.RoundedImageView;
 
+import java.io.File;
 import java.sql.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -91,6 +92,7 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
     private void initView() {
         mPresenter = new UpateInfoPresenterImpl(this);
 
+        avatar = UserPreference.getAvatar();
         nickname = UserPreference.getNickname();
         area = UserPreference.getArea();
         birthday = UserPreference.getBirthday();
@@ -138,6 +140,12 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
         rlDate.setOnClickListener(this);
         rlPhone.setOnClickListener(this);
         tvLogout.setOnClickListener(this);
+    }
+
+    @Override
+    protected void uploadPhoto(String photoPath) {
+        super.uploadPhoto(photoPath);
+        ImageLoader.getPicasso(UserInfoActivity.this).load(new File(photoPath)).fit().into(rivAvatar);
     }
 
     private void showDatePickDialog() {

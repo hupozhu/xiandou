@@ -27,7 +27,7 @@
             android:layout_margin="9dp"
             android:gravity="center"
             android:text="@string/take_photo"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/gray6"
             android:textSize="15sp" />
 
         <TextView
@@ -37,7 +37,7 @@
             android:layout_margin="9dp"
             android:gravity="center"
             android:text="@string/album_photo"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/gray6"
             android:textSize="15sp" />
 
     </LinearLayout>

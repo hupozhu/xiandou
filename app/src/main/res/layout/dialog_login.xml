@@ -105,7 +105,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="8dp"
-                    android:background="@drawable/shape_text_gray_background"
+                    android:background="@drawable/shape_text_gray_border_background"
                     android:gravity="center"
                     android:text="@string/get_auth_code"
                     android:textColor="@color/selector_auth_code_color"

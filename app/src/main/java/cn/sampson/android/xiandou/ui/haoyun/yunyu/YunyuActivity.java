@@ -1,6 +1,7 @@
 package cn.sampson.android.xiandou.ui.haoyun.yunyu;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,6 +10,8 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
@@ -24,6 +27,8 @@ import cn.sampson.android.xiandou.core.presenter.impl.NewPresenterImpl;
 import cn.sampson.android.xiandou.model.ListItem;
 import cn.sampson.android.xiandou.ui.BaseActivity;
 import cn.sampson.android.xiandou.ui.haoyun.INewsView;
+import cn.sampson.android.xiandou.ui.haoyun.NewArticleDetailActivity;
+import cn.sampson.android.xiandou.ui.haoyun.beiyun.BeiYunActivity;
 import cn.sampson.android.xiandou.ui.haoyun.domain.ArticleItem;
 import cn.sampson.android.xiandou.ui.haoyun.yunyu.attention.PregnancyAttentionActivity;
 import cn.sampson.android.xiandou.ui.haoyun.yunyu.fortyweeks.FortyWeeksActivity;
@@ -32,6 +37,7 @@ import cn.sampson.android.xiandou.ui.haoyun.yunyu.taijiaozhishi.TaijiaoZhishiAct
 import cn.sampson.android.xiandou.ui.haoyun.yunyu.twohundredeighty.TwoHundredEightyActivity;
 import cn.sampson.android.xiandou.utils.ContextUtil;
 import cn.sampson.android.xiandou.utils.ScreenUtils;
+import cn.sampson.android.xiandou.utils.imageloader.ImageLoader;
 import cn.sampson.android.xiandou.utils.systembar.StatusBarUtil;
 import cn.sampson.android.xiandou.widget.adapter.baseadapter.QuickRecycleViewAdapter;
 import cn.sampson.android.xiandou.widget.adapter.baseadapter.ViewHelper;
@@ -78,9 +84,18 @@ public class YunyuActivity extends BaseActivity implements INewsView, SwipeRefre
         list.setLayoutManager(new LinearLayoutManager(this));
         mAdapter = new QuickRecycleViewAdapter<ArticleItem>(R.layout.item_news_article, new ArrayList<ArticleItem>()) {
             @Override
-            protected void onBindData(Context context, int position, ArticleItem item, int itemLayoutId, ViewHelper helper) {
+            protected void onBindData(Context context, int position, final ArticleItem item, int itemLayoutId, ViewHelper helper) {
                 helper.setText(R.id.tv_title, item.articleTitle);
-                helper.setText(R.id.tv_content, item.articleContent);
+                helper.setText(R.id.tv_content, item.articleSummary);
+                ImageLoader.load(context, item.cover, (ImageView) helper.getView(R.id.iv_poster));
+                helper.getRootView().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(YunyuActivity.this, NewArticleDetailActivity.class);
+                        intent.putExtra(NewArticleDetailActivity.ARTICLE_ID, item.articleId);
+                        startActivity(intent);
+                    }
+                });
             }
         };
         mAdapter.setOnLoadMoreListener(new QuickRecycleViewAdapter.OnLoadMoreListener() {
