@@ -16,5 +16,6 @@ public class ArticleDetail {
     public int recommend;
     public long userId;
     public String created;
+    public int isCollect;
 
 }

@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import cn.sampson.android.xiandou.R;
+import cn.sampson.android.xiandou.core.manager.ImageUrlProcesser;
 import cn.sampson.android.xiandou.model.ListItem;
 import cn.sampson.android.xiandou.ui.BaseFragment;
 import cn.sampson.android.xiandou.ui.haoyun.domain.ArticleItem;
@@ -62,7 +63,7 @@ public class ArticleListFragment extends BaseFragment {
             protected void onBindData(Context context, int position, final ArticleItem item, int itemLayoutId, ViewHelper helper) {
                 helper.setText(R.id.tv_title, item.articleTitle);
                 helper.setText(R.id.tv_content, item.articleSummary);
-                ImageLoader.load(context, item.cover, (ImageView) helper.getView(R.id.iv_poster));
+                ImageLoader.loadFixXY(context, ImageUrlProcesser.reSetImageUrlWH(item.cover, ImageUrlProcesser.POSTER_WIDTH, ImageUrlProcesser.POSTER_HEIGHT), (ImageView) helper.getView(R.id.iv_poster));
                 helper.getRootView().setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {

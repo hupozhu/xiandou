@@ -8,7 +8,6 @@ import cn.sampson.android.xiandou.widget.adapter.baseadapter.SelectBase;
  */
 
 public class CommentItem extends SelectBase{
-
     public long commentId;
     public long pid;
     public long userId;
@@ -16,9 +15,9 @@ public class CommentItem extends SelectBase{
     public String content;
     public long articleId;
     public String created;
-
-//    public User userinfo;
-//    public User fatherInfo;
-    public String articleTitle;
+    public String updated;
+    public int status;
+    public User userinfo;
+    public CommentItem fathercomment;
 
 }

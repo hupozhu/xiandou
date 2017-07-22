@@ -19,6 +19,6 @@ public class ArticleDetail {
     public int commentNum;
     public int recommend;
     public String created;
-//    public User userinfo;
-
+    public User userinfo;
+    public int isCollect;
 }

@@ -1,24 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<cn.sampson.android.xiandou.widget.keyboard.ArticleCommentKeyboard xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/keyboard"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root_refresh"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
 
-    <RelativeLayout
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/refresh"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginBottom="44dp">
 
-        <android.support.v4.widget.SwipeRefreshLayout
-            android:id="@+id/refresh"
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/list"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent" />
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/list"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+    </android.support.v4.widget.SwipeRefreshLayout>
 
-        </android.support.v4.widget.SwipeRefreshLayout>
-    </RelativeLayout>
-</cn.sampson.android.xiandou.widget.keyboard.ArticleCommentKeyboard>
+    <include layout="@layout/keyboard_article_comment" />
+</RelativeLayout>

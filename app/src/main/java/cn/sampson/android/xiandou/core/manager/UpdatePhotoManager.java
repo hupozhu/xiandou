@@ -1,4 +1,4 @@
-package cn.sampson.android.xiandou.core;
+package cn.sampson.android.xiandou.core.manager;
 
 import android.text.TextUtils;
 

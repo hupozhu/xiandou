@@ -192,7 +192,12 @@
         <!-- 图片裁剪 -->
         <activity
             android:name=".ui.takephoto.ImageCropActivity"
-            android:theme="@style/ActivityNoActionBar"
+            android:screenOrientation="portrait"
+            android:theme="@style/ActivityNoActionBar" />
+
+        <!-- 内嵌网页 -->
+        <activity
+            android:name=".ui.WebViewActivity"
             android:screenOrientation="portrait" />
 
         <receiver android:name=".ui.haoyun.yunyu.taijiaoyinyue.receiver.StatusBarReceiver">

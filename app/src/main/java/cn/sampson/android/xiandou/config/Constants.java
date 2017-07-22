@@ -21,4 +21,7 @@ public class Constants {
     public static final int REQUEST_PHOTO = 1;
 
     public static final int ACTIVITY_RESULT_SUCCESS = 200;
+
+    public static final int TYPE_COMMENT_ARTICLE = 1;   //评论文章
+    public static final int TYPE_COMMENT_REPLY = 2;     //回复某用户
 }

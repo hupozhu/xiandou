@@ -22,6 +22,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.sampson.android.xiandou.R;
+import cn.sampson.android.xiandou.core.manager.ImageUrlProcesser;
 import cn.sampson.android.xiandou.core.presenter.NewsPresenter;
 import cn.sampson.android.xiandou.core.presenter.impl.NewPresenterImpl;
 import cn.sampson.android.xiandou.model.ListItem;
@@ -87,7 +88,7 @@ public class YunyuActivity extends BaseActivity implements INewsView, SwipeRefre
             protected void onBindData(Context context, int position, final ArticleItem item, int itemLayoutId, ViewHelper helper) {
                 helper.setText(R.id.tv_title, item.articleTitle);
                 helper.setText(R.id.tv_content, item.articleSummary);
-                ImageLoader.load(context, item.cover, (ImageView) helper.getView(R.id.iv_poster));
+                ImageLoader.load(context,  ImageUrlProcesser.reSetImageUrlWH(item.cover, ImageUrlProcesser.POSTER_WIDTH, ImageUrlProcesser.POSTER_HEIGHT), (ImageView) helper.getView(R.id.iv_poster));
                 helper.getRootView().setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {

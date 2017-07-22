@@ -4,8 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -29,11 +31,13 @@ import cn.sampson.android.xiandou.core.retroft.base.IView;
 import cn.sampson.android.xiandou.core.retroft.base.Result;
 import cn.sampson.android.xiandou.model.ListItem;
 import cn.sampson.android.xiandou.ui.BaseFragment;
+import cn.sampson.android.xiandou.ui.WebViewActivity;
 import cn.sampson.android.xiandou.ui.haoyun.beiyun.BeiYunActivity;
 import cn.sampson.android.xiandou.ui.haoyun.domain.ArticleItem;
 import cn.sampson.android.xiandou.ui.haoyun.domain.Index;
 import cn.sampson.android.xiandou.ui.haoyun.yuer.YuerActivity;
 import cn.sampson.android.xiandou.ui.haoyun.yunyu.YunyuActivity;
+import cn.sampson.android.xiandou.utils.ContextUtil;
 import cn.sampson.android.xiandou.utils.imageloader.ImageLoader;
 import cn.sampson.android.xiandou.utils.imageloader.transformation.RoundedTransformation;
 import cn.sampson.android.xiandou.widget.adapter.TabStateFragmentAdapter;
@@ -41,12 +45,13 @@ import cn.sampson.android.xiandou.widget.adapter.baseadapter.QuickRecycleViewAda
 import cn.sampson.android.xiandou.widget.adapter.baseadapter.ViewHelper;
 import cn.sampson.android.xiandou.widget.banner.BannerItem;
 import cn.sampson.android.xiandou.widget.banner.MainPageImageBanner;
+import cn.sampson.android.xiandou.widget.banner.base.BaseBanner;
 
 /**
  * Created by Administrator on 2017/6/5.
  */
 
-public class HaoYunFragment extends BaseFragment implements View.OnClickListener, IView {
+public class HaoYunFragment extends BaseFragment implements View.OnClickListener, IView, SwipeRefreshLayout.OnRefreshListener {
 
     @Bind(R.id.beiyun)
     LinearLayout mBeiyun;
@@ -66,10 +71,14 @@ public class HaoYunFragment extends BaseFragment implements View.OnClickListener
     RecyclerView advList;
     @Bind(R.id.adv_split)
     View advSplit;
+    @Bind(R.id.refresh)
+    SwipeRefreshLayout refresh;
+    @Bind(R.id.app_bar)
+    AppBarLayout appBar;
 
     QuickRecycleViewAdapter<BannerItem> mAdpter;
 
-    List<BannerItem> bannerItems;
+
     private static HaoYunFragment haoyunFragment;
 
 
@@ -85,6 +94,9 @@ public class HaoYunFragment extends BaseFragment implements View.OnClickListener
 
     private ListItem<ArticleItem> hotList;
     private ListItem<ArticleItem> newsList;
+    private List<BannerItem> bannerItems;
+
+    int advHeight, advWidth;
 
     @Nullable
     @Override
@@ -100,6 +112,31 @@ public class HaoYunFragment extends BaseFragment implements View.OnClickListener
         mYunyu.setOnClickListener(this);
         mYuer.setOnClickListener(this);
 
+        mPresenter = new HomePresenterImpl(this, refreshRoot);
+        advWidth = (ContextUtil.getScreenWidth() - ContextUtil.dip2Px(12) * 4) / 2;
+        advHeight = advWidth / 160 * 62 * 2;
+
+        refresh.setOnRefreshListener(this);
+        refresh.setProgressViewOffset(true, -50, 50);
+        appBar.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+            @Override
+            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+                if (verticalOffset >= 0) {
+                    refresh.setEnabled(true);
+                } else {
+                    refresh.setEnabled(false);
+                }
+            }
+        });
+        banner.setOnItemClickL(new BaseBanner.OnItemClickL() {
+            @Override
+            public void onItemClick(int position) {
+                Intent intent = new Intent(getActivity(), WebViewActivity.class);
+                intent.putExtra(WebViewActivity.URL, bannerItems.get(position).actUrl);
+                startActivity(intent);
+            }
+        });
+
         mPagerFragmentAdapter = new TabStateFragmentAdapter(getChildFragmentManager(), new IndexFragmentWrapper());
         pager.setAdapter(mPagerFragmentAdapter);
         tabs.setupWithViewPager(pager);
@@ -107,14 +144,24 @@ public class HaoYunFragment extends BaseFragment implements View.OnClickListener
         advList.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         mAdpter = new QuickRecycleViewAdapter<BannerItem>(R.layout.item_advs, new ArrayList<BannerItem>()) {
             @Override
-            protected void onBindData(Context context, int position, BannerItem item, int itemLayoutId, ViewHelper helper) {
+            protected void onBindData(Context context, final int position, final BannerItem item, int itemLayoutId, ViewHelper helper) {
+                helper.getRootView().getLayoutParams().height = advHeight;
+                helper.getRootView().getLayoutParams().width = advWidth;
+
                 ImageLoader.getPicasso(context).load(item.imgAddr).transform(new RoundedTransformation(10, 0)).fit().into((ImageView) helper.getView(R.id.iv_advs));
+                helper.getRootView().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(getActivity(), WebViewActivity.class);
+                        intent.putExtra(WebViewActivity.URL, item.actUrl);
+                        startActivity(intent);
+                    }
+                });
             }
         };
         advList.setAdapter(mAdpter);
 
-        mPresenter = new HomePresenterImpl(this, refreshRoot);
-        mPresenter.getHome();
+        onRefresh();
     }
 
     @Override
@@ -157,10 +204,11 @@ public class HaoYunFragment extends BaseFragment implements View.OnClickListener
 
     @Override
     public void setError(int errorCode, String error, String key) {
-
+        refresh.setRefreshing(false);
     }
 
     void showHomePage(Index index) {
+        refresh.setRefreshing(false);
         //显示banner
         if (index.banners != null && index.banners.total > 0) {
             this.bannerItems = index.banners.lists;
@@ -195,6 +243,11 @@ public class HaoYunFragment extends BaseFragment implements View.OnClickListener
         } else {
             return newsList;
         }
+    }
+
+    @Override
+    public void onRefresh() {
+        mPresenter.getHome();
     }
 
     class HomePresenterImpl extends BasePresenter<HaoYunFragment> implements HomePresenter {

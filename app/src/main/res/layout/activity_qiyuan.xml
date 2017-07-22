@@ -1,92 +1,136 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/refresh_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    android:orientation="vertical">
+    android:fitsSystemWindows="true">
 
-    <ImageView
-        android:layout_width="144dp"
-        android:layout_height="143dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="16dp"
-        android:src="@mipmap/ic_qiyuan_poaster" />
-
-    <TextView
-        style="@style/text15"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="26dp"
-        android:text="@string/qiyuan_describe"
-        android:textSize="18sp" />
-
-    <View
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/refresh"
         android:layout_width="match_parent"
-        android:layout_height="20dp"
-        android:layout_marginTop="30dp"
-        android:background="@color/common_background" />
+        android:layout_height="match_parent">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_margin="15dp">
-
-        <EditText
+        <android.support.design.widget.CoordinatorLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/shape_round_corner_gray"
-            android:gravity="top"
-            android:hint="@string/qiyuan_input_hint"
-            android:padding="13dp"
-            android:text="一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十"
-            android:textSize="14sp" />
+            android:layout_height="match_parent">
 
-        <TextView
-            style="@style/text15"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginBottom="10dp"
-            android:layout_marginRight="20dp"
-            android:text="0/140"
-            android:textColor="@color/green" />
-    </RelativeLayout>
+            <android.support.design.widget.AppBarLayout
+                android:id="@+id/app_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-    <TextView
-        android:layout_width="216dp"
-        android:layout_height="40dp"
-        android:layout_gravity="center_horizontal"
-        android:background="@drawable/shape_logout_background"
-        android:gravity="center"
-        android:text="@string/qiyuan1"
-        android:textColor="@color/white"
-        android:textSize="18sp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    app:layout_scrollFlags="scroll|enterAlwaysCollapsed">
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="20dp"
-        android:layout_marginTop="30dp"
-        android:background="@color/common_background" />
+                    <ImageView
+                        android:layout_width="144dp"
+                        android:layout_height="143dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="16dp"
+                        android:src="@mipmap/ic_qiyuan_poaster" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:gravity="center"
-        android:orientation="horizontal">
+                    <TextView
+                        style="@style/text15"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="26dp"
+                        android:text="@string/qiyuan_describe"
+                        android:textSize="18sp" />
 
-        <ImageView
-            android:layout_width="20.5dp"
-            android:layout_height="19dp"
-            android:src="@mipmap/ic_qiyuan1" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:layout_marginTop="30dp"
+                        android:background="@color/common_background" />
 
-        <TextView
-            style="@style/text15"
-            android:layout_marginLeft="4dp"
-            android:text="@string/qiyuan_wall"
-            android:textColor="@color/article_title" />
-    </LinearLayout>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"
+                        android:layout_margin="15dp">
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@color/common_background" />
+                        <EditText
+                            android:id="@+id/et_input"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/shape_round_corner_gray"
+                            android:gravity="top"
+                            android:hint="@string/qiyuan_input_hint"
+                            android:padding="13dp"
+                            android:text="一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十"
+                            android:textSize="14sp" />
 
-</LinearLayout>
+                        <TextView
+                            style="@style/text15"
+                            android:layout_alignParentBottom="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginRight="20dp"
+                            android:text="0/140"
+                            android:textColor="@color/green" />
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/tv_qiyuan"
+                        android:layout_width="216dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@drawable/shape_logout_background"
+                        android:gravity="center"
+                        android:text="@string/qiyuan1"
+                        android:textColor="@color/white"
+                        android:textSize="18sp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:layout_marginTop="30dp"
+                        android:background="@color/common_background" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="20.5dp"
+                            android:layout_height="19dp"
+                            android:src="@mipmap/ic_qiyuan1" />
+
+                        <TextView
+                            style="@style/text15"
+                            android:layout_marginLeft="4dp"
+                            android:text="@string/qiyuan_wall"
+                            android:textColor="@color/article_title" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:background="@color/common_background" />
+
+                </LinearLayout>
+
+                <android.support.design.widget.TabLayout
+                    android:id="@+id/tabs"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    app:tabGravity="fill"
+                    app:tabIndicatorColor="@color/green"
+                    app:tabSelectedTextColor="@color/green"
+                    app:tabTextColor="@color/gray10" />
+            </android.support.design.widget.AppBarLayout>
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/pager"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+        </android.support.design.widget.CoordinatorLayout>
+    </android.support.v4.widget.SwipeRefreshLayout>
+</FrameLayout>

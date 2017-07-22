@@ -54,4 +54,6 @@
     <color name="man">#87CEFF</color>
     <color name="woman">#FF83FA</color>
     <color name="woman_30">#80FF83FA</color>
+
+    <color name="tip_dialog_bg">#BF4B4C4B</color>
 </resources>

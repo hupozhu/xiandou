@@ -29,6 +29,7 @@ import cn.sampson.android.xiandou.core.retroft.base.IView;
 import cn.sampson.android.xiandou.core.retroft.base.Result;
 import cn.sampson.android.xiandou.model.ListItem;
 import cn.sampson.android.xiandou.ui.BaseFragment;
+import cn.sampson.android.xiandou.ui.WebViewActivity;
 import cn.sampson.android.xiandou.ui.community.domain.ArticleItem;
 import cn.sampson.android.xiandou.ui.community.domain.CommunityCategory;
 import cn.sampson.android.xiandou.ui.community.domain.CommunityIndex;
@@ -88,6 +89,7 @@ public class CommunityFragment extends BaseFragment implements SwipeRefreshLayou
         refresh.setOnRefreshListener(this);
         mPresenter = new CommunityIndexPresenterImpl(this, viewRoot);
 
+
         list.setLayoutManager(new LinearLayoutManager(getContext()));
         mAdapter = new QuickRecycleViewAdapter<ArticleItem>(R.layout.item_community_news, new ArrayList<ArticleItem>()) {
             @Override
@@ -129,7 +131,9 @@ public class CommunityFragment extends BaseFragment implements SwipeRefreshLayou
         mBanner.setOnItemClickL(new BaseBanner.OnItemClickL() {
             @Override
             public void onItemClick(int position) {
-                //TODO:
+                Intent intent = new Intent(getActivity(), WebViewActivity.class);
+                intent.putExtra(WebViewActivity.URL, bannerItems.get(position).actUrl);
+                startActivity(intent);
             }
         });
         return view;

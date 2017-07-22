@@ -7,6 +7,8 @@
     <string name="msg_no_camera">无法启动相机！请在设置中开启相机权限</string>
     <string name="please_open_write_sdcard_permission">请开启读写存储权限</string>
     <string name="pick_avatar">头像选择</string>
+    <string name="input_not_null">内容不能为空！</string>
+    <string name="network_error">网络连接失败</string>
 
     <string name="haoyun">好孕</string>
     <string name="shequ">社区</string>
@@ -17,6 +19,7 @@
     <string name="yuer">育儿</string>
 
     <string name="finish">完成</string>
+    <string name="collect">收藏</string>
     <string name="man">男</string>
     <string name="woman">女</string>
 

@@ -79,8 +79,8 @@ public class CommunityActivity extends BaseActivity implements SwipeRefreshLayou
         mAdapter = new QuickRecycleViewAdapter<ArticleItem>(R.layout.item_community, new ArrayList<ArticleItem>(), list) {
             @Override
             protected void onBindData(Context context, int position, final ArticleItem item, int itemLayoutId, ViewHelper helper) {
-//                ImageLoader.loadAvatar(context, item.userinfo.userPic, (ImageView) helper.getView(R.id.riv_avatar));
-//                helper.setText(R.id.tv_name, item.userinfo.nickname);
+                ImageLoader.loadAvatar(context, item.userinfo.userPic, (ImageView) helper.getView(R.id.riv_avatar));
+                helper.setText(R.id.tv_name, item.userinfo.nickname);
                 helper.setText(R.id.article_title, item.title);
                 helper.setText(R.id.tv_content, item.content);
                 helper.setText(R.id.tv_time, item.addTime);

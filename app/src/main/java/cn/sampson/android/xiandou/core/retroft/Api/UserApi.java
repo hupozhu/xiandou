@@ -48,4 +48,8 @@ public interface UserApi {
 
     @GET("/users/collects")
     Observable<Result<ListItem<ArticleItem>>> getCollections();
+
+    @POST("/users/collect")
+    @FormUrlEncoded
+    Observable<Result<String>> collect(@Field("type") int type, @Field("id") long id);
 }

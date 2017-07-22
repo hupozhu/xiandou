@@ -1,12 +1,18 @@
 package cn.sampson.android.xiandou.core.retroft.Api;
 
+import java.util.Map;
+
 import cn.sampson.android.xiandou.core.retroft.base.Result;
 import cn.sampson.android.xiandou.model.ListItem;
 import cn.sampson.android.xiandou.ui.community.domain.ArticleDetail;
 import cn.sampson.android.xiandou.ui.community.domain.ArticleItem;
 import cn.sampson.android.xiandou.ui.community.domain.CommentItem;
 import cn.sampson.android.xiandou.ui.community.domain.CommunityIndex;
+import retrofit2.http.Field;
+import retrofit2.http.FieldMap;
 import retrofit2.http.GET;
+import retrofit2.http.Multipart;
+import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 import rx.Observable;
@@ -16,6 +22,9 @@ import rx.Observable;
  */
 
 public interface CommunityApi {
+
+    String RE_USER_ID = "re_user_id";
+    String RE_COMMENT_ID = "re_comment_id";
 
     @GET("/community/index")
     Observable<Result<CommunityIndex>> getUserInfo(@Query("page") int page, @Query("limit") int limit);
@@ -29,4 +38,7 @@ public interface CommunityApi {
     @GET("/community/comments/{artId}")
     Observable<Result<ListItem<CommentItem>>> getCommentList(@Path("artId") String id, @Query("page") int page, @Query("limit") int limit);
 
+    @POST("/community/commentit")
+    @Multipart
+    Observable<Result<String>> commentCommunity(@Field("articleid") long articleid, @Field("content") String content, @FieldMap Map<String, Object> map);
 }

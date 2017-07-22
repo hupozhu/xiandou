@@ -1,5 +1,6 @@
 package cn.sampson.android.xiandou.ui;
 
+import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.os.Bundle;
@@ -15,13 +16,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 
 import java.io.File;
 import java.lang.ref.WeakReference;
 
 import cn.sampson.android.xiandou.R;
 import cn.sampson.android.xiandou.config.Constants;
-import cn.sampson.android.xiandou.core.UpdatePhotoManager;
+import cn.sampson.android.xiandou.core.manager.UpdatePhotoManager;
 import cn.sampson.android.xiandou.ui.takephoto.ImageCropActivity;
 import cn.sampson.android.xiandou.utils.ContextUtil;
 import cn.sampson.android.xiandou.utils.ToastUtils;
@@ -37,6 +39,7 @@ public class BaseActivity extends AppCompatActivity {
 
     public MyHandler mHandler = new MyHandler(this);
     private View loadingView;
+    protected MenuItem menuItem;
 
     protected ActionBar mActionToolbar;
 
@@ -74,18 +77,27 @@ public class BaseActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        menuItem = item;
         switch (item.getItemId()) {
             case android.R.id.home:
                 onBackPressed();
                 break;
+
             case R.id.action_save:
                 onToolbarSave();
+                break;
+
+            case R.id.action_collect:
+                onToolbarCollect();
                 break;
         }
         return true;
     }
 
     protected void onToolbarSave() {
+    }
+
+    protected void onToolbarCollect() {
     }
 
     /**
@@ -96,6 +108,22 @@ public class BaseActivity extends AppCompatActivity {
             getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
         }
     }
+
+    // ========================================== 软键盘收起 ==================================
+    //收起软键盘
+    protected void pickUpKeyBoard() {
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (imm != null) {
+            imm.hideSoftInputFromWindow(getWindow().getDecorView().getWindowToken(), 0);
+        }
+    }
+
+    //显示软键盘
+    protected void showKeyBoard(View view) {
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT);
+    }
+
     // ========================================== 跳转 ====================================================
 
     public void jumpTo(Class activityClazz) {

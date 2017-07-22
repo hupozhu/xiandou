@@ -21,5 +21,5 @@ public class ArticleItem extends SelectBase {
     public int recommend;
     public String addTime;
 
-//    public User userinfo;
+    public User userinfo;
 }
