@@ -7,7 +7,7 @@ import cn.sampson.android.xiandou.core.retroft.base.BasePresenter;
 import cn.sampson.android.xiandou.core.retroft.base.Result;
 import cn.sampson.android.xiandou.model.ListItem;
 import cn.sampson.android.xiandou.ui.haoyun.INewsView;
-import cn.sampson.android.xiandou.ui.haoyun.domain.ArticleItem;
+import cn.sampson.android.xiandou.ui.haoyun.domain.NewsItem;
 
 /**
  * Created by chengyang on 2017/7/13.
@@ -28,7 +28,7 @@ public class NewPresenterImpl extends BasePresenter<INewsView> implements NewsPr
     protected void onResult(Result result, String key) {
         switch (key) {
             case GET_NEWS_BY_TAG:
-                view.showNews((ListItem<ArticleItem>) result.data);
+                view.showNews((ListItem<NewsItem>) result.data);
                 break;
         }
     }

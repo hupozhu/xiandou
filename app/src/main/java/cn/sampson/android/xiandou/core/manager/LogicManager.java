@@ -4,6 +4,7 @@ import android.text.TextUtils;
 
 import cn.sampson.android.xiandou.core.persistence.UserPreference;
 import cn.sampson.android.xiandou.ui.BaseActivity;
+import cn.sampson.android.xiandou.widget.dialog.LoginDialog;
 
 
 /**
@@ -11,9 +12,10 @@ import cn.sampson.android.xiandou.ui.BaseActivity;
  */
 public class LogicManager {
 
-
     public static boolean loginIntercept(BaseActivity context) {
         if (TextUtils.isEmpty(UserPreference.getToken())) {//用户还没有登录
+            LoginDialog dialog = new LoginDialog(context);
+            dialog.showDialog();
             return true;
         }
         return false;

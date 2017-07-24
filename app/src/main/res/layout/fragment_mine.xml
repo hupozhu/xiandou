@@ -105,7 +105,7 @@
                     style="@style/text15"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="6dp"
-                    android:text="@string/my_note" />
+                    android:text="@string/my_circle" />
             </LinearLayout>
 
             <View
@@ -215,6 +215,15 @@
                 <TextView
                     style="@style/text15"
                     android:layout_marginLeft="22.5dp"
+                    android:text="@string/current_version" />
+
+                <TextView
+                    android:id="@+id/tv_current_version"
+                    style="@style/text15"
+                    android:layout_marginLeft="22.5dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_weight="1"
+                    android:gravity="right"
                     android:text="@string/current_version" />
 
             </LinearLayout>

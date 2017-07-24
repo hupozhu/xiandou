@@ -176,3 +176,7 @@
 -keep class android.support.v4.app.NotificationCompat**{
     public *;
 }
+
+-keep class com.qiniu.**{*;}
+-keep class com.qiniu.**{public <init>();}
+-ignorewarnings

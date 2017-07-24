@@ -30,10 +30,9 @@ import cn.sampson.android.xiandou.core.retroft.base.Result;
 import cn.sampson.android.xiandou.model.ListItem;
 import cn.sampson.android.xiandou.ui.BaseFragment;
 import cn.sampson.android.xiandou.ui.WebViewActivity;
-import cn.sampson.android.xiandou.ui.community.domain.ArticleItem;
+import cn.sampson.android.xiandou.ui.community.domain.PostsItem;
 import cn.sampson.android.xiandou.ui.community.domain.CommunityCategory;
 import cn.sampson.android.xiandou.ui.community.domain.CommunityIndex;
-import cn.sampson.android.xiandou.ui.mine.MineFragment;
 import cn.sampson.android.xiandou.utils.UiUtils;
 import cn.sampson.android.xiandou.utils.imageloader.ImageLoader;
 import cn.sampson.android.xiandou.widget.adapter.baseadapter.QuickRecycleViewAdapter;
@@ -61,7 +60,7 @@ public class CommunityFragment extends BaseFragment implements SwipeRefreshLayou
     MainPageImageBanner mBanner;
 
     CommunityIndexPresenter mPresenter;
-    QuickRecycleViewAdapter<ArticleItem> mAdapter;
+    QuickRecycleViewAdapter<PostsItem> mAdapter;
     List<BannerItem> bannerItems;
 
     int page = 1;
@@ -91,9 +90,9 @@ public class CommunityFragment extends BaseFragment implements SwipeRefreshLayou
 
 
         list.setLayoutManager(new LinearLayoutManager(getContext()));
-        mAdapter = new QuickRecycleViewAdapter<ArticleItem>(R.layout.item_community_news, new ArrayList<ArticleItem>()) {
+        mAdapter = new QuickRecycleViewAdapter<PostsItem>(R.layout.item_community_news, new ArrayList<PostsItem>()) {
             @Override
-            protected void onBindData(Context context, int position, final ArticleItem item, int itemLayoutId, ViewHelper helper) {
+            protected void onBindData(Context context, int position, final PostsItem item, int itemLayoutId, ViewHelper helper) {
                 ImageLoader.load(context, item.cover, (ImageView) helper.getView(R.id.iv_poster));
                 helper.setText(R.id.tv_title, item.title);
                 helper.setText(R.id.tv_content, item.content);
@@ -200,7 +199,7 @@ public class CommunityFragment extends BaseFragment implements SwipeRefreshLayou
     /**
      * 展示热门动态
      */
-//    private void showTopHot(ListItem<ArticleItem> hots) {
+//    private void showTopHot(ListItem<NewsItem> hots) {
 //        if (hots != null && hots.total > 0) {
 //            llHotContainer.removeAllViews();
 //            for (int i = 0; i < hots.lists.size(); i++) {
@@ -213,13 +212,13 @@ public class CommunityFragment extends BaseFragment implements SwipeRefreshLayou
     /**
      * 展示资讯
      */
-    private void showHot(ListItem<ArticleItem> news) {
+    private void showHot(ListItem<PostsItem> news) {
         if (news != null && news.total > 0) {
             setList(news.lists);
         }
     }
 
-    private void setList(List<ArticleItem> list) {
+    private void setList(List<PostsItem> list) {
         if (page == 1) {
             mAdapter.setRefresh(list, num);
         } else {

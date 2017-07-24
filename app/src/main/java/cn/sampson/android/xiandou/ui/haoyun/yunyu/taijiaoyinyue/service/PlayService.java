@@ -210,7 +210,7 @@ public class PlayService extends Service implements MediaPlayer.OnCompletionList
         mPlayingMusic = music;
         try {
             mediaPlayer.reset();
-            mediaPlayer.setDataSource(AppConfig.MUSIC_PATH + StringUtils.getUTF8String(music.name) + ".mp3");
+            mediaPlayer.setDataSource(music.url);
             mediaPlayer.prepareAsync();
             playState = STATE_PREPARING;
             mediaPlayer.setOnPreparedListener(mPreparedListener);

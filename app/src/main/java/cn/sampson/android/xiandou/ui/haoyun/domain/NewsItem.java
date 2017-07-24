@@ -6,7 +6,7 @@ import cn.sampson.android.xiandou.widget.adapter.baseadapter.SelectBase;
  * Created by chengyang on 2017/7/13.
  */
 
-public class ArticleItem extends SelectBase {
+public class NewsItem extends SelectBase {
 
     public long articleId;
     public String articleTitle;

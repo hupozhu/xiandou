@@ -33,7 +33,7 @@ import cn.sampson.android.xiandou.model.ListItem;
 import cn.sampson.android.xiandou.ui.BaseFragment;
 import cn.sampson.android.xiandou.ui.WebViewActivity;
 import cn.sampson.android.xiandou.ui.haoyun.beiyun.BeiYunActivity;
-import cn.sampson.android.xiandou.ui.haoyun.domain.ArticleItem;
+import cn.sampson.android.xiandou.ui.haoyun.domain.NewsItem;
 import cn.sampson.android.xiandou.ui.haoyun.domain.Index;
 import cn.sampson.android.xiandou.ui.haoyun.yuer.YuerActivity;
 import cn.sampson.android.xiandou.ui.haoyun.yunyu.YunyuActivity;
@@ -92,8 +92,8 @@ public class HaoYunFragment extends BaseFragment implements View.OnClickListener
     HomePresenter mPresenter;
     TabStateFragmentAdapter mPagerFragmentAdapter;
 
-    private ListItem<ArticleItem> hotList;
-    private ListItem<ArticleItem> newsList;
+    private ListItem<NewsItem> hotList;
+    private ListItem<NewsItem> newsList;
     private List<BannerItem> bannerItems;
 
     int advHeight, advWidth;
@@ -114,10 +114,10 @@ public class HaoYunFragment extends BaseFragment implements View.OnClickListener
 
         mPresenter = new HomePresenterImpl(this, refreshRoot);
         advWidth = (ContextUtil.getScreenWidth() - ContextUtil.dip2Px(12) * 4) / 2;
-        advHeight = advWidth / 160 * 62 * 2;
+        advHeight = (int) (advWidth / 320 * 130 * 1.5);
 
         refresh.setOnRefreshListener(this);
-        refresh.setProgressViewOffset(true, -50, 50);
+        refresh.setProgressViewOffset(false, -150, 50);
         appBar.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
             @Override
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
@@ -237,7 +237,7 @@ public class HaoYunFragment extends BaseFragment implements View.OnClickListener
     }
 
     //获取资讯列表
-    public ListItem<ArticleItem> getListData(int type) {
+    public ListItem<NewsItem> getListData(int type) {
         if (type == ArticleListFragment.TYPE_HOT) {
             return hotList;
         } else {

@@ -17,6 +17,4 @@ public class AppConfig {
     public static int NET_WRITE_TIMEOUT = 10;
     public static int NET_READ_TIMEOUT = 10;
 
-    public static final String MUSIC_PATH = "http://hope.gvrc.cn/tj/";
-
 }

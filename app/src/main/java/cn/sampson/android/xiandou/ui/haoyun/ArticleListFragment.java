@@ -19,7 +19,7 @@ import cn.sampson.android.xiandou.R;
 import cn.sampson.android.xiandou.core.manager.ImageUrlProcesser;
 import cn.sampson.android.xiandou.model.ListItem;
 import cn.sampson.android.xiandou.ui.BaseFragment;
-import cn.sampson.android.xiandou.ui.haoyun.domain.ArticleItem;
+import cn.sampson.android.xiandou.ui.haoyun.domain.NewsItem;
 import cn.sampson.android.xiandou.utils.imageloader.ImageLoader;
 import cn.sampson.android.xiandou.widget.adapter.baseadapter.QuickRecycleViewAdapter;
 import cn.sampson.android.xiandou.widget.adapter.baseadapter.ViewHelper;
@@ -42,7 +42,7 @@ public class ArticleListFragment extends BaseFragment {
     @Bind(R.id.list)
     RecyclerView list;
 
-    QuickRecycleViewAdapter<ArticleItem> mAdapter;
+    QuickRecycleViewAdapter<NewsItem> mAdapter;
 
     @Nullable
     @Override
@@ -58,12 +58,12 @@ public class ArticleListFragment extends BaseFragment {
         mParentFragment = (HaoYunFragment) getParentFragment();
 
         list.setLayoutManager(new LinearLayoutManager(getContext()));
-        mAdapter = new QuickRecycleViewAdapter<ArticleItem>(R.layout.item_news_article, new ArrayList<ArticleItem>()) {
+        mAdapter = new QuickRecycleViewAdapter<NewsItem>(R.layout.item_news_article, new ArrayList<NewsItem>()) {
             @Override
-            protected void onBindData(Context context, int position, final ArticleItem item, int itemLayoutId, ViewHelper helper) {
+            protected void onBindData(Context context, int position, final NewsItem item, int itemLayoutId, ViewHelper helper) {
                 helper.setText(R.id.tv_title, item.articleTitle);
                 helper.setText(R.id.tv_content, item.articleSummary);
-                ImageLoader.loadFixXY(context, ImageUrlProcesser.reSetImageUrlWH(item.cover, ImageUrlProcesser.POSTER_WIDTH, ImageUrlProcesser.POSTER_HEIGHT), (ImageView) helper.getView(R.id.iv_poster));
+                ImageLoader.load(context, ImageUrlProcesser.reSetImageUrlWH(item.cover, ImageUrlProcesser.POSTER_WIDTH, ImageUrlProcesser.POSTER_HEIGHT), (ImageView) helper.getView(R.id.iv_poster));
                 helper.getRootView().setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -78,7 +78,7 @@ public class ArticleListFragment extends BaseFragment {
     }
 
     public void showArticle() {
-        ListItem<ArticleItem> data = mParentFragment.getListData(type);
+        ListItem<NewsItem> data = mParentFragment.getListData(type);
         if (data != null && data.total > 0) {
             mAdapter.getAdapterManager().replaceAllItems(data.lists);
         }

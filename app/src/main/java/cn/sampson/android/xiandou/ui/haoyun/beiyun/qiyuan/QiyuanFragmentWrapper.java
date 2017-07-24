@@ -1,11 +1,10 @@
-package cn.sampson.android.xiandou.ui.haoyun.beiyun;
+package cn.sampson.android.xiandou.ui.haoyun.beiyun.qiyuan;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
 import java.util.ArrayList;
 
-import cn.sampson.android.xiandou.ui.haoyun.ArticleListFragment;
 import cn.sampson.android.xiandou.widget.IFragmentsWrapper;
 
 /**
@@ -28,7 +27,11 @@ public class QiyuanFragmentWrapper implements IFragmentsWrapper {
     private QiyuanFragment createFragment(int index) {
         QiyuanFragment f = new QiyuanFragment();
         Bundle args = new Bundle();
-        args.putInt(QiyuanFragment.TYPE, index);
+        if (index == 1) {
+            args.putInt(QiyuanFragment.TYPE, 1);
+        } else {
+            args.putInt(QiyuanFragment.TYPE, 0);
+        }
         f.setArguments(args);
         return f;
     }

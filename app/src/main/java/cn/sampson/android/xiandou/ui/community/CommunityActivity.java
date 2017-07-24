@@ -26,9 +26,9 @@ import cn.sampson.android.xiandou.core.retroft.base.IView;
 import cn.sampson.android.xiandou.core.retroft.base.Result;
 import cn.sampson.android.xiandou.model.ListItem;
 import cn.sampson.android.xiandou.ui.BaseActivity;
-import cn.sampson.android.xiandou.ui.community.domain.ArticleItem;
+import cn.sampson.android.xiandou.ui.community.domain.PostsItem;
+import cn.sampson.android.xiandou.utils.ContextUtil;
 import cn.sampson.android.xiandou.utils.imageloader.ImageLoader;
-import cn.sampson.android.xiandou.utils.plist.domain.Array;
 import cn.sampson.android.xiandou.utils.systembar.StatusBarUtil;
 import cn.sampson.android.xiandou.widget.adapter.baseadapter.QuickRecycleViewAdapter;
 import cn.sampson.android.xiandou.widget.adapter.baseadapter.ViewHelper;
@@ -50,12 +50,15 @@ public class CommunityActivity extends BaseActivity implements SwipeRefreshLayou
     FrameLayout viewRoot;
 
     CommunityPresenter mPresenter;
-    QuickRecycleViewAdapter<ArticleItem> mAdapter;
+    QuickRecycleViewAdapter<PostsItem> mAdapter;
 
     int page = 1;
     int num = 10;
     String tag;
     String name;
+
+    int imageWidth;
+    int margin;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -72,20 +75,23 @@ public class CommunityActivity extends BaseActivity implements SwipeRefreshLayou
         name = getIntent().getStringExtra(COMMUNITY_NAME);
         getSupportActionBar().setTitle(name);
 
+        imageWidth = (ContextUtil.getScreenWidth() - ContextUtil.dip2Px(100)) / 3;
+        margin = ContextUtil.dip2Px(12);
+
         refresh.setOnRefreshListener(this);
         mPresenter = new CommunityPresenterImpl(this, viewRoot);
 
         list.setLayoutManager(new LinearLayoutManager(this));
-        mAdapter = new QuickRecycleViewAdapter<ArticleItem>(R.layout.item_community, new ArrayList<ArticleItem>(), list) {
+        mAdapter = new QuickRecycleViewAdapter<PostsItem>(R.layout.item_community, new ArrayList<PostsItem>(), list) {
             @Override
-            protected void onBindData(Context context, int position, final ArticleItem item, int itemLayoutId, ViewHelper helper) {
+            protected void onBindData(Context context, int position, final PostsItem item, int itemLayoutId, ViewHelper helper) {
                 ImageLoader.loadAvatar(context, item.userinfo.userPic, (ImageView) helper.getView(R.id.riv_avatar));
                 helper.setText(R.id.tv_name, item.userinfo.nickname);
                 helper.setText(R.id.article_title, item.title);
                 helper.setText(R.id.tv_content, item.content);
                 helper.setText(R.id.tv_time, item.addTime);
                 helper.setText(R.id.tv_comment, String.valueOf(item.commentNum));
-                showImages((RelativeLayout) helper.getView(R.id.image_container));
+                showImages(item.images, (RelativeLayout) helper.getView(R.id.image_container));
                 helper.getRootView().setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -107,8 +113,20 @@ public class CommunityActivity extends BaseActivity implements SwipeRefreshLayou
         onRefresh();
     }
 
-    private void showImages(RelativeLayout container) {
+    private void showImages(List<String> images, RelativeLayout container) {
+        container.removeAllViews();
+        if (images == null)
+            return;
 
+        int length = images.size() > 3 ? 3 : images.size();
+        for (int i = 0; i < length; i++) {
+            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(imageWidth, imageWidth);
+            ImageView img = new ImageView(CommunityActivity.this);
+            params.leftMargin = (imageWidth + margin) * i;
+            img.setLayoutParams(params);
+            ImageLoader.load(CommunityActivity.this, images.get(i), img);
+            container.addView(img);
+        }
     }
 
     @Override
@@ -126,7 +144,7 @@ public class CommunityActivity extends BaseActivity implements SwipeRefreshLayou
         }
     }
 
-    private void setList(List<ArticleItem> list) {
+    private void setList(List<PostsItem> list) {
         refresh.setRefreshing(false);
         if (page == 1) {
             mAdapter.setRefresh(list, num);
@@ -135,7 +153,7 @@ public class CommunityActivity extends BaseActivity implements SwipeRefreshLayou
         }
     }
 
-    void onArticleComplete(ListItem<ArticleItem> datas) {
+    void onArticleComplete(ListItem<PostsItem> datas) {
         setList(datas.lists);
     }
 
@@ -154,7 +172,7 @@ public class CommunityActivity extends BaseActivity implements SwipeRefreshLayou
         protected void onResult(Result result, String key) {
             switch (key) {
                 case GET_ARTICLE:
-                    onArticleComplete((ListItem<ArticleItem>) result.data);
+                    onArticleComplete((ListItem<PostsItem>) result.data);
                     break;
             }
         }

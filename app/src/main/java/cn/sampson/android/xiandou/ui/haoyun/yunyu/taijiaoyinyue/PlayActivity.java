@@ -78,9 +78,12 @@ public class PlayActivity extends AppCompatActivity implements OnPlayerEventList
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        StatusBarUtil.StatusBarLightMode(this);
         setContentView(R.layout.activity_play);
         ButterKnife.bind(this);
         StatusBarUtil.transparencyBar(this);
+//        initSystemBar();
+
         if (AppCache.getPlayService() == null) {
             finish();
             return;
@@ -241,7 +244,7 @@ public class PlayActivity extends AppCompatActivity implements OnPlayerEventList
     }
 
     @Override
-    public void  onChange(Musics music) {
+    public void onChange(Musics music) {
         onPlay(music);
     }
 

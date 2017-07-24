@@ -12,8 +12,6 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,8 +27,7 @@ import cn.sampson.android.xiandou.model.ListItem;
 import cn.sampson.android.xiandou.ui.BaseActivity;
 import cn.sampson.android.xiandou.ui.haoyun.INewsView;
 import cn.sampson.android.xiandou.ui.haoyun.NewArticleDetailActivity;
-import cn.sampson.android.xiandou.ui.haoyun.beiyun.BeiYunActivity;
-import cn.sampson.android.xiandou.ui.haoyun.domain.ArticleItem;
+import cn.sampson.android.xiandou.ui.haoyun.domain.NewsItem;
 import cn.sampson.android.xiandou.ui.haoyun.yunyu.attention.PregnancyAttentionActivity;
 import cn.sampson.android.xiandou.ui.haoyun.yunyu.fortyweeks.FortyWeeksActivity;
 import cn.sampson.android.xiandou.ui.haoyun.yunyu.taijiaoyinyue.TaijiaoYinyueActivity;
@@ -60,7 +57,7 @@ public class YunyuActivity extends BaseActivity implements INewsView, SwipeRefre
     SwipeRefreshLayout refresh;
 
     NewsPresenter mPresenter;
-    QuickRecycleViewAdapter<ArticleItem> mAdapter;
+    QuickRecycleViewAdapter<NewsItem> mAdapter;
     int page = 1;
     int pageNum = 10;
 
@@ -83,9 +80,9 @@ public class YunyuActivity extends BaseActivity implements INewsView, SwipeRefre
 
         refresh.setOnRefreshListener(this);
         list.setLayoutManager(new LinearLayoutManager(this));
-        mAdapter = new QuickRecycleViewAdapter<ArticleItem>(R.layout.item_news_article, new ArrayList<ArticleItem>()) {
+        mAdapter = new QuickRecycleViewAdapter<NewsItem>(R.layout.item_news_article, new ArrayList<NewsItem>()) {
             @Override
-            protected void onBindData(Context context, int position, final ArticleItem item, int itemLayoutId, ViewHelper helper) {
+            protected void onBindData(Context context, int position, final NewsItem item, int itemLayoutId, ViewHelper helper) {
                 helper.setText(R.id.tv_title, item.articleTitle);
                 helper.setText(R.id.tv_content, item.articleSummary);
                 ImageLoader.load(context,  ImageUrlProcesser.reSetImageUrlWH(item.cover, ImageUrlProcesser.POSTER_WIDTH, ImageUrlProcesser.POSTER_HEIGHT), (ImageView) helper.getView(R.id.iv_poster));
@@ -129,14 +126,14 @@ public class YunyuActivity extends BaseActivity implements INewsView, SwipeRefre
     }
 
     @Override
-    public void showNews(ListItem<ArticleItem> data) {
+    public void showNews(ListItem<NewsItem> data) {
         refresh.setRefreshing(false);
         if (data != null && data.total > 0) {
             setList(data.lists);
         }
     }
 
-    private void setList(List<ArticleItem> data) {
+    private void setList(List<NewsItem> data) {
         if (page == 1) {
             mAdapter.setRefresh(data, pageNum);
         } else {

@@ -1,11 +1,14 @@
 package cn.sampson.android.xiandou.core.retroft.Api;
 
+import java.util.List;
 import java.util.Map;
 
 import cn.sampson.android.xiandou.core.retroft.base.Result;
+import cn.sampson.android.xiandou.model.CommonField;
 import cn.sampson.android.xiandou.model.ListItem;
-import cn.sampson.android.xiandou.ui.haoyun.domain.ArticleDetail;
-import cn.sampson.android.xiandou.ui.haoyun.domain.ArticleItem;
+import cn.sampson.android.xiandou.model.Musics;
+import cn.sampson.android.xiandou.ui.haoyun.domain.NewsDetail;
+import cn.sampson.android.xiandou.ui.haoyun.domain.NewsItem;
 import cn.sampson.android.xiandou.ui.haoyun.domain.CommentItem;
 import cn.sampson.android.xiandou.ui.haoyun.domain.Index;
 import retrofit2.http.Field;
@@ -30,10 +33,10 @@ public interface NewsApi {
     Observable<Result<Index>> getIndex();
 
     @GET("/articles/articles/{new_tag}")
-    Observable<Result<ListItem<ArticleItem>>> getNewsByTag(@Path("new_tag") String tag, @Query("page") int page, @Query("limit") int limit);
+    Observable<Result<ListItem<NewsItem>>> getNewsByTag(@Path("new_tag") String tag, @Query("page") int page, @Query("limit") int limit);
 
     @GET("/articles/article/{new_id}")
-    Observable<Result<ArticleDetail>> getNewDetail(@Path("new_id") String tag);
+    Observable<Result<NewsDetail>> getNewDetail(@Path("new_id") String tag);
 
     @GET("/articles/comments/{new_id}")
     Observable<Result<ListItem<CommentItem>>> getCommentList(@Path("new_id") String tag, @Query("page") int page, @Query("limit") int limit);
@@ -41,4 +44,11 @@ public interface NewsApi {
     @FormUrlEncoded
     @POST("/articles/commentit")
     Observable<Result<String>> newsComment(@Field("articleid") long articleid, @Field("content") String content, @FieldMap Map<String, Object> map);
+
+    @GET("/others/pregnantRate")
+    Observable<Result<CommonField>> getPregnantRate();
+
+    @GET("/others/antenatalMusics/{month}")
+    Observable<Result<ListItem<Musics>>> antenatalMusics(@Path("month") String month, @Query("page") int page, @Query("limit") int limit);
+
 }

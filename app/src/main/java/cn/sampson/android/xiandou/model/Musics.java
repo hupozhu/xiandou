@@ -11,6 +11,7 @@ public class Musics extends SelectBase {
     public int id;
     public String name;
     public int month;
+    public String url;
 
     // 持续时间
     public int duration = 0;

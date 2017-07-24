@@ -8,6 +8,6 @@ public interface MyCollectionPresenter {
 
     String GET_COLLECTION_LIST = "getCollectionList";
 
-    void getCollectionList();
+    void getCollectionList(String type, int page, int num);
 
 }

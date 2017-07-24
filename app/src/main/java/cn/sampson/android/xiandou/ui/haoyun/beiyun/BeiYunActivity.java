@@ -11,7 +11,6 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -23,12 +22,20 @@ import butterknife.OnClick;
 import cn.sampson.android.xiandou.R;
 import cn.sampson.android.xiandou.core.manager.ImageUrlProcesser;
 import cn.sampson.android.xiandou.core.presenter.NewsPresenter;
+import cn.sampson.android.xiandou.core.presenter.PregnantRatePresenter;
 import cn.sampson.android.xiandou.core.presenter.impl.NewPresenterImpl;
+import cn.sampson.android.xiandou.core.retroft.Api.NewsApi;
+import cn.sampson.android.xiandou.core.retroft.RetrofitWapper;
+import cn.sampson.android.xiandou.core.retroft.base.BasePresenter;
+import cn.sampson.android.xiandou.core.retroft.base.IView;
+import cn.sampson.android.xiandou.core.retroft.base.Result;
+import cn.sampson.android.xiandou.model.CommonField;
 import cn.sampson.android.xiandou.model.ListItem;
 import cn.sampson.android.xiandou.ui.BaseActivity;
 import cn.sampson.android.xiandou.ui.haoyun.INewsView;
 import cn.sampson.android.xiandou.ui.haoyun.NewArticleDetailActivity;
-import cn.sampson.android.xiandou.ui.haoyun.domain.ArticleItem;
+import cn.sampson.android.xiandou.ui.haoyun.beiyun.qiyuan.QiyuanActivity;
+import cn.sampson.android.xiandou.ui.haoyun.domain.NewsItem;
 import cn.sampson.android.xiandou.utils.ContextUtil;
 import cn.sampson.android.xiandou.utils.ScreenUtils;
 import cn.sampson.android.xiandou.utils.imageloader.ImageLoader;
@@ -56,7 +63,8 @@ public class BeiYunActivity extends BaseActivity implements INewsView, SwipeRefr
     CollapsingToolbarLayout toolbarLayout;
 
     NewsPresenter mPresenter;
-    QuickRecycleViewAdapter<ArticleItem> mAdapter;
+    PregnantRatePresenter mRatePresenter;
+    QuickRecycleViewAdapter<NewsItem> mAdapter;
     int page = 1;
     int pageNum = 10;
 
@@ -79,9 +87,9 @@ public class BeiYunActivity extends BaseActivity implements INewsView, SwipeRefr
 
         refresh.setOnRefreshListener(this);
         list.setLayoutManager(new LinearLayoutManager(this));
-        mAdapter = new QuickRecycleViewAdapter<ArticleItem>(R.layout.item_news_article, new ArrayList<ArticleItem>()) {
+        mAdapter = new QuickRecycleViewAdapter<NewsItem>(R.layout.item_news_article, new ArrayList<NewsItem>()) {
             @Override
-            protected void onBindData(Context context, int position, final ArticleItem item, int itemLayoutId, ViewHelper helper) {
+            protected void onBindData(Context context, int position, final NewsItem item, int itemLayoutId, ViewHelper helper) {
                 helper.setText(R.id.tv_title, item.articleTitle);
                 helper.setText(R.id.tv_content, item.articleSummary);
                 ImageLoader.load(context, ImageUrlProcesser.reSetImageUrlWH(item.cover, ImageUrlProcesser.POSTER_WIDTH, ImageUrlProcesser.POSTER_HEIGHT), (ImageView) helper.getView(R.id.iv_poster));
@@ -105,6 +113,8 @@ public class BeiYunActivity extends BaseActivity implements INewsView, SwipeRefr
         list.setAdapter(mAdapter);
 
         mPresenter = new NewPresenterImpl(this);
+        mRatePresenter = new PregnantRatePresenterImpl(this);
+        mRatePresenter.getPregnateRate();
         onRefresh();
     }
 
@@ -145,14 +155,14 @@ public class BeiYunActivity extends BaseActivity implements INewsView, SwipeRefr
     }
 
     @Override
-    public void showNews(ListItem<ArticleItem> data) {
+    public void showNews(ListItem<NewsItem> data) {
         refresh.setRefreshing(false);
         if (data != null && data.total > 0) {
             setList(data.lists);
         }
     }
 
-    private void setList(List<ArticleItem> data) {
+    private void setList(List<NewsItem> data) {
         if (page == 1) {
             mAdapter.setRefresh(data, pageNum);
         } else {
@@ -165,4 +175,30 @@ public class BeiYunActivity extends BaseActivity implements INewsView, SwipeRefr
         page = 1;
         mPresenter.getNewsByTag("1", page, pageNum);
     }
+
+    void onRateComplete(CommonField field) {
+        tvPregnancyRatio.setText(field.rate + "%");
+    }
+
+    class PregnantRatePresenterImpl extends BasePresenter<BeiYunActivity> implements PregnantRatePresenter {
+
+        public PregnantRatePresenterImpl(BeiYunActivity view) {
+            super(view);
+        }
+
+        @Override
+        public void getPregnateRate() {
+            requestData(RetrofitWapper.getInstance().getNetService(NewsApi.class).getPregnantRate(), GET_PREGNATE_RATE);
+        }
+
+        @Override
+        protected void onResult(Result result, String key) {
+            switch (key) {
+                case GET_PREGNATE_RATE:
+                    onRateComplete((CommonField) result.data);
+                    break;
+            }
+        }
+    }
+
 }

@@ -12,7 +12,7 @@ public class CommunityIndex extends SelectBase {
 
     public ListItem<BannerItem> banners;
     public ListItem<CommunityCategory> cateList;
-    public ListItem<ArticleItem> hots;
-    public ListItem<ArticleItem> news;
+    public ListItem<PostsItem> hots;
+    public ListItem<PostsItem> news;
 
 }

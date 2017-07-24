@@ -50,13 +50,6 @@
                 android:text="03/02"
                 android:textColor="#bfbfbf" />
         </LinearLayout>
-
-        <TextView
-            android:id="@+id/tv_tag"
-            style="@style/title"
-            android:layout_alignParentRight="true"
-            android:text="#试管婴儿#"
-            android:textColor="@color/red" />
     </RelativeLayout>
 
     <TextView

@@ -8,6 +8,6 @@ public interface MyReplyCommentPresenter {
 
     String GET_MY_REPLY = "getMyReply";
 
-    void getMyReply();
+    void getMyReply(String path, int page, int num);
 
 }

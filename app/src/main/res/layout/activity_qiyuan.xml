@@ -59,11 +59,12 @@
                             android:background="@drawable/shape_round_corner_gray"
                             android:gravity="top"
                             android:hint="@string/qiyuan_input_hint"
+                            android:maxLength="140"
                             android:padding="13dp"
-                            android:text="一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十"
                             android:textSize="14sp" />
 
                         <TextView
+                            android:id="@+id/tv_length_num"
                             style="@style/text15"
                             android:layout_alignParentBottom="true"
                             android:layout_alignParentRight="true"

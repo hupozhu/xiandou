@@ -20,6 +20,7 @@ import butterknife.ButterKnife;
 import cn.sampson.android.xiandou.R;
 import cn.sampson.android.xiandou.core.AppCache;
 import cn.sampson.android.xiandou.core.event.GetUserInfoEvent;
+import cn.sampson.android.xiandou.core.manager.LogicManager;
 import cn.sampson.android.xiandou.core.persistence.UserPreference;
 import cn.sampson.android.xiandou.core.presenter.UserPresenter;
 import cn.sampson.android.xiandou.core.retroft.Api.UserApi;
@@ -27,9 +28,13 @@ import cn.sampson.android.xiandou.core.retroft.RetrofitWapper;
 import cn.sampson.android.xiandou.core.retroft.base.BasePresenter;
 import cn.sampson.android.xiandou.core.retroft.base.IView;
 import cn.sampson.android.xiandou.core.retroft.base.Result;
+import cn.sampson.android.xiandou.ui.BaseActivity;
 import cn.sampson.android.xiandou.ui.BaseFragment;
 import cn.sampson.android.xiandou.ui.haoyun.yunyu.taijiaoyinyue.service.PlayService;
+import cn.sampson.android.xiandou.ui.mine.collect.MyCollectActivity;
 import cn.sampson.android.xiandou.ui.mine.domain.User;
+import cn.sampson.android.xiandou.ui.mine.reply.MyReplyActivity;
+import cn.sampson.android.xiandou.utils.DeviceUtils;
 import cn.sampson.android.xiandou.utils.ToastUtils;
 import cn.sampson.android.xiandou.utils.imageloader.ImageLoader;
 import cn.sampson.android.xiandou.widget.dialog.LoadingDialog;
@@ -63,6 +68,8 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
     RelativeLayout rlLogin;
     @Bind(R.id.tv_nickname)
     TextView tvNickname;
+    @Bind(R.id.tv_current_version)
+    TextView tvCurrentVersion;
 
     UserPresenter mPresenter;
     LoginDialog loginDialog;
@@ -111,6 +118,8 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
         llReply.setOnClickListener(this);
         llCollect.setOnClickListener(this);
 
+        tvCurrentVersion.setText(DeviceUtils.getAppVersionName());
+
         rivAvatar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -123,6 +132,8 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
         });
         checkLogin();
         mPresenter.getUserInfo();
+
+
     }
 
     public void onEvent(GetUserInfoEvent event) {
@@ -191,11 +202,17 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
                 break;
 
             case R.id.ll_reply:
+                if (LogicManager.loginIntercept((BaseActivity) getActivity())) {
+                    return;
+                }
                 //跳转到我的回复
                 startActivity(new Intent(getActivity(), MyReplyActivity.class));
                 break;
 
             case R.id.ll_collect:
+                if (LogicManager.loginIntercept((BaseActivity) getActivity())) {
+                    return;
+                }
                 //跳转到我的收藏
                 startActivity(new Intent(getActivity(), MyCollectActivity.class));
                 break;

@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -33,8 +34,10 @@ import java.util.Map;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import cn.sampson.android.xiandou.R;
+import cn.sampson.android.xiandou.core.manager.LogicManager;
 import cn.sampson.android.xiandou.core.manager.TipManager;
 import cn.sampson.android.xiandou.core.presenter.ArticleDetailPresenter;
+import cn.sampson.android.xiandou.core.presenter.LoginPresenter;
 import cn.sampson.android.xiandou.core.retroft.Api.NewsApi;
 import cn.sampson.android.xiandou.core.retroft.Api.UserApi;
 import cn.sampson.android.xiandou.core.retroft.RetrofitWapper;
@@ -43,7 +46,7 @@ import cn.sampson.android.xiandou.core.retroft.base.IView;
 import cn.sampson.android.xiandou.core.retroft.base.Result;
 import cn.sampson.android.xiandou.model.ListItem;
 import cn.sampson.android.xiandou.ui.BaseActivity;
-import cn.sampson.android.xiandou.ui.haoyun.domain.ArticleDetail;
+import cn.sampson.android.xiandou.ui.haoyun.domain.NewsDetail;
 import cn.sampson.android.xiandou.ui.haoyun.domain.CommentItem;
 import cn.sampson.android.xiandou.utils.ContextUtil;
 import cn.sampson.android.xiandou.utils.ToastUtils;
@@ -110,7 +113,7 @@ public class NewArticleDetailActivity extends BaseActivity implements SwipeRefre
 
     private void initView() {
         articleId = getIntent().getLongExtra(ARTICLE_ID, 0);
-        mPresenter = new ArticleDetailPresenterImpl(this);
+        mPresenter = new ArticleDetailPresenterImpl(this, rootRefresh);
 
         tvComment.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -283,6 +286,10 @@ public class NewArticleDetailActivity extends BaseActivity implements SwipeRefre
      * 发布评论
      */
     private void publishComment() {
+        if (LogicManager.loginIntercept(this)) {
+            return;
+        }
+
         String input = etInput.getText().toString();
         if (TextUtils.isEmpty(input)) {
             ToastUtils.show(R.string.input_not_null);
@@ -316,7 +323,7 @@ public class NewArticleDetailActivity extends BaseActivity implements SwipeRefre
     /**
      * 显示资讯详情
      */
-    public void showDetailInfo(ArticleDetail detail) {
+    public void showDetailInfo(NewsDetail detail) {
         tvNickname.setText(detail.articleAuthor);
         tvTitle.setText(detail.articleTitle);
         tvTime.setText(detail.created);
@@ -387,8 +394,9 @@ public class NewArticleDetailActivity extends BaseActivity implements SwipeRefre
 
     class ArticleDetailPresenterImpl extends BasePresenter<NewArticleDetailActivity> implements ArticleDetailPresenter {
 
-        public ArticleDetailPresenterImpl(NewArticleDetailActivity view) {
-            super(view);
+
+        public ArticleDetailPresenterImpl(NewArticleDetailActivity view, ViewGroup rootView) {
+            super(view, rootView);
         }
 
         @Override
@@ -420,7 +428,7 @@ public class NewArticleDetailActivity extends BaseActivity implements SwipeRefre
         protected void onResult(Result result, String key) {
             switch (key) {
                 case GET_ARTICLE_DETAIL:
-                    showDetailInfo((ArticleDetail) result.data);
+                    showDetailInfo((NewsDetail) result.data);
                     break;
 
                 case PUBLISH_COMMENT:
@@ -458,6 +466,8 @@ public class NewArticleDetailActivity extends BaseActivity implements SwipeRefre
 
     @Override
     protected void onToolbarCollect() {
-        mPresenter.collectNews(articleId);
+        if (!LogicManager.loginIntercept(this)) {
+            mPresenter.collectNews(articleId);
+        }
     }
 }

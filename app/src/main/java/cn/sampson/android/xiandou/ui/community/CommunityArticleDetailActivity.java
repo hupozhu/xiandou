@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -35,10 +36,10 @@ import java.util.Map;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import cn.sampson.android.xiandou.R;
+import cn.sampson.android.xiandou.core.manager.LogicManager;
 import cn.sampson.android.xiandou.core.manager.TipManager;
 import cn.sampson.android.xiandou.core.presenter.ArticleDetailPresenter;
 import cn.sampson.android.xiandou.core.retroft.Api.CommunityApi;
-import cn.sampson.android.xiandou.core.retroft.Api.NewsApi;
 import cn.sampson.android.xiandou.core.retroft.Api.UserApi;
 import cn.sampson.android.xiandou.core.retroft.RetrofitWapper;
 import cn.sampson.android.xiandou.core.retroft.base.BasePresenter;
@@ -46,7 +47,7 @@ import cn.sampson.android.xiandou.core.retroft.base.IView;
 import cn.sampson.android.xiandou.core.retroft.base.Result;
 import cn.sampson.android.xiandou.model.ListItem;
 import cn.sampson.android.xiandou.ui.BaseActivity;
-import cn.sampson.android.xiandou.ui.community.domain.ArticleDetail;
+import cn.sampson.android.xiandou.ui.community.domain.PostsDetail;
 import cn.sampson.android.xiandou.ui.community.domain.CommentItem;
 import cn.sampson.android.xiandou.utils.ContextUtil;
 import cn.sampson.android.xiandou.utils.ToastUtils;
@@ -56,7 +57,6 @@ import cn.sampson.android.xiandou.utils.systembar.StatusBarUtil;
 import cn.sampson.android.xiandou.widget.adapter.baseadapter.QuickRecycleViewAdapter;
 import cn.sampson.android.xiandou.widget.adapter.baseadapter.ViewHelper;
 import cn.sampson.android.xiandou.widget.babushkatext.BabushkaText;
-import cn.sampson.android.xiandou.widget.keyboard.FuncLayout;
 import cn.sampson.android.xiandou.widget.webview.ImgObserveWebView;
 
 /**
@@ -83,7 +83,6 @@ public class CommunityArticleDetailActivity extends BaseActivity implements Swip
     private Menu menu;
 
     RoundedImageView rivAvatar;
-    TextView tvTag;
     TextView tvNickname;
     TextView tvTime;
     TextView tvTitle;
@@ -119,7 +118,7 @@ public class CommunityArticleDetailActivity extends BaseActivity implements Swip
 
     private void initView() {
         articleId = getIntent().getLongExtra(ARTICLE_ID, 0);
-        mPresenter = new ArticleDetailPresenterImpl(this);
+        mPresenter = new ArticleDetailPresenterImpl(this, rootRefresh);
 
         tvComment.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -235,7 +234,6 @@ public class CommunityArticleDetailActivity extends BaseActivity implements Swip
         tvCommentNum = UiUtils.find(view, R.id.tv_comment_num);
         llRoot = UiUtils.find(view, R.id.ll_root);
         rivAvatar = UiUtils.find(view, R.id.riv_avatar);
-        tvTag = UiUtils.find(view, R.id.tv_tag);
         return view;
     }
 
@@ -312,6 +310,10 @@ public class CommunityArticleDetailActivity extends BaseActivity implements Swip
     }
 
     public void publishComment() {
+        if (LogicManager.loginIntercept(this)) {
+            return;
+        }
+
         String input = etInput.getText().toString();
         if (TextUtils.isEmpty(input)) {
             ToastUtils.show(R.string.input_not_null);
@@ -324,12 +326,11 @@ public class CommunityArticleDetailActivity extends BaseActivity implements Swip
     /**
      * 显示资讯详情
      */
-    public void showDetailInfo(ArticleDetail detail) {
+    public void showDetailInfo(PostsDetail detail) {
         tvNickname.setText(detail.userinfo.nickname);
         ImageLoader.loadAvatar(CommunityArticleDetailActivity.this, detail.userinfo.userPic, rivAvatar);
         tvTitle.setText(detail.title);
         tvTime.setText(detail.created);
-        tvTag.setText(getString(R.string.category_tag, detail.cateTag));
         webView.loadDataWithBaseURL(null, getHtmlContent(detail.content), "text/html", "utf-8", null);
         showCollection(detail.isCollect == 1);
     }
@@ -366,9 +367,9 @@ public class CommunityArticleDetailActivity extends BaseActivity implements Swip
     public void setList(List<CommentItem> items) {
         refresh.setRefreshing(false);
         if (page == 1) {
-            mAdapter.setRefresh(items, page);
+            mAdapter.setRefresh(items, num);
         } else {
-            mAdapter.setLoaded(items, page);
+            mAdapter.setLoaded(items, num);
         }
     }
 
@@ -394,8 +395,9 @@ public class CommunityArticleDetailActivity extends BaseActivity implements Swip
 
     class ArticleDetailPresenterImpl extends BasePresenter<CommunityArticleDetailActivity> implements ArticleDetailPresenter {
 
-        public ArticleDetailPresenterImpl(CommunityArticleDetailActivity view) {
-            super(view);
+
+        public ArticleDetailPresenterImpl(CommunityArticleDetailActivity view, ViewGroup rootView) {
+            super(view, rootView);
         }
 
         @Override
@@ -427,7 +429,7 @@ public class CommunityArticleDetailActivity extends BaseActivity implements Swip
         protected void onResult(Result result, String key) {
             switch (key) {
                 case GET_ARTICLE_DETAIL:
-                    showDetailInfo((ArticleDetail) result.data);
+                    showDetailInfo((PostsDetail) result.data);
                     break;
 
                 case GET_COMMENT_LIST:
@@ -466,6 +468,10 @@ public class CommunityArticleDetailActivity extends BaseActivity implements Swip
 
     @Override
     protected void onToolbarCollect() {
+        if (LogicManager.loginIntercept(this)) {
+            return;
+        }
+
         mPresenter.collectNews(articleId);
     }
 }

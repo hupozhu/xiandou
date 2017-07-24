@@ -21,7 +21,7 @@ public class MainTabWrapper implements IFragmentsWrapper {
     public MainTabWrapper() {
         mTitles = new String[]{
                 ContextUtil.getString(R.string.haoyun),
-                ContextUtil.getString(R.string.shequ),
+                ContextUtil.getString(R.string.discover),
                 ContextUtil.getString(R.string.wode)
         };
 

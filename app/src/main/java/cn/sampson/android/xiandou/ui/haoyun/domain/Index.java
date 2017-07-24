@@ -11,7 +11,7 @@ public class Index {
 
     public ListItem<BannerItem> banners;
     public ListItem<BannerItem> advs;
-    public ListItem<ArticleItem> hots;
-    public ListItem<ArticleItem> news;
+    public ListItem<NewsItem> hots;
+    public ListItem<NewsItem> news;
 
 }

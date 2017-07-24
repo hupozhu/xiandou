@@ -90,6 +90,10 @@ public class BaseActivity extends AppCompatActivity {
             case R.id.action_collect:
                 onToolbarCollect();
                 break;
+
+            case R.id.action_message:
+                onToolbarMessage();
+                break;
         }
         return true;
     }
@@ -98,6 +102,9 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     protected void onToolbarCollect() {
+    }
+
+    protected void onToolbarMessage() {
     }
 
     /**

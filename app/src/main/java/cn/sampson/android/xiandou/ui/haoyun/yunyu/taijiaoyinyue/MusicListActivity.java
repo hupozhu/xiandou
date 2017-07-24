@@ -28,10 +28,12 @@ import cn.sampson.android.xiandou.R;
 import cn.sampson.android.xiandou.config.Constants;
 import cn.sampson.android.xiandou.core.AppCache;
 import cn.sampson.android.xiandou.core.retroft.Api.FetalTrainingApi;
+import cn.sampson.android.xiandou.core.retroft.Api.NewsApi;
 import cn.sampson.android.xiandou.core.retroft.RetrofitWapper;
 import cn.sampson.android.xiandou.core.retroft.base.BasePresenter;
 import cn.sampson.android.xiandou.core.retroft.base.IView;
 import cn.sampson.android.xiandou.core.retroft.base.Result;
+import cn.sampson.android.xiandou.model.ListItem;
 import cn.sampson.android.xiandou.ui.BaseActivity;
 import cn.sampson.android.xiandou.model.Musics;
 import cn.sampson.android.xiandou.ui.haoyun.yunyu.taijiaoyinyue.service.PlayService;
@@ -129,31 +131,14 @@ public class MusicListActivity extends BaseActivity implements IView {
             }
         };
         list.setAdapter(mAdapter);
-
-        BannerView banner = new BannerView(this, ADSize.BANNER, Constants.APPID, Constants.BannerPosID);
-        //设置广告轮播时间，为0或30~120之间的数字，单位为s,0标识不自动轮播
-        banner.setRefresh(30);
-        banner.setADListener(new AbstractBannerADListener() {
-
-            @Override
-            public void onNoAD(int arg0) {
-                Log.i("AD_DEMO", "BannerNoAD，eCode=" + arg0);
-            }
-
-            @Override
-            public void onADReceiv() {
-                Log.i("AD_DEMO", "ONBannerReceive");
-            }
-        });
-        mAdapter.addHeaderView(banner);
-        /* 发起广告请求，收到广告数据后会展示数据 */
-        banner.loadAD();
     }
 
-    public void setMusicList(ArrayList<Musics> datas) {
-        AppCache.getMusicList().clear();
-        AppCache.getMusicList().addAll(datas);
-        mAdapter.setRefresh(datas, datas.size());
+    public void setMusicList(ListItem<Musics> datas) {
+        if (datas != null && datas.total > 0) {
+            AppCache.getMusicList().clear();
+            AppCache.getMusicList().addAll(datas.lists);
+            mAdapter.getAdapterManager().replaceAllItems(datas.lists);
+        }
     }
 
     @Override
@@ -172,14 +157,14 @@ public class MusicListActivity extends BaseActivity implements IView {
         protected void onResult(Result result, String key) {
             switch (key) {
                 case GET_MUSIC_LIST:
-                    setMusicList((ArrayList<Musics>) result.data);
+                    setMusicList((ListItem<Musics>) result.data);
                     break;
             }
         }
 
         @Override
         public void getMusicList(int month) {
-            requestData(RetrofitWapper.getInstance().getNetService(FetalTrainingApi.class).getMusicList(month), GET_MUSIC_LIST);
+            requestData(RetrofitWapper.getInstance().getNetService(NewsApi.class).antenatalMusics(String.valueOf(month), 1, Integer.MAX_VALUE), GET_MUSIC_LIST);
         }
     }
 

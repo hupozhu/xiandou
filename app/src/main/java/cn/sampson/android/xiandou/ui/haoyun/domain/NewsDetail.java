@@ -4,7 +4,7 @@ package cn.sampson.android.xiandou.ui.haoyun.domain;
  * Created by chengyang on 2017/7/20.
  */
 
-public class ArticleDetail {
+public class NewsDetail {
 
     public long articleId;
     public String articleAuthor;

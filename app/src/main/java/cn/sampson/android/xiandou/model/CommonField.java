@@ -12,4 +12,6 @@ public class CommonField {
     public String keys;
     public String thumbimg;
 
+    public int rate;
+
 }

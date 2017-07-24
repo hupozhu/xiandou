@@ -1,12 +1,15 @@
 package cn.sampson.android.xiandou.ui.community.domain;
 
+import java.util.List;
+
 import cn.sampson.android.xiandou.ui.mine.domain.User;
+import cn.sampson.android.xiandou.widget.adapter.baseadapter.SelectBase;
 
 /**
- * Created by chengyang on 2017/7/20.
+ * Created by chengyang on 2017/7/12.
  */
 
-public class ArticleDetail {
+public class PostsItem extends SelectBase {
 
     public long articleId;
     public String title;
@@ -14,11 +17,11 @@ public class ArticleDetail {
     public String cateTag;
     public String cover;
     public String content;
-    public String images;
+    public List<String> images;
     public int clickNum;
     public int commentNum;
     public int recommend;
-    public String created;
+    public String addTime;
+
     public User userinfo;
-    public int isCollect;
 }

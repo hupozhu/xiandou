@@ -2,7 +2,7 @@ package cn.sampson.android.xiandou.ui.haoyun;
 
 import cn.sampson.android.xiandou.core.retroft.base.IView;
 import cn.sampson.android.xiandou.model.ListItem;
-import cn.sampson.android.xiandou.ui.haoyun.domain.ArticleItem;
+import cn.sampson.android.xiandou.ui.haoyun.domain.NewsItem;
 
 /**
  * Created by chengyang on 2017/7/13.
@@ -10,6 +10,6 @@ import cn.sampson.android.xiandou.ui.haoyun.domain.ArticleItem;
 
 public interface INewsView extends IView {
 
-    void showNews(ListItem<ArticleItem> list);
+    void showNews(ListItem<NewsItem> list);
 
 }
