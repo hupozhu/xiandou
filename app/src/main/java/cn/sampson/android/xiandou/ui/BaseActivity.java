@@ -29,6 +29,7 @@ import cn.sampson.android.xiandou.utils.ContextUtil;
 import cn.sampson.android.xiandou.utils.ToastUtils;
 import cn.sampson.android.xiandou.utils.permission.PermissionReq;
 import cn.sampson.android.xiandou.utils.permission.PermissionResult;
+import cn.sampson.android.xiandou.widget.dialog.LoadingDialog;
 import cn.sampson.android.xiandou.widget.dialog.PhotoPickDialog;
 
 /**
@@ -208,7 +209,7 @@ public class BaseActivity extends AppCompatActivity {
 
 
     //图片压缩质量
-    private int photo_compression_quality = 100;
+    private int photo_compression_quality = 30;
 
     /**
      * 点击头像弹出选择头像对话框，拍照 或者 从相册选择

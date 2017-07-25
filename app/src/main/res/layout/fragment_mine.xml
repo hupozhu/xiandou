@@ -45,8 +45,8 @@
                             style="@style/text15"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="18dp"
-                            android:layout_marginTop="19dp" />
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="18dp" />
 
                         <ImageView
                             android:layout_width="17.5dp"

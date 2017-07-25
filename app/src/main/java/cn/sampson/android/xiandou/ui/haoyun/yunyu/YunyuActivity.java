@@ -67,7 +67,7 @@ public class YunyuActivity extends BaseActivity implements INewsView, SwipeRefre
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_yun_yu);
         ButterKnife.bind(this);
-        setSupportToolbar(toolbar, "");
+        setSupportToolbar(toolbar, getString(R.string.yunyu));
         StatusBarUtil.transparencyBar(this);
         initSystemBar();
         initView();

@@ -21,6 +21,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.sampson.android.xiandou.R;
 import cn.sampson.android.xiandou.core.manager.ImageUrlProcesser;
+import cn.sampson.android.xiandou.core.manager.LogicManager;
 import cn.sampson.android.xiandou.core.presenter.NewsPresenter;
 import cn.sampson.android.xiandou.core.presenter.PregnantRatePresenter;
 import cn.sampson.android.xiandou.core.presenter.impl.NewPresenterImpl;
@@ -74,7 +75,7 @@ public class BeiYunActivity extends BaseActivity implements INewsView, SwipeRefr
         StatusBarUtil.StatusBarLightMode(this);
         setContentView(R.layout.activity_bei_yun);
         ButterKnife.bind(this);
-        setSupportToolbar(toolbar, "");
+        setSupportToolbar(toolbar, getString(R.string.beiyun));
         StatusBarUtil.transparencyBar(this);
         initSystemBar();
         initView();
@@ -145,6 +146,9 @@ public class BeiYunActivity extends BaseActivity implements INewsView, SwipeRefr
 
     @OnClick(R.id.qiyuan)
     public void jumpToQiyuan() {
+        if (LogicManager.loginIntercept(this))
+            return;
+
         jumpTo(QiyuanActivity.class);
     }
 

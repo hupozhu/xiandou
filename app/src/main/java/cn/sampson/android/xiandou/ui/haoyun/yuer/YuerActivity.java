@@ -62,7 +62,7 @@ public class YuerActivity extends BaseActivity implements INewsView, SwipeRefres
         StatusBarUtil.StatusBarLightMode(this);
         setContentView(R.layout.activity_yu_er);
         ButterKnife.bind(this);
-        setSupportToolbar(toolbar, "");
+        setSupportToolbar(toolbar, getString(R.string.yuer));
         StatusBarUtil.transparencyBar(this);
         initSystemBar();
         initView();

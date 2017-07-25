@@ -178,7 +178,7 @@
                 style="@style/text15"
                 android:layout_marginLeft="12dp"
                 android:layout_marginRight="12dp"
-                android:text="@string/beiyunzhilan" />
+                android:text="@string/yunyuzhilan" />
 
             <View
                 android:layout_width="35dp"

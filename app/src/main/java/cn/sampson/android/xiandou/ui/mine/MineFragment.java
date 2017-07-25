@@ -46,8 +46,7 @@ import de.greenrobot.event.EventBus;
  */
 
 public class MineFragment extends BaseFragment implements View.OnClickListener, IView {
-
-
+    
     @Bind(R.id.riv_avatar)
     RoundedImageView rivAvatar;
     @Bind(R.id.rl_user_info)
@@ -96,7 +95,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
     public void onResume() {
         super.onResume();
         if (!TextUtils.isEmpty(UserPreference.getAvatar())) {
-            ImageLoader.loadAvatar(getContext(), UserPreference.getArea(), rivAvatar);
+            ImageLoader.loadAvatar(getContext(), UserPreference.getAvatar(), rivAvatar);
         } else {
             rivAvatar.setImageResource(R.mipmap.default_avatar);
         }

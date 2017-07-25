@@ -11,31 +11,24 @@ import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
-
-import com.qq.e.ads.banner.ADSize;
-import com.qq.e.ads.banner.AbstractBannerADListener;
-import com.qq.e.ads.banner.BannerView;
 
 import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import cn.sampson.android.xiandou.R;
-import cn.sampson.android.xiandou.config.Constants;
 import cn.sampson.android.xiandou.core.AppCache;
-import cn.sampson.android.xiandou.core.retroft.Api.FetalTrainingApi;
 import cn.sampson.android.xiandou.core.retroft.Api.NewsApi;
 import cn.sampson.android.xiandou.core.retroft.RetrofitWapper;
 import cn.sampson.android.xiandou.core.retroft.base.BasePresenter;
 import cn.sampson.android.xiandou.core.retroft.base.IView;
 import cn.sampson.android.xiandou.core.retroft.base.Result;
 import cn.sampson.android.xiandou.model.ListItem;
-import cn.sampson.android.xiandou.ui.BaseActivity;
 import cn.sampson.android.xiandou.model.Musics;
+import cn.sampson.android.xiandou.ui.BaseActivity;
 import cn.sampson.android.xiandou.ui.haoyun.yunyu.taijiaoyinyue.service.PlayService;
 import cn.sampson.android.xiandou.utils.systembar.StatusBarUtil;
 import cn.sampson.android.xiandou.widget.adapter.baseadapter.QuickRecycleViewAdapter;
@@ -119,7 +112,8 @@ public class MusicListActivity extends BaseActivity implements IView {
         mAdapter = new QuickRecycleViewAdapter<Musics>(R.layout.item_music_info, new ArrayList<Musics>()) {
             @Override
             protected void onBindData(Context context, final int position, Musics item, int itemLayoutId, ViewHelper helper) {
-                helper.setText(R.id.music_name, item.name);
+                helper.setText(R.id.music_name, (position + 1) + "、" +
+                        "" + item.name);
                 helper.getRootView().setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {

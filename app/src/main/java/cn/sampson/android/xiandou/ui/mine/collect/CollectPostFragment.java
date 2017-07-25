@@ -85,6 +85,7 @@ public class CollectPostFragment extends BaseFragment implements IView, SwipeRef
                 helper.setText(R.id.tv_content, item.content);
                 helper.setText(R.id.tv_time, item.addTime);
                 helper.setText(R.id.tv_comment, String.valueOf(item.commentNum));
+
                 showImages(item.images, (RelativeLayout) helper.getView(R.id.image_container));
                 helper.getRootView().setOnClickListener(new View.OnClickListener() {
                     @Override

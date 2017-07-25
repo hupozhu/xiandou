@@ -7,7 +7,8 @@ import cn.sampson.android.xiandou.widget.adapter.baseadapter.SelectBase;
  * Created by chengyang on 2017/7/18.
  */
 
-public class CommentItem extends SelectBase{
+public class CommentItem extends SelectBase {
+
     public long commentId;
     public long pid;
     public long userId;

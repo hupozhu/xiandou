@@ -67,6 +67,7 @@ public class UserInfoSettingsActivity extends BaseActivity {
         if (!TextUtils.isEmpty(content)) {
             etInfo.setText(content);
             etInfo.setSelection(content.length());
+            rlClear.setVisibility(View.VISIBLE);
         }
 
         etInfo.addTextChangedListener(new TextWatcher() {

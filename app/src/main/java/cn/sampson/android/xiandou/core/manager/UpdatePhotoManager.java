@@ -27,6 +27,7 @@ import cn.sampson.android.xiandou.utils.ContextUtil;
 import cn.sampson.android.xiandou.utils.NetworkUtil;
 import cn.sampson.android.xiandou.utils.Tip;
 import cn.sampson.android.xiandou.utils.ToastUtils;
+import cn.sampson.android.xiandou.widget.dialog.LoadingDialog;
 import de.greenrobot.event.EventBus;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
@@ -80,11 +81,14 @@ public class UpdatePhotoManager {
                         }, new Action1<Throwable>() {
                             @Override
                             public void call(Throwable throwable) {
+                                ToastUtils.show("图片上传token获取失败");
                             }
                         });
             } else {
                 qiniuUpdatePhoto(file);
             }
+        } else {
+            ToastUtils.show("上传失败，请检查网络状况");
         }
     }
 
@@ -102,6 +106,7 @@ public class UpdatePhotoManager {
                                 updateUserPic(res.getString("keys"));
                                 ToastUtils.show("上传成功");
                             } catch (JSONException e) {
+                                ToastUtils.show("上传失败");
                                 e.printStackTrace();
                             }
                             Tip.i("qiniu ==> Upload Success");

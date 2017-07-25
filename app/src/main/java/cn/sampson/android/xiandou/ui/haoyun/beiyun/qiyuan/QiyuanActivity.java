@@ -74,7 +74,7 @@ public class QiyuanActivity extends BaseActivity implements IView, SwipeRefreshL
         mPresenter = new QiyuanPresenterImpl(this);
 
         refresh.setOnRefreshListener(this);
-        refresh.setProgressViewOffset(true, -50, 50);
+        refresh.setProgressViewOffset(false, -150, 50);
         appBar.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
             @Override
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {

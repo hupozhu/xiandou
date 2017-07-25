@@ -132,7 +132,7 @@
     <string name="date">设置日期</string>
     <string name="phone">已绑定手机</string>
     <string name="logout">退出当前帐号</string>
-    <string name="user_info">用户详情</string>
+    <string name="user_info">个人资料</string>
     <string name="update_info">修改资料</string>
 
     <string name="input_nickname">请输入昵称</string>

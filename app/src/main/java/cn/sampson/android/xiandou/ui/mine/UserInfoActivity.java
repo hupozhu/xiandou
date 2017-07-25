@@ -41,8 +41,7 @@ import cn.sampson.android.xiandou.widget.timepicker.utils.DateUtils;
  */
 
 public class UserInfoActivity extends BaseActivity implements View.OnClickListener, IView {
-
-
+    
     @Bind(R.id.riv_avatar)
     RoundedImageView rivAvatar;
     @Bind(R.id.rl_avatar)

@@ -20,4 +20,5 @@ public class CommentItem extends SelectBase {
     public int status;
     public User userinfo;
     public CommentItem fathercomment;
+
 }
