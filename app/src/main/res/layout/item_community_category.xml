@@ -17,6 +17,6 @@
     <TextView
         android:id="@+id/tv_name"
         style="@style/text15"
-        android:layout_marginLeft="7dp" />
+        android:layout_marginLeft="5dp" />
 
 </LinearLayout>

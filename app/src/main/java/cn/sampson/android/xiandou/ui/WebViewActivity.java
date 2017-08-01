@@ -29,6 +29,8 @@ import cn.sampson.android.xiandou.utils.systembar.StatusBarUtil;
 public class WebViewActivity extends BaseActivity {
 
     public static final String URL = "url";
+    public static final String TITLE = "title";
+
     @Bind(R.id.webView)
     WebView webView;
     @Bind(R.id.root)
@@ -36,6 +38,7 @@ public class WebViewActivity extends BaseActivity {
 
     private String url;
     private String fristPath = "";
+    private String title;
 
     private ProgressDialog dialog;
 
@@ -48,6 +51,7 @@ public class WebViewActivity extends BaseActivity {
         setActionBarBack();
 
         url = getIntent().getStringExtra(URL);
+        title = getIntent().getStringExtra(TITLE);
 
         initView();
     }
@@ -100,9 +104,13 @@ public class WebViewActivity extends BaseActivity {
             @Override
             public void onPageFinished(WebView view, String url) {
                 dialog.dismiss();
-                if (!TextUtils.isEmpty(view.getTitle())) {
-                   getSupportActionBar().setTitle(view.getTitle());
+                if (!TextUtils.isEmpty(title)) {
+                    getSupportActionBar().setTitle(title);
                 } else {
+                    if (!TextUtils.isEmpty(view.getTitle())) {
+                        getSupportActionBar().setTitle(view.getTitle());
+                    } else {
+                    }
                 }
                 Tip.i("originUrl =======> " + url);
                 view.loadUrl("javascript:window.HTMLOUT.processHTML(document.getElementById('description').content);");
@@ -153,7 +161,7 @@ public class WebViewActivity extends BaseActivity {
 //                webView.goBack();
 //            }
 //        } else
-            super.onBackPressed();
+        super.onBackPressed();
     }
 
     class LoadListener {

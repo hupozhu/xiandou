@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/selectable_common_white_pressed_bg"
+    android:clickable="true"
     android:orientation="vertical">
 
     <ImageView
@@ -32,4 +33,5 @@
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         android:background="#d0d0d0" />
+
 </LinearLayout>

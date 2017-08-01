@@ -30,6 +30,7 @@ import cn.sampson.android.xiandou.core.retroft.base.IView;
 import cn.sampson.android.xiandou.core.retroft.base.Result;
 import cn.sampson.android.xiandou.ui.BaseActivity;
 import cn.sampson.android.xiandou.ui.BaseFragment;
+import cn.sampson.android.xiandou.ui.WebViewActivity;
 import cn.sampson.android.xiandou.ui.haoyun.yunyu.taijiaoyinyue.service.PlayService;
 import cn.sampson.android.xiandou.ui.mine.collect.MyCollectActivity;
 import cn.sampson.android.xiandou.ui.mine.domain.User;
@@ -46,7 +47,7 @@ import de.greenrobot.event.EventBus;
  */
 
 public class MineFragment extends BaseFragment implements View.OnClickListener, IView {
-    
+
     @Bind(R.id.riv_avatar)
     RoundedImageView rivAvatar;
     @Bind(R.id.rl_user_info)
@@ -116,6 +117,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
         rlLogin.setOnClickListener(this);
         llReply.setOnClickListener(this);
         llCollect.setOnClickListener(this);
+        llAboutUs.setOnClickListener(this);
 
         tvCurrentVersion.setText(DeviceUtils.getAppVersionName());
 
@@ -214,6 +216,13 @@ public class MineFragment extends BaseFragment implements View.OnClickListener, 
                 }
                 //跳转到我的收藏
                 startActivity(new Intent(getActivity(), MyCollectActivity.class));
+                break;
+
+            case R.id.ll_about_us:
+                Intent intent = new Intent(getActivity(), WebViewActivity.class);
+                intent.putExtra(WebViewActivity.TITLE, getString(R.string.about_us));
+                intent.putExtra(WebViewActivity.URL, "http://xiyun.gvrc.cn/");
+                startActivity(intent);
                 break;
         }
     }

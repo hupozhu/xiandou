@@ -34,49 +34,87 @@ import cn.sampson.android.xiandou.widget.banner.loopviewpager.FixedSpeedScroller
 import cn.sampson.android.xiandou.widget.banner.loopviewpager.LoopViewPager;
 
 public abstract class BaseBanner<E, T extends BaseBanner<E, T>> extends RelativeLayout {
-    /** 日志 */
+    /**
+     * 日志
+     */
     private static final String TAG = BaseBanner.class.getSimpleName();
-    /** 单线程池定时任务 */
+    /**
+     * 单线程池定时任务
+     */
     private ScheduledExecutorService mStse;
-    /** 上下文 */
+    /**
+     * 上下文
+     */
     protected Context mContext;
-    /** 设备密度 */
+    /**
+     * 设备密度
+     */
     protected DisplayMetrics mDisplayMetrics;
-    /** ViewPager */
+    /**
+     * ViewPager
+     */
     protected ViewPager mViewPager;
-    /** 数据源 */
+    /**
+     * 数据源
+     */
     protected List<E> mDatas = new ArrayList<>();
-    /** 当前position */
+    /**
+     * 当前position
+     */
     protected int mCurrentPositon;
-    /** 上一个position */
+    /**
+     * 上一个position
+     */
     protected int mLastPositon;
-    /** 多久后开始滚动 */
+    /**
+     * 多久后开始滚动
+     */
     private long mDelay;
-    /** 滚动间隔 */
+    /**
+     * 滚动间隔
+     */
     private long mPeriod;
-    /** 是否自动滚动 */
+    /**
+     * 是否自动滚动
+     */
     private boolean mIsAutoScrollEnable;
-    /** 是否正在自动滚动中 */
+    /**
+     * 是否正在自动滚动中
+     */
     private boolean mIsAutoScrolling;
-    /** 滚动速度 */
+    /**
+     * 滚动速度
+     */
     private int mScrollSpeed = 450;
-    /** 切换动画 */
+    /**
+     * 切换动画
+     */
     private Class<? extends ViewPager.PageTransformer> mTransformerClass;
 
-    /** 显示器(小点)的最顶层父容器 */
+    /**
+     * 显示器(小点)的最顶层父容器
+     */
     private RelativeLayout mRlBottomBarParent;
     private int mItemWidth;
     private int mItemHeight;
 
-    /** 显示器和标题的直接父容器 */
+    /**
+     * 显示器和标题的直接父容器
+     */
     private LinearLayout mLlBottomBar;
-    /** 最后一条item是否显示背景条 */
+    /**
+     * 最后一条item是否显示背景条
+     */
     private boolean mIsBarShowWhenLast;
 
-    /** 显示器的的直接容器 */
+    /**
+     * 显示器的的直接容器
+     */
     private LinearLayout mLlIndicatorContainer;
 
-    /** 标题 */
+    /**
+     * 标题
+     */
     private TextView mTvTitle;
 
     private Handler mHandler = new Handler() {
@@ -201,98 +239,134 @@ public abstract class BaseBanner<E, T extends BaseBanner<E, T>> extends Relative
         }
     }
 
-    /** 创建ViewPager的Item布局 */
+    /**
+     * 创建ViewPager的Item布局
+     */
     public abstract View onCreateItemView(int position);
 
-    /** 创建显示器 */
+    /**
+     * 创建显示器
+     */
     public abstract View onCreateIndicator();
 
-    /** 设置当前显示器的状态,选中或者未选中 */
+    /**
+     * 设置当前显示器的状态,选中或者未选中
+     */
     public abstract void setCurrentIndicator(int position);
 
-    /** 覆写这个方法设置标题 */
+    /**
+     * 覆写这个方法设置标题
+     */
     public void onTitleSlect(TextView tv, int position) {
     }
 
-    /** 设置数据源 */
+    /**
+     * 设置数据源
+     */
     public T setSource(List<E> list) {
         this.mDatas = list;
         return (T) this;
     }
 
-    /** 滚动延时,默认5秒 */
+    /**
+     * 滚动延时,默认5秒
+     */
     public T setDelay(long delay) {
         this.mDelay = delay;
         return (T) this;
     }
 
-    /** 滚动间隔,默认5秒 */
+    /**
+     * 滚动间隔,默认5秒
+     */
     public T setPeriod(long period) {
         this.mPeriod = period;
         return (T) this;
     }
 
-    /** 设置是否支持自动滚动,默认true.仅对LoopViewPager有效 */
+    /**
+     * 设置是否支持自动滚动,默认true.仅对LoopViewPager有效
+     */
     public T setAutoScrollEnable(boolean isAutoScrollEnable) {
         this.mIsAutoScrollEnable = isAutoScrollEnable;
         return (T) this;
     }
 
-    /** 设置页面切换动画 */
+    /**
+     * 设置页面切换动画
+     */
     public T setTransformerClass(Class<? extends ViewPager.PageTransformer> transformerClass) {
         this.mTransformerClass = transformerClass;
         return (T) this;
     }
 
-    /** 设置底部背景条颜色,默认透明 */
+    /**
+     * 设置底部背景条颜色,默认透明
+     */
     public T setBarColor(int barColor) {
         mLlBottomBar.setBackgroundColor(barColor);
         return (T) this;
     }
 
-    /** 设置最后一条item是否显示背景条,默认true */
+    /**
+     * 设置最后一条item是否显示背景条,默认true
+     */
     public T setBarShowWhenLast(boolean isBarShowWhenLast) {
         this.mIsBarShowWhenLast = isBarShowWhenLast;
         return (T) this;
     }
 
-    /** 设置底部背景条padding,单位dp */
+    /**
+     * 设置底部背景条padding,单位dp
+     */
     public T barPadding(float left, float top, float right, float bottom) {
         mLlBottomBar.setPadding(dp2px(left), dp2px(top), dp2px(right), dp2px(bottom));
         return (T) this;
     }
 
-    /** 设置标题文字颜色,默认"#ffffff" */
+    /**
+     * 设置标题文字颜色,默认"#ffffff"
+     */
     public T setTextColor(int textColor) {
         mTvTitle.setTextColor(textColor);
         return (T) this;
     }
 
-    /** 设置标题文字大小,单位sp,默认14sp */
+    /**
+     * 设置标题文字大小,单位sp,默认14sp
+     */
     public T setTextSize(float textSize) {
         mTvTitle.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
         return (T) this;
     }
 
-    /** 设置是否显示标题,默认true */
+    /**
+     * 设置是否显示标题,默认true
+     */
     public T setTitleShow(boolean isTitleShow) {
         mTvTitle.setVisibility(isTitleShow ? VISIBLE : INVISIBLE);
         return (T) this;
     }
 
-    /** 设置是否显示显示器,默认true */
+    /**
+     * 设置是否显示显示器,默认true
+     */
     public T setIndicatorShow(boolean isIndicatorShow) {
         mLlIndicatorContainer.setVisibility(isIndicatorShow ? VISIBLE : INVISIBLE);
         return (T) this;
     }
 
-    /** 滚动到下一个item */
+    /**
+     * 滚动到下一个item
+     */
     private void scrollToNextItem(int position) {
         position++;
         mViewPager.setCurrentItem(position);
     }
 
-    /** 设置viewpager */
+    /**
+     * 设置viewpager
+     */
     private void setViewPager() {
         InnerBannerAdapter mInnerAdapter = new InnerBannerAdapter();
         mViewPager.setAdapter(mInnerAdapter);
@@ -351,7 +425,9 @@ public abstract class BaseBanner<E, T extends BaseBanner<E, T>> extends Relative
         }
     };
 
-    /** 开始滚动 */
+    /**
+     * 开始滚动
+     */
     public void startScroll() {
         if (mDatas == null) {
             throw new IllegalStateException("Data source is empty,you must setSource() before startScroll()");
@@ -373,8 +449,13 @@ public abstract class BaseBanner<E, T extends BaseBanner<E, T>> extends Relative
         goOnScroll();
     }
 
-    /** 继续滚动(for LoopViewPager) */
+    /**
+     * 继续滚动(for LoopViewPager)
+     */
     public void goOnScroll() {
+        if (mDatas != null && mDatas.size() <= 1)
+            return;
+
         if (!isValid()) {
             return;
         }
@@ -398,7 +479,9 @@ public abstract class BaseBanner<E, T extends BaseBanner<E, T>> extends Relative
         }
     }
 
-    /** 停止滚动(for LoopViewPager) */
+    /**
+     * 停止滚动(for LoopViewPager)
+     */
     public void pauseScroll() {
         if (mStse != null) {
             mStse.shutdown();
@@ -409,7 +492,9 @@ public abstract class BaseBanner<E, T extends BaseBanner<E, T>> extends Relative
         mIsAutoScrolling = false;
     }
 
-    /** 获取ViewPager对象 */
+    /**
+     * 获取ViewPager对象
+     */
     public ViewPager getViewPager() {
         return mViewPager;
     }
@@ -481,7 +566,9 @@ public abstract class BaseBanner<E, T extends BaseBanner<E, T>> extends Relative
         }
     }
 
-    /** 设置滚动速率 */
+    /**
+     * 设置滚动速率
+     */
     private void setScrollSpeed() {
         try {
             Field mScroller = ViewPager.class.getDeclaredField("mScroller");

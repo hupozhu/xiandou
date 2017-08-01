@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -130,6 +131,9 @@ public class CommunityFragment extends BaseFragment implements SwipeRefreshLayou
         mBanner.setOnItemClickL(new BaseBanner.OnItemClickL() {
             @Override
             public void onItemClick(int position) {
+                if (TextUtils.isEmpty(bannerItems.get(position).actUrl))
+                    return;
+
                 Intent intent = new Intent(getActivity(), WebViewActivity.class);
                 intent.putExtra(WebViewActivity.URL, bannerItems.get(position).actUrl);
                 startActivity(intent);
@@ -188,10 +192,12 @@ public class CommunityFragment extends BaseFragment implements SwipeRefreshLayou
             }
 
             int deltaSize = categories.lists.size() % 3;
-            LinearLayout lastRow = ((LinearLayout) llCategoryContainer.getChildAt(llCategoryContainer.getChildCount() - 1));
-            for (int i = 0; i < 3 - deltaSize; i++) {
-                View item = LayoutInflater.from(getContext()).inflate(R.layout.item_community_category, lastRow, false);
-                lastRow.addView(item);
+            if (deltaSize > 0) {
+                LinearLayout lastRow = ((LinearLayout) llCategoryContainer.getChildAt(llCategoryContainer.getChildCount() - 1));
+                for (int i = 0; i < 3 - deltaSize; i++) {
+                    View item = LayoutInflater.from(getContext()).inflate(R.layout.item_community_category, lastRow, false);
+                    lastRow.addView(item);
+                }
             }
         }
     }

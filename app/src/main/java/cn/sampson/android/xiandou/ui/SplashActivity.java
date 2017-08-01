@@ -87,10 +87,11 @@ public class SplashActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        StatusBarUtil.StatusBarLightMode(this);
         setContentView(R.layout.activity_splash);
         ButterKnife.bind(this);
         StatusBarUtil.transparencyBar(this);
-        initSystemBar();
+//        initSystemBar();
 
         countDown();
     }

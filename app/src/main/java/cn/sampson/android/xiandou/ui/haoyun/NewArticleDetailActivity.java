@@ -337,7 +337,7 @@ public class NewArticleDetailActivity extends BaseActivity implements SwipeRefre
         Elements ele_Img = doc_Dis.getElementsByTag("img");
         if (ele_Img.size() != 0) {
             for (Element e_Img : ele_Img) {
-                e_Img.attr("style", "width:100%; height:auto;");
+                e_Img.attr("style", "max-width:100%; height:auto;");
             }
         }
         return doc_Dis.toString();
@@ -350,6 +350,8 @@ public class NewArticleDetailActivity extends BaseActivity implements SwipeRefre
         if (lists != null && lists.total > 0) {
             setList(lists.lists);
             tvCommentNum.setText(getString(R.string.comment_num, String.valueOf(lists.total)));
+        } else {
+            setList(null);
         }
     }
 

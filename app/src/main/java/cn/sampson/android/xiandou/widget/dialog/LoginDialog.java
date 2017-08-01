@@ -182,6 +182,7 @@ public class LoginDialog extends Dialog implements View.OnClickListener, IView {
     private void countDown() {
         if (time == 0) {
             time = 59;
+            tvGetAuth.setEnabled(true);
             tvGetAuth.setText(mContext.getString(R.string.get_auth_code));
             checkInput(etAuthCode.getText());
         } else {

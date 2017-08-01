@@ -9,8 +9,13 @@ android {
     compileSdkVersion 25
     buildToolsVersion "25.0.0"
 
+    aaptOptions {
+        cruncherEnabled = false
+        useNewCruncher = false
+    }
+
     defaultConfig {
-        applicationId "cn.sampson.android.xiandou"
+        applicationId "cn.xiandou.android"
         minSdkVersion 14
         targetSdkVersion 23
         versionCode 2
@@ -78,7 +83,7 @@ dependencies {
     compile 'de.greenrobot:eventbus:2.4.0'
     compile 'com.nineoldandroids:library:2.4.0'
 
-    compile ('com.qiniu:qiniu-android-sdk:7.3.+', {
+    compile('com.qiniu:qiniu-android-sdk:7.3.+', {
         exclude module: 'okhttp'
     })
 
