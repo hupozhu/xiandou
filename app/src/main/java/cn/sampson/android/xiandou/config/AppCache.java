@@ -1,4 +1,4 @@
-package cn.sampson.android.xiandou.core;
+package cn.sampson.android.xiandou.config;
 
 import android.app.Application;
 import android.content.Context;
@@ -6,6 +6,7 @@ import android.content.Context;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.sampson.android.xiandou.ui.community.domain.CommunityCategory;
 import cn.sampson.android.xiandou.ui.main.MainActivity;
 import cn.sampson.android.xiandou.model.Musics;
 import cn.sampson.android.xiandou.ui.haoyun.yunyu.taijiaoyinyue.service.PlayService;
@@ -18,6 +19,9 @@ public class AppCache {
 
     private Context mContext;
 
+    //七牛Token
+    public String QiNiuToken;
+
     //正在播放歌曲列表
     private final List<Musics> mMusicList = new ArrayList<>();
 
@@ -28,6 +32,9 @@ public class AppCache {
     private PlayService mPlayService;
 
     private MainActivity mainActivity;
+
+    //社区分类列表
+    private List<CommunityCategory> communityCategories;
 
     public static int cropNum = 0;
 
@@ -56,12 +63,28 @@ public class AppCache {
         return getInstance().mContext;
     }
 
+    public static String getQiniuToken() {
+        return getInstance().QiNiuToken;
+    }
+
+    public static void setQiniuToken(String token) {
+        getInstance().QiNiuToken = token;
+    }
+
     public static List<Musics> getMusicList() {
         return getInstance().mMusicList;
     }
 
     public static void setPlayService(PlayService service) {
         getInstance().mPlayService = service;
+    }
+
+    public static List<CommunityCategory> getCommunityCategories() {
+        return getInstance().communityCategories;
+    }
+
+    public static void setCommunityCategories(List<CommunityCategory> categories) {
+        getInstance().communityCategories = categories;
     }
 
     public static PlayService getPlayService() {

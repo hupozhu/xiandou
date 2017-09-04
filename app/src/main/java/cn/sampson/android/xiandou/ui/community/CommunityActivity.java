@@ -8,7 +8,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
@@ -42,12 +41,6 @@ public class CommunityActivity extends BaseActivity implements SwipeRefreshLayou
     public static final String ARTICLE_TAG = "article_tag";
     public static final String COMMUNITY_NAME = "community_name";
 
-    @Bind(R.id.list)
-    RecyclerView list;
-    @Bind(R.id.refresh)
-    SwipeRefreshLayout refresh;
-    @Bind(R.id.view_root)
-    FrameLayout viewRoot;
 
     CommunityPresenter mPresenter;
     QuickRecycleViewAdapter<PostsItem> mAdapter;
@@ -59,6 +52,13 @@ public class CommunityActivity extends BaseActivity implements SwipeRefreshLayou
 
     int imageWidth;
     int margin;
+
+    @Bind(R.id.list)
+    RecyclerView list;
+    @Bind(R.id.refresh)
+    SwipeRefreshLayout refresh;
+    @Bind(R.id.view_root)
+    RelativeLayout viewRoot;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -90,7 +90,6 @@ public class CommunityActivity extends BaseActivity implements SwipeRefreshLayou
                 helper.setText(R.id.article_title, item.title);
                 helper.setText(R.id.tv_content, item.content);
                 helper.setText(R.id.tv_time, item.addTime);
-                helper.setText(R.id.tv_comment, String.valueOf(item.commentNum));
                 showImages(item.images, (RelativeLayout) helper.getView(R.id.image_container));
                 helper.getRootView().setOnClickListener(new View.OnClickListener() {
                     @Override

@@ -12,7 +12,6 @@ import android.os.Build;
 import android.telephony.TelephonyManager;
 
 import cn.sampson.android.xiandou.R;
-import cn.sampson.android.xiandou.core.AppCache;
 
 /**
  * Created by Administrator on 2016/5/13.

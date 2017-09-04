@@ -12,9 +12,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
-import cn.sampson.android.xiandou.BaseApp;
 import cn.sampson.android.xiandou.R;
-import cn.sampson.android.xiandou.core.AppCache;
 import cn.sampson.android.xiandou.utils.ContextUtil;
 import cn.sampson.android.xiandou.utils.NetworkUtil;
 import cn.sampson.android.xiandou.utils.Tip;

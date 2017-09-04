@@ -207,7 +207,7 @@ public class ImageCropActivity extends BaseActivity implements View.OnTouchListe
                     public void call(Void nothing) {
                         Intent intent = new Intent();
                         intent.putExtra(RESULT_PHOTO_PATH, croppedFile.getAbsolutePath());
-                        setResult(200, intent);
+                        setResult(RESULT_OK, intent);
                         goBack();
                     }
                 }));

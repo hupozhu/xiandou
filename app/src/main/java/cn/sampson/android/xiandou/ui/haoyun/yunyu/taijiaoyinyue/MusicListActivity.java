@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import cn.sampson.android.xiandou.R;
-import cn.sampson.android.xiandou.core.AppCache;
+import cn.sampson.android.xiandou.config.AppCache;
 import cn.sampson.android.xiandou.core.retroft.Api.NewsApi;
 import cn.sampson.android.xiandou.core.retroft.RetrofitWapper;
 import cn.sampson.android.xiandou.core.retroft.base.BasePresenter;

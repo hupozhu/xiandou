@@ -3,7 +3,6 @@ package cn.sampson.android.xiandou.ui.main.message;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,8 +10,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +20,6 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import cn.sampson.android.xiandou.R;
 import cn.sampson.android.xiandou.core.presenter.MessagePresenter;
-import cn.sampson.android.xiandou.core.presenter.MyReplyCommentPresenter;
 import cn.sampson.android.xiandou.core.retroft.Api.UserApi;
 import cn.sampson.android.xiandou.core.retroft.RetrofitWapper;
 import cn.sampson.android.xiandou.core.retroft.base.BasePresenter;
@@ -43,18 +41,18 @@ import cn.sampson.android.xiandou.widget.babushkatext.BabushkaText;
 
 public class MessageNewsFragment extends BaseFragment implements IView, SwipeRefreshLayout.OnRefreshListener {
 
-    @Bind(R.id.list)
-    RecyclerView list;
-    @Bind(R.id.refresh)
-    SwipeRefreshLayout refresh;
-    @Bind(R.id.view_root)
-    FrameLayout viewRoot;
 
     QuickRecycleViewAdapter<CommentItem> mAdapter;
     MessagePresenter mPresenter;
 
     int page = 1;
     int num = 10;
+    @Bind(R.id.list)
+    RecyclerView list;
+    @Bind(R.id.refresh)
+    SwipeRefreshLayout refresh;
+    @Bind(R.id.view_root)
+    RelativeLayout viewRoot;
 
     @Nullable
     @Override

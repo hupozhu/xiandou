@@ -17,11 +17,12 @@ public class PostsItem extends SelectBase {
     public String cateTag;
     public String cover;
     public String content;
-    public List<String> images;
     public int clickNum;
     public int commentNum;
     public int recommend;
+    public List<String> images;
     public String addTime;
+    public String cateName;
 
     public User userinfo;
 }

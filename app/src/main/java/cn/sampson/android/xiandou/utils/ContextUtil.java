@@ -5,8 +5,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.view.View;
 
-import cn.sampson.android.xiandou.BaseApp;
-import cn.sampson.android.xiandou.core.AppCache;
+import cn.sampson.android.xiandou.config.AppCache;
 
 
 /**

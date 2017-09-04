@@ -18,7 +18,7 @@ import android.widget.TextView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import cn.sampson.android.xiandou.R;
-import cn.sampson.android.xiandou.core.AppCache;
+import cn.sampson.android.xiandou.config.AppCache;
 import cn.sampson.android.xiandou.ui.SplashActivity;
 import cn.sampson.android.xiandou.model.Musics;
 import cn.sampson.android.xiandou.ui.haoyun.yunyu.taijiaoyinyue.receiver.RemoteControlReceiver;

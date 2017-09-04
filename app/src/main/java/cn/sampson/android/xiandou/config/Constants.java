@@ -18,6 +18,8 @@ public class Constants {
 
     public static final int REQUEST_UPATE_NICKNAME = 1001;
     public static final int REQUEST_UPATE_ADDRESS = 1002;
+    public static final int REQUEST_CODE_SELECT_IMG = 1003;
+
     public static final int REQUEST_PHOTO = 1;
 
     public static final int ACTIVITY_RESULT_SUCCESS = 200;

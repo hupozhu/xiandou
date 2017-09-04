@@ -20,6 +20,7 @@
     <string name="yuer">育儿</string>
 
     <string name="finish">完成</string>
+    <string name="publish">发布</string>
     <string name="collect">收藏</string>
     <string name="message">消息</string>
     <string name="man">男</string>
@@ -56,6 +57,7 @@
     <string name="yunqizhuyi">孕期注意</string>
     <string name="taijiaoyinyue">胎教音乐</string>
     <string name="taijiaozhishi">胎教知识</string>
+    <string name="taijiao">胎教</string>
 
     <string name="yunyuzhilan">孕育指南</string>
 
@@ -139,6 +141,7 @@
     <string name="input_nickname_not_null">昵称不能为空</string>
     <string name="input_address">请输入地址</string>
     <string name="input_address_not_null">地址不能为空</string>
+    <string name="input_article_title">标题</string>
 
     <!--社区-->
     <string name="yaobaobao">我要宝宝</string>
@@ -146,6 +149,18 @@
     <string name="comment">评论</string>
     <string name="comment_num">评论 (%1$s)</string>
     <string name="my_message">我的消息</string>
+    <string name="edit_article">编辑内容</string>
+    <string name="quick_question">快速提问</string>
+    <string name="for_free">免费</string>
+    <string name="question_detail">每天34323个问题被宝妈们解答</string>
+    <string name="health_and_fitness">幼儿保健</string>
+    <string name="knowledge_detail">不懂就来查，帮助宝妈解决幼儿问题</string>
+    <string name="tools">推荐工具</string>
+    <string name="tube">试管</string>
+    <string name="yuer1">#育儿</string>
+    <string name="taijiao4">#胎教</string>
+    <string name="beiyun1">#备孕</string>
+    <string name="set_top">置顶</string>
 
     <string-array name="taijiao">
         <item>早期胎教</item>

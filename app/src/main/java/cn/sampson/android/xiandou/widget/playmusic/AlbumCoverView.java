@@ -14,7 +14,7 @@ import android.view.View;
 import android.view.WindowManager;
 
 import cn.sampson.android.xiandou.R;
-import cn.sampson.android.xiandou.core.AppCache;
+import cn.sampson.android.xiandou.config.AppCache;
 import cn.sampson.android.xiandou.utils.ScreenUtils;
 
 

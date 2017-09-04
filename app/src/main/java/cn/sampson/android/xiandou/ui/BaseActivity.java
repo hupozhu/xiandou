@@ -2,7 +2,9 @@ package cn.sampson.android.xiandou.ui;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.media.AudioManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -18,12 +20,19 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 
+import com.zhihu.matisse.Matisse;
+import com.zhihu.matisse.MimeType;
+import com.zhihu.matisse.engine.impl.GlideEngine;
+import com.zhihu.matisse.engine.impl.PicassoEngine;
+
 import java.io.File;
 import java.lang.ref.WeakReference;
+import java.util.List;
 
 import cn.sampson.android.xiandou.R;
 import cn.sampson.android.xiandou.config.Constants;
 import cn.sampson.android.xiandou.core.manager.UpdatePhotoManager;
+import cn.sampson.android.xiandou.ui.community.PublishArticleActivity;
 import cn.sampson.android.xiandou.ui.takephoto.ImageCropActivity;
 import cn.sampson.android.xiandou.utils.ContextUtil;
 import cn.sampson.android.xiandou.utils.ToastUtils;
@@ -95,6 +104,10 @@ public class BaseActivity extends AppCompatActivity {
             case R.id.action_message:
                 onToolbarMessage();
                 break;
+
+            case R.id.action_publish:
+                onToolbarPublish();
+                break;
         }
         return true;
     }
@@ -106,6 +119,9 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     protected void onToolbarMessage() {
+    }
+
+    protected void onToolbarPublish() {
     }
 
     /**
@@ -239,6 +255,29 @@ public class BaseActivity extends AppCompatActivity {
         dialog.show();
     }
 
+    protected void getImageFromMatisse() {
+        PermissionReq.with(BaseActivity.this)
+                .permissions(android.Manifest.permission.WRITE_EXTERNAL_STORAGE, android.Manifest.permission.CAMERA)
+                .result(new PermissionResult() {
+                    @Override
+                    public void onGranted() {
+                        Matisse.from(BaseActivity.this)
+                                .choose(MimeType.allOf())
+                                .countable(true)
+                                .maxSelectable(9)
+                                .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED)
+                                .thumbnailScale(0.85f)
+                                .imageEngine(new PicassoEngine())
+                                .forResult(Constants.REQUEST_CODE_SELECT_IMG);
+                    }
+
+                    @Override
+                    public void onDenied() {
+                        ToastUtils.show("请开启所需权限");
+                    }
+                }).request();
+    }
+
     private void openCamera() {
         PermissionReq.with(BaseActivity.this)
                 .permissions(android.Manifest.permission.CAMERA)
@@ -277,17 +316,29 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (data != null && resultCode == 200) {
+        if (data != null && resultCode == RESULT_OK) {
             switch (requestCode) {
                 case Constants.REQUEST_PHOTO:
                     uploadPhoto(data.getStringExtra(ImageCropActivity.RESULT_PHOTO_PATH));
+                    break;
+
+                case Constants.REQUEST_CODE_SELECT_IMG:
+                    List<Uri> imgUris = Matisse.obtainResult(data);
+                    getImgUrlsFromMatisse(imgUris);
                     break;
             }
         }
     }
 
+    /**
+     * 从Matisse插件中获取到图片
+     */
+    protected void getImgUrlsFromMatisse(List<Uri> imgUris) {
+
+    }
+
     protected void uploadPhoto(String photoPath) {
-        UpdatePhotoManager.getInstance().updatePhoto(new File(photoPath));
+        new UpdatePhotoManager().updatePhoto(new File(photoPath));
 
     }
 

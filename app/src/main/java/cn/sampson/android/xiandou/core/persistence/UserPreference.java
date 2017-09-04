@@ -213,10 +213,10 @@ public class UserPreference {
     /**
      * 设置头像
      */
-    public static void setAvatar(String token) {
+    public static void setAvatar(String imageUrl) {
         instance();
         SharedPreferences.Editor ed = preference.edit();
-        ed.putString(USERPIC, token);
+        ed.putString(USERPIC, imageUrl);
         ed.commit();
     }
 

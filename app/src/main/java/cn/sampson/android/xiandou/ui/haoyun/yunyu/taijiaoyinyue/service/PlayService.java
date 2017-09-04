@@ -17,13 +17,11 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Random;
 
-import cn.sampson.android.xiandou.config.AppConfig;
-import cn.sampson.android.xiandou.core.AppCache;
+import cn.sampson.android.xiandou.config.AppCache;
 import cn.sampson.android.xiandou.model.Musics;
 import cn.sampson.android.xiandou.ui.haoyun.yunyu.taijiaoyinyue.Preferences;
 import cn.sampson.android.xiandou.ui.haoyun.yunyu.taijiaoyinyue.receiver.Actions;
 import cn.sampson.android.xiandou.ui.haoyun.yunyu.taijiaoyinyue.receiver.NoisyAudioStreamReceiver;
-import cn.sampson.android.xiandou.utils.StringUtils;
 
 /**
  * Created by chengyang on 2017/6/13.

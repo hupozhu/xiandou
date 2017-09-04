@@ -32,9 +32,6 @@ public class ArticleListFragment extends BaseFragment {
 
     public static final String TYPE = "type";
 
-    public static final int TYPE_HOT = 1;
-    public static final int TYPE_NEW = 2;
-
     int type;
 
     HaoYunFragment mParentFragment;
@@ -75,13 +72,6 @@ public class ArticleListFragment extends BaseFragment {
             }
         };
         list.setAdapter(mAdapter);
-    }
-
-    public void showArticle() {
-        ListItem<NewsItem> data = mParentFragment.getListData(type);
-        if (data != null && data.total > 0) {
-            mAdapter.getAdapterManager().replaceAllItems(data.lists);
-        }
     }
 
     @Override

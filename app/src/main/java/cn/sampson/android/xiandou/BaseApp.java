@@ -2,8 +2,7 @@ package cn.sampson.android.xiandou;
 
 import android.app.Application;
 
-import cn.sampson.android.xiandou.core.AppCache;
-import cn.sampson.android.xiandou.utils.ContextUtil;
+import cn.sampson.android.xiandou.config.AppCache;
 import cn.sampson.android.xiandou.utils.ScreenUtils;
 import cn.sampson.android.xiandou.utils.ToastUtils;
 

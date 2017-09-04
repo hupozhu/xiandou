@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tool="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="34dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_anchor"
+        android:layout_width="40dp"
+        android:layout_height="20dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="13dp"
+        android:layout_marginRight="13sp"
+        android:background="@drawable/shape_text_red_border"
+        android:gravity="center"
+        android:text="@string/set_top"
+        android:textColor="@color/red1"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        style="@style/article_title"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="13dp"
+        android:layout_toRightOf="@+id/tv_anchor"
+        android:ellipsize="end"
+        android:lines="1"
+        android:textSize="12sp"
+        android:textStyle="normal"
+        tool:text="春耕2017计划立马实施，欢迎大家前来参与，奖励多多 hahahaha " />
+
+</RelativeLayout>

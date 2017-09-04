@@ -207,6 +207,13 @@
             android:name=".ui.WebViewActivity"
             android:screenOrientation="portrait" />
 
+        <!-- 社区发帖 -->
+        <activity
+            android:name=".ui.community.PublishArticleActivity"
+            android:label="@string/edit_article"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateAlwaysVisible" />
+
         <receiver android:name=".ui.haoyun.yunyu.taijiaoyinyue.receiver.StatusBarReceiver">
             <intent-filter>
                 <action android:name="cn.sampson.android.xiandou.STATUS_BAR_ACTIONS" />

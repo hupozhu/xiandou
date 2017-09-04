@@ -18,7 +18,7 @@ import com.makeramen.roundedimageview.RoundedImageView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import cn.sampson.android.xiandou.R;
-import cn.sampson.android.xiandou.core.AppCache;
+import cn.sampson.android.xiandou.config.AppCache;
 import cn.sampson.android.xiandou.core.event.GetUserInfoEvent;
 import cn.sampson.android.xiandou.core.manager.LogicManager;
 import cn.sampson.android.xiandou.core.persistence.UserPreference;

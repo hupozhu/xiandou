@@ -7,13 +7,12 @@ import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -22,6 +21,8 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import cn.sampson.android.xiandou.R;
+import cn.sampson.android.xiandou.config.AppCache;
+import cn.sampson.android.xiandou.core.manager.LogicManager;
 import cn.sampson.android.xiandou.core.presenter.CommunityIndexPresenter;
 import cn.sampson.android.xiandou.core.retroft.Api.CommunityApi;
 import cn.sampson.android.xiandou.core.retroft.RetrofitWapper;
@@ -29,18 +30,15 @@ import cn.sampson.android.xiandou.core.retroft.base.BasePresenter;
 import cn.sampson.android.xiandou.core.retroft.base.IView;
 import cn.sampson.android.xiandou.core.retroft.base.Result;
 import cn.sampson.android.xiandou.model.ListItem;
+import cn.sampson.android.xiandou.ui.BaseActivity;
 import cn.sampson.android.xiandou.ui.BaseFragment;
-import cn.sampson.android.xiandou.ui.WebViewActivity;
-import cn.sampson.android.xiandou.ui.community.domain.PostsItem;
 import cn.sampson.android.xiandou.ui.community.domain.CommunityCategory;
-import cn.sampson.android.xiandou.ui.community.domain.CommunityIndex;
+import cn.sampson.android.xiandou.ui.community.domain.Discovery;
+import cn.sampson.android.xiandou.ui.community.domain.PostsItem;
 import cn.sampson.android.xiandou.utils.UiUtils;
 import cn.sampson.android.xiandou.utils.imageloader.ImageLoader;
 import cn.sampson.android.xiandou.widget.adapter.baseadapter.QuickRecycleViewAdapter;
 import cn.sampson.android.xiandou.widget.adapter.baseadapter.ViewHelper;
-import cn.sampson.android.xiandou.widget.banner.BannerItem;
-import cn.sampson.android.xiandou.widget.banner.MainPageImageBanner;
-import cn.sampson.android.xiandou.widget.banner.base.BaseBanner;
 
 /**
  * Created by chengyang on 2017/7/11.
@@ -52,17 +50,16 @@ public class CommunityFragment extends BaseFragment implements SwipeRefreshLayou
     @Bind(R.id.list)
     RecyclerView list;
     @Bind(R.id.view_root)
-    FrameLayout viewRoot;
+    RelativeLayout viewRoot;
     @Bind(R.id.refresh)
     SwipeRefreshLayout refresh;
-
-    LinearLayout llCategoryContainer;
-    LinearLayout llHotContainer;
-    MainPageImageBanner mBanner;
+    @Bind(R.id.iv_publish)
+    ImageView ivPublish;
 
     CommunityIndexPresenter mPresenter;
     QuickRecycleViewAdapter<PostsItem> mAdapter;
-    List<BannerItem> bannerItems;
+
+    LinearLayout mTopContainer;
 
     int page = 1;
     int num = 10;
@@ -79,7 +76,7 @@ public class CommunityFragment extends BaseFragment implements SwipeRefreshLayou
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.common_refresh_list, null);
+        View view = inflater.inflate(R.layout.fragment_community, null);
         ButterKnife.bind(this, view);
         initView();
         return view;
@@ -89,23 +86,23 @@ public class CommunityFragment extends BaseFragment implements SwipeRefreshLayou
         refresh.setOnRefreshListener(this);
         mPresenter = new CommunityIndexPresenterImpl(this, viewRoot);
 
-
         list.setLayoutManager(new LinearLayoutManager(getContext()));
-        mAdapter = new QuickRecycleViewAdapter<PostsItem>(R.layout.item_community_news, new ArrayList<PostsItem>()) {
+        mAdapter = new QuickRecycleViewAdapter<PostsItem>(R.layout.item_community_news, new ArrayList<PostsItem>(), list) {
             @Override
             protected void onBindData(Context context, int position, final PostsItem item, int itemLayoutId, ViewHelper helper) {
-                ImageLoader.load(context, item.cover, (ImageView) helper.getView(R.id.iv_poster));
                 helper.setText(R.id.tv_title, item.title);
+                helper.setText(R.id.tv_tag, "#" + item.cateName + "#");
                 helper.setText(R.id.tv_content, item.content);
-                helper.setRootOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        //跳转到社区帖子详情
-                        Intent intent = new Intent(getActivity(), CommunityArticleDetailActivity.class);
-                        intent.putExtra(CommunityArticleDetailActivity.ARTICLE_ID, item.articleId);
-                        startActivity(intent);
-                    }
-                });
+                ImageLoader.loadAvatar(context, item.userinfo.userPic, (ImageView) helper.getView(R.id.riv_avatar));
+                helper.setText(R.id.tv_username, item.userinfo.nickname);
+                helper.setText(R.id.tv_comment_num, String.valueOf(item.commentNum));
+                RelativeLayout layout = helper.getView(R.id.image_container);
+                if (item.images.size() > 0) {
+                    layout.setVisibility(View.VISIBLE);
+                    showImages(item.images, layout);
+                } else {
+                    layout.setVisibility(View.GONE);
+                }
             }
         };
         mAdapter.setOnLoadMoreListener(new QuickRecycleViewAdapter.OnLoadMoreListener() {
@@ -117,7 +114,36 @@ public class CommunityFragment extends BaseFragment implements SwipeRefreshLayou
         });
         mAdapter.addHeaderView(initHeader());
         list.setAdapter(mAdapter);
+
+        ivPublish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!LogicManager.loginIntercept((BaseActivity) getActivity())) {
+                    Intent intent = new Intent(getActivity(), PublishArticleActivity.class);
+                    startActivity(intent);
+                }
+            }
+        });
         onRefresh();
+    }
+
+    int imageWidth;
+    int margin;
+
+    private void showImages(List<String> images, RelativeLayout container) {
+        container.removeAllViews();
+        if (images == null)
+            return;
+
+        int length = images.size() > 3 ? 3 : images.size();
+        for (int i = 0; i < length; i++) {
+            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(imageWidth, imageWidth);
+            ImageView img = new ImageView(getContext());
+            params.leftMargin = (imageWidth + margin) * i;
+            img.setLayoutParams(params);
+            ImageLoader.load(getContext(), images.get(i), img);
+            container.addView(img);
+        }
     }
 
     /**
@@ -125,100 +151,39 @@ public class CommunityFragment extends BaseFragment implements SwipeRefreshLayou
      */
     private View initHeader() {
         View view = LayoutInflater.from(getContext()).inflate(R.layout.header_community, list, false);
-        llCategoryContainer = UiUtils.find(view, R.id.ll_category_container);
-        llHotContainer = UiUtils.find(view, R.id.ll_hot_container);
-        mBanner = UiUtils.find(view, R.id.banner);
-        mBanner.setOnItemClickL(new BaseBanner.OnItemClickL() {
-            @Override
-            public void onItemClick(int position) {
-                if (TextUtils.isEmpty(bannerItems.get(position).actUrl))
-                    return;
-
-                Intent intent = new Intent(getActivity(), WebViewActivity.class);
-                intent.putExtra(WebViewActivity.URL, bannerItems.get(position).actUrl);
-                startActivity(intent);
-            }
-        });
+        mTopContainer = (LinearLayout) view;
         return view;
     }
 
     /**
-     * 展示banner
+     * 处理类别
      */
-    private void showBanner(ListItem<BannerItem> banners) {
-        if (banners != null && banners.total > 0) {
-            this.bannerItems = banners.lists;
-            mBanner.setSource(banners.lists);
-            mBanner.startScroll();
-        }
-    }
-
-    /**
-     * 展示类别
-     */
-    private void showCategory(final ListItem<CommunityCategory> categories) {
+    private void processCategory(ListItem<CommunityCategory> categories) {
         if (categories != null && categories.total > 0) {
-            llCategoryContainer.removeAllViews();
-            boolean newLine = false;
-            LinearLayout row = null;
-            for (int i = 0; i < categories.lists.size(); i++) {
-                if (i % 3 == 0) {
-                    row = new LinearLayout(getContext());
-                    row.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-                    newLine = true;
-                }
-
-                View item = LayoutInflater.from(getContext()).inflate(R.layout.item_community_category, row, false);
-                TextView cateName = UiUtils.find(item, R.id.tv_name);
-                ImageView cateImg = UiUtils.find(item, R.id.iv_logo);
-                cateName.setText(categories.lists.get(i).name);
-                ImageLoader.loadFixXY(getContext(), categories.lists.get(i).img, cateImg);
-                final int finalI = i;
-                item.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Intent intent = new Intent(getActivity(), CommunityActivity.class);
-                        intent.putExtra(CommunityActivity.ARTICLE_TAG, categories.lists.get(finalI).tag);
-                        intent.putExtra(CommunityActivity.COMMUNITY_NAME, categories.lists.get(finalI).name);
-                        startActivity(intent);
-                    }
-                });
-                row.addView(item);
-
-                if (newLine) {
-                    newLine = false;
-                    llCategoryContainer.addView(row);
-                }
-            }
-
-            int deltaSize = categories.lists.size() % 3;
-            if (deltaSize > 0) {
-                LinearLayout lastRow = ((LinearLayout) llCategoryContainer.getChildAt(llCategoryContainer.getChildCount() - 1));
-                for (int i = 0; i < 3 - deltaSize; i++) {
-                    View item = LayoutInflater.from(getContext()).inflate(R.layout.item_community_category, lastRow, false);
-                    lastRow.addView(item);
-                }
-            }
+            AppCache.setCommunityCategories(categories.lists);
         }
     }
-
-    /**
-     * 展示热门动态
-     */
-//    private void showTopHot(ListItem<NewsItem> hots) {
-//        if (hots != null && hots.total > 0) {
-//            llHotContainer.removeAllViews();
-//            for (int i = 0; i < hots.lists.size(); i++) {
-//                View view = LayoutInflater.from(getContext()).inflate(R.layout.item_community_hot, llHotContainer, false);
-//                llHotContainer.addView(view);
-//            }
-//        }
-//    }
 
     /**
      * 展示资讯
      */
-    private void showHot(ListItem<PostsItem> news) {
+    private void showHot(ListItem<PostsItem> top) {
+        mTopContainer.removeAllViews();
+
+        if (top != null && top.total > 0) {
+            for (PostsItem item : top.lists) {
+                View view = LayoutInflater.from(getContext()).inflate(R.layout.item_discovery_top, mTopContainer, false);
+                TextView title = UiUtils.find(view, R.id.tv_title);
+                title.setText(item.title);
+                mTopContainer.addView(view);
+            }
+        }
+    }
+
+    /**
+     * 展示社区帖子
+     */
+    private void showPoster(ListItem<PostsItem> news) {
         if (news != null && news.total > 0) {
             setList(news.lists);
         }
@@ -233,18 +198,6 @@ public class CommunityFragment extends BaseFragment implements SwipeRefreshLayou
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        mBanner.goOnScroll();
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        mBanner.pauseScroll();
-    }
-
-    @Override
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(this);
@@ -254,6 +207,7 @@ public class CommunityFragment extends BaseFragment implements SwipeRefreshLayou
     public void onRefresh() {
         page = 1;
         mPresenter.getCommunityIndex(page, num);
+        mPresenter.setGetCategory();
     }
 
     @Override
@@ -265,12 +219,10 @@ public class CommunityFragment extends BaseFragment implements SwipeRefreshLayou
         }
     }
 
-    void showCommunityIndex(CommunityIndex communityIndex) {
+    void showCommunityIndex(Discovery discovery) {
         refresh.setRefreshing(false);
-        showBanner(communityIndex.banners);
-        showCategory(communityIndex.cateList);
-//        showHot(communityIndex.hots);
-        showHot(communityIndex.hots);
+        showHot(discovery.top);
+        showPoster(discovery.news);
     }
 
     class CommunityIndexPresenterImpl extends BasePresenter<CommunityFragment> implements CommunityIndexPresenter {
@@ -281,14 +233,23 @@ public class CommunityFragment extends BaseFragment implements SwipeRefreshLayou
 
         @Override
         public void getCommunityIndex(int page, int num) {
-            requestData(RetrofitWapper.getInstance().getNetService(CommunityApi.class).getUserInfo(page, num), GET_COMMUNITY_INDEX);
+            requestData(RetrofitWapper.getInstance().getNetService(CommunityApi.class).getDiscovery(page, num), GET_COMMUNITY_INDEX);
+        }
+
+        @Override
+        public void setGetCategory() {
+            requestData(RetrofitWapper.getInstance().getNetService(CommunityApi.class).getCategories(), GET_CATEGORY);
         }
 
         @Override
         protected void onResult(Result result, String key) {
             switch (key) {
                 case GET_COMMUNITY_INDEX:
-                    showCommunityIndex((CommunityIndex) result.data);
+                    showCommunityIndex((Discovery) result.data);
+                    break;
+
+                case GET_CATEGORY:
+                    processCategory((ListItem<CommunityCategory>) result.data);
                     break;
             }
         }

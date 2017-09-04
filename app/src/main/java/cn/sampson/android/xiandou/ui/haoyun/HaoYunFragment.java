@@ -2,12 +2,11 @@ package cn.sampson.android.xiandou.ui.haoyun;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
+import android.support.v4.app.Fragment;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -18,6 +17,8 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,8 +36,8 @@ import cn.sampson.android.xiandou.model.ListItem;
 import cn.sampson.android.xiandou.ui.BaseFragment;
 import cn.sampson.android.xiandou.ui.WebViewActivity;
 import cn.sampson.android.xiandou.ui.haoyun.beiyun.BeiYunActivity;
-import cn.sampson.android.xiandou.ui.haoyun.domain.NewsItem;
 import cn.sampson.android.xiandou.ui.haoyun.domain.Index;
+import cn.sampson.android.xiandou.ui.haoyun.domain.NewsItem;
 import cn.sampson.android.xiandou.ui.haoyun.yuer.YuerActivity;
 import cn.sampson.android.xiandou.ui.haoyun.yunyu.YunyuActivity;
 import cn.sampson.android.xiandou.utils.ContextUtil;
@@ -55,34 +56,36 @@ import cn.sampson.android.xiandou.widget.banner.base.BaseBanner;
 
 public class HaoYunFragment extends BaseFragment implements View.OnClickListener, IView, SwipeRefreshLayout.OnRefreshListener {
 
-    @Bind(R.id.beiyun)
-    LinearLayout mBeiyun;
-    @Bind(R.id.yunyu)
-    LinearLayout mYunyu;
-    @Bind(R.id.yuer)
-    LinearLayout mYuer;
-    @Bind(R.id.refresh_root)
-    FrameLayout refreshRoot;
+    @Bind(R.id.iv_question)
+    ImageView ivQuestion;
+    @Bind(R.id.tv_question)
+    TextView tvQuestion;
+    @Bind(R.id.rl_question)
+    RelativeLayout rlQuestion;
+    @Bind(R.id.iv_knowledge)
+    ImageView ivKnowledge;
+    @Bind(R.id.tv_knowledge)
+    TextView tvKnowledge;
+    @Bind(R.id.rl_health)
+    RelativeLayout rlHealth;
     @Bind(R.id.banner)
     MainPageImageBanner banner;
-    @Bind(R.id.tabs)
-    TabLayout tabs;
-    @Bind(R.id.pager)
-    ViewPager pager;
     @Bind(R.id.adv_list)
     RecyclerView advList;
-    @Bind(R.id.adv_split)
-    View advSplit;
-    @Bind(R.id.refresh)
-    SwipeRefreshLayout refresh;
-    @Bind(R.id.app_bar)
-    AppBarLayout appBar;
+    @Bind(R.id.ll_shiguan)
+    LinearLayout llShiguan;
+    @Bind(R.id.ll_beiyun)
+    LinearLayout llBeiyun;
+    @Bind(R.id.ll_taijiao)
+    LinearLayout llTaijiao;
+    @Bind(R.id.ll_yuer)
+    LinearLayout llYuer;
+    @Bind(R.id.refresh_root)
+    FrameLayout refreshRoot;
 
     QuickRecycleViewAdapter<BannerItem> mAdpter;
 
-
     private static HaoYunFragment haoyunFragment;
-
 
     public static HaoYunFragment getInstance() {
         if (haoyunFragment == null) {
@@ -92,10 +95,7 @@ public class HaoYunFragment extends BaseFragment implements View.OnClickListener
     }
 
     HomePresenter mPresenter;
-    TabStateFragmentAdapter mPagerFragmentAdapter;
 
-    private ListItem<NewsItem> hotList;
-    private ListItem<NewsItem> newsList;
     private List<BannerItem> bannerItems;
 
     int advHeight, advWidth;
@@ -110,26 +110,14 @@ public class HaoYunFragment extends BaseFragment implements View.OnClickListener
     }
 
     private void initView() {
-        mBeiyun.setOnClickListener(this);
-        mYunyu.setOnClickListener(this);
-        mYuer.setOnClickListener(this);
+        llBeiyun.setOnClickListener(this);
+        llTaijiao.setOnClickListener(this);
+        llYuer.setOnClickListener(this);
 
         mPresenter = new HomePresenterImpl(this, refreshRoot);
         advWidth = (ContextUtil.getScreenWidth() - ContextUtil.dip2Px(12) * 4) / 2;
         advHeight = (int) (advWidth / 320 * 130 * 1.5);
 
-        refresh.setOnRefreshListener(this);
-        refresh.setProgressViewOffset(false, -150, 50);
-        appBar.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
-            @Override
-            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
-                if (verticalOffset >= 0) {
-                    refresh.setEnabled(true);
-                } else {
-                    refresh.setEnabled(false);
-                }
-            }
-        });
         banner.setOnItemClickL(new BaseBanner.OnItemClickL() {
             @Override
             public void onItemClick(int position) {
@@ -141,10 +129,6 @@ public class HaoYunFragment extends BaseFragment implements View.OnClickListener
                 startActivity(intent);
             }
         });
-
-        mPagerFragmentAdapter = new TabStateFragmentAdapter(getChildFragmentManager(), new IndexFragmentWrapper());
-        pager.setAdapter(mPagerFragmentAdapter);
-        tabs.setupWithViewPager(pager);
 
         advList.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         mAdpter = new QuickRecycleViewAdapter<BannerItem>(R.layout.item_advs, new ArrayList<BannerItem>()) {
@@ -190,17 +174,17 @@ public class HaoYunFragment extends BaseFragment implements View.OnClickListener
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.beiyun:
+            case R.id.ll_beiyun:
                 Intent beiyun = new Intent(getActivity(), BeiYunActivity.class);
                 getActivity().startActivity(beiyun);
                 break;
 
-            case R.id.yunyu:
+            case R.id.ll_taijiao:
                 Intent yunyu = new Intent(getActivity(), YunyuActivity.class);
                 getActivity().startActivity(yunyu);
                 break;
 
-            case R.id.yuer:
+            case R.id.ll_yuer:
                 Intent attention = new Intent(getActivity(), YuerActivity.class);
                 getActivity().startActivity(attention);
                 break;
@@ -209,11 +193,9 @@ public class HaoYunFragment extends BaseFragment implements View.OnClickListener
 
     @Override
     public void setError(int errorCode, String error, String key) {
-        refresh.setRefreshing(false);
     }
 
     void showHomePage(Index index) {
-        refresh.setRefreshing(false);
         //显示banner
         if (index.banners != null && index.banners.total > 0) {
             this.bannerItems = index.banners.lists;
@@ -224,29 +206,9 @@ public class HaoYunFragment extends BaseFragment implements View.OnClickListener
         //显示广告
         if (index.advs != null && index.advs.total > 0) {
             advList.setVisibility(View.VISIBLE);
-            advSplit.setVisibility(View.VISIBLE);
             mAdpter.getAdapterManager().replaceAllItems(index.advs.lists);
         } else {
             advList.setVisibility(View.GONE);
-            advSplit.setVisibility(View.GONE);
-        }
-
-        //显示资讯
-        hotList = index.hots;
-        newsList = index.news;
-
-        for (int i = 0; i < mPagerFragmentAdapter.getCount(); i++) {
-            ((ArticleListFragment) mPagerFragmentAdapter.getItem(i)).showArticle();
-        }
-
-    }
-
-    //获取资讯列表
-    public ListItem<NewsItem> getListData(int type) {
-        if (type == ArticleListFragment.TYPE_HOT) {
-            return hotList;
-        } else {
-            return newsList;
         }
     }
 

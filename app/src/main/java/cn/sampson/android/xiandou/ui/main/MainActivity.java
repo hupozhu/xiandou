@@ -5,13 +5,12 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.ViewPager;
 import android.view.Menu;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import cn.sampson.android.xiandou.R;
-import cn.sampson.android.xiandou.core.AppCache;
+import cn.sampson.android.xiandou.config.AppCache;
 import cn.sampson.android.xiandou.core.manager.LogicManager;
 import cn.sampson.android.xiandou.ui.BaseActivity;
 import cn.sampson.android.xiandou.ui.community.CommunityFragment;
@@ -20,7 +19,6 @@ import cn.sampson.android.xiandou.ui.main.message.MessageActivity;
 import cn.sampson.android.xiandou.ui.mine.MineFragment;
 import cn.sampson.android.xiandou.utils.systembar.StatusBarUtil;
 import cn.sampson.android.xiandou.widget.TabAdapter;
-import cn.sampson.android.xiandou.widget.TabFragmentAdapter;
 
 public class MainActivity extends BaseActivity {
 

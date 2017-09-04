@@ -1,12 +1,16 @@
 package cn.sampson.android.xiandou.core.manager;
 
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.qiniu.android.common.AutoZone;
 import com.qiniu.android.http.ResponseInfo;
 import com.qiniu.android.storage.Configuration;
+import com.qiniu.android.storage.UpCancellationSignal;
 import com.qiniu.android.storage.UpCompletionHandler;
+import com.qiniu.android.storage.UpProgressHandler;
 import com.qiniu.android.storage.UploadManager;
+import com.qiniu.android.storage.UploadOptions;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -15,6 +19,7 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
+import cn.sampson.android.xiandou.config.AppCache;
 import cn.sampson.android.xiandou.core.event.GetUserInfoEvent;
 import cn.sampson.android.xiandou.core.persistence.UserPreference;
 import cn.sampson.android.xiandou.core.retroft.Api.PublicApi;
@@ -39,18 +44,14 @@ import rx.schedulers.Schedulers;
 
 public class UpdatePhotoManager {
 
-    private static UpdatePhotoManager instance = null;
+    public static final int TYPE_AVATAR = 2;
+    public static final int TYPE_PHOTO = 1;
+
     private UploadManager uploadManager;
-
-    public static String QiNiuToken;
-
-
-    public static UpdatePhotoManager getInstance() {
-        if (instance == null) {
-            instance = new UpdatePhotoManager();
-        }
-        return instance;
-    }
+    private PictureUpdateProgressCallback mProgressCallBack;
+    private PictureUpdateResultCallBack mResultCallBack;
+    private int type;
+    private boolean isCancelled;
 
     public UpdatePhotoManager() {
         Configuration config = new Configuration.Builder()
@@ -64,9 +65,28 @@ public class UpdatePhotoManager {
         uploadManager = new UploadManager(config);
     }
 
+    public UpdatePhotoManager setCallBack(PictureUpdateProgressCallback progressCallback, PictureUpdateResultCallBack resultCallBack) {
+        mProgressCallBack = progressCallback;
+        mResultCallBack = resultCallBack;
+        return this;
+    }
+
+    public UpdatePhotoManager setUpdateType(int type) {
+        this.type = type;
+        return this;
+    }
+
+    public void cancelUpdate() {
+        isCancelled = true;
+    }
+
+    public boolean isCancelled() {
+        return isCancelled;
+    }
+
     public void updatePhoto(final File file) {
         if (NetworkUtil.isNetworkAvailable(ContextUtil.getContext())) {
-            if (TextUtils.isEmpty(QiNiuToken)) {
+            if (TextUtils.isEmpty(AppCache.getQiniuToken())) {
                 RetrofitWapper.getInstance().getNetService(PublicApi.class).getQiniuToken()
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
@@ -74,7 +94,7 @@ public class UpdatePhotoManager {
                             @Override
                             public void call(Result1<CommonField> result) {
                                 if (result.data != null) {
-                                    QiNiuToken = result.data.uptoken;
+                                    AppCache.setQiniuToken(result.data.uptoken);
                                     qiniuUpdatePhoto(file);
                                 }
                             }
@@ -93,33 +113,37 @@ public class UpdatePhotoManager {
     }
 
     private void qiniuUpdatePhoto(File file) {
-//        data = <File对象、或 文件路径、或 字节数组>
-//        String key = <指定七牛服务上的文件名，或 null>;
-//        String token = <从服务端SDK获取>;
-        uploadManager.put(file, null, QiNiuToken,
+        //        data = <File对象、或 文件路径、或 字节数组>
+        //        String key = <指定七牛服务上的文件名，或 null>;
+        //        String token = <从服务端SDK获取>;
+        uploadManager.put(file, null, AppCache.getQiniuToken(),
                 new UpCompletionHandler() {
                     @Override
                     public void complete(String key, ResponseInfo info, JSONObject res) {
                         //res包含hash、key等信息，具体字段取决于上传策略的设置
                         if (info.isOK()) {
-                            try {
-                                updateUserPic(res.getString("keys"));
-                                ToastUtils.show("上传成功");
-                            } catch (JSONException e) {
-                                ToastUtils.show("上传失败");
-                                e.printStackTrace();
-                            }
-                            Tip.i("qiniu ==> Upload Success");
+                            processResult(res);
                         } else {
-                            ToastUtils.show("上传失败");
+                            processResult(null);
                             Tip.i("qiniu ==> Upload Fail");
                             //如果失败，这里可以把info信息上报自己的服务器，便于后面分析上传错误原因
                         }
                         Tip.i("qiniu ==> " + key + ",\r\n " + info + ",\r\n " + res);
                     }
-                }, null);
+                },
+                new UploadOptions(null, "image/jpg", false,
+                        new UpProgressHandler() {
+                            public void progress(String key, double percent) {
+                                if (mProgressCallBack != null)
+                                    mProgressCallBack.progress(percent);
+                                Log.i("qiniu", key + ": " + percent);
+                            }
+                        }, new UpCancellationSignal() {
+                    public boolean isCancelled() {
+                        return isCancelled;
+                    }
+                }));
     }
-
 
     private void updateUserPic(final String imgUrl) {
         Map<String, String> map = new HashMap<>();
@@ -140,6 +164,54 @@ public class UpdatePhotoManager {
                         }
                     });
         }
+    }
+
+    private void processResult(JSONObject res) {
+        //{"img":"http:\/\/img.gvrc.cn\/Fv0floGTB7GCL-oJGZFvUf_sOXrZ","keys":"Fv0floGTB7GCL-oJGZFvUf_sOXrZ","thumbimg":"http:\/\/img.gvrc.cn\/Fv0floGTB7GCL-oJGZFvUf_sOXrZ?imageView2\/1\/w\/100\/h\/100"}
+
+        String imageUrl = null;
+        String keys = null;
+        String thumbImg = null;
+
+        try {
+            imageUrl = res.getString("img");
+            keys = res.getString("keys");
+            thumbImg = res.getString("thumbimg");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        if (TextUtils.isEmpty(imageUrl)) {
+            if (mResultCallBack != null) {
+                mResultCallBack.onFailed();
+            }
+            switch (type) {
+                case TYPE_AVATAR:
+                    ToastUtils.show("上传失败");
+                    break;
+            }
+
+        } else {
+            if (mResultCallBack != null) {
+                mResultCallBack.onSuccess(imageUrl);
+            }
+            switch (type) {
+                case TYPE_AVATAR:
+                    updateUserPic(imageUrl);
+                    ToastUtils.show("上传成功");
+                    break;
+            }
+        }
+    }
+
+    public interface PictureUpdateProgressCallback {
+        void progress(double percent);
+    }
+
+    public interface PictureUpdateResultCallBack {
+        void onSuccess(String imageUrl);
+
+        void onFailed();
     }
 
 }
