@@ -184,6 +184,12 @@
             android:label="@string/community_content"
             android:screenOrientation="portrait" />
 
+        <!-- 幼儿保健 -->
+        <activity
+            android:name=".ui.haoyun.yuerbaojian.YuerBaojianActivity"
+            android:label="@string/youer_baojian"
+            android:screenOrientation="portrait" />
+
         <!-- 我的消息 -->
         <activity
             android:name=".ui.main.message.MessageActivity"

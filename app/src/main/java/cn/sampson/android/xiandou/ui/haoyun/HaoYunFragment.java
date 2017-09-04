@@ -39,6 +39,7 @@ import cn.sampson.android.xiandou.ui.haoyun.beiyun.BeiYunActivity;
 import cn.sampson.android.xiandou.ui.haoyun.domain.Index;
 import cn.sampson.android.xiandou.ui.haoyun.domain.NewsItem;
 import cn.sampson.android.xiandou.ui.haoyun.yuer.YuerActivity;
+import cn.sampson.android.xiandou.ui.haoyun.yuerbaojian.YuerBaojianActivity;
 import cn.sampson.android.xiandou.ui.haoyun.yunyu.YunyuActivity;
 import cn.sampson.android.xiandou.utils.ContextUtil;
 import cn.sampson.android.xiandou.utils.imageloader.ImageLoader;
@@ -113,6 +114,7 @@ public class HaoYunFragment extends BaseFragment implements View.OnClickListener
         llBeiyun.setOnClickListener(this);
         llTaijiao.setOnClickListener(this);
         llYuer.setOnClickListener(this);
+        rlHealth.setOnClickListener(this);
 
         mPresenter = new HomePresenterImpl(this, refreshRoot);
         advWidth = (ContextUtil.getScreenWidth() - ContextUtil.dip2Px(12) * 4) / 2;
@@ -187,6 +189,11 @@ public class HaoYunFragment extends BaseFragment implements View.OnClickListener
             case R.id.ll_yuer:
                 Intent attention = new Intent(getActivity(), YuerActivity.class);
                 getActivity().startActivity(attention);
+                break;
+
+            case R.id.rl_health:
+                Intent baojian = new Intent(getActivity(), YuerBaojianActivity.class);
+                getActivity().startActivity(baojian);
                 break;
         }
     }
