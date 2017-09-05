@@ -1,6 +1,7 @@
 package cn.sampson.android.xiandou.ui.haoyun.yuerbaojian;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 
 import java.util.ArrayList;
@@ -25,6 +27,7 @@ import cn.sampson.android.xiandou.core.retroft.base.BasePresenter;
 import cn.sampson.android.xiandou.core.retroft.base.IView;
 import cn.sampson.android.xiandou.core.retroft.base.Result;
 import cn.sampson.android.xiandou.model.ListItem;
+import cn.sampson.android.xiandou.ui.haoyun.NewArticleDetailActivity;
 import cn.sampson.android.xiandou.ui.haoyun.domain.NewsItem;
 import cn.sampson.android.xiandou.widget.adapter.baseadapter.QuickRecycleViewAdapter;
 import cn.sampson.android.xiandou.widget.adapter.baseadapter.ViewHelper;
@@ -48,7 +51,7 @@ public class YuerbaojianFragment extends Fragment implements IView {
     YuerBaojianListPresenter mPresenter;
 
     String type;
-    int page =1,num=10;
+    int page = 1, num = 10;
 
     @Nullable
     @Override
@@ -61,32 +64,40 @@ public class YuerbaojianFragment extends Fragment implements IView {
 
     private void initView() {
         type = getArguments().getString(TYPE);
-        mPresenter = new YuerBaojianPresenterImpl(this,viewRoot);
+        mPresenter = new YuerBaojianPresenterImpl(this, viewRoot);
 
         refresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                mPresenter.getYuerBaojianList(type,page,num);
+                mPresenter.getYuerBaojianList(type, page, num);
             }
         });
 
         list.setLayoutManager(new LinearLayoutManager(getActivity()));
-        adapter = new QuickRecycleViewAdapter<NewsItem>(R.layout.item_baojian,new ArrayList<NewsItem>(),list) {
+        adapter = new QuickRecycleViewAdapter<NewsItem>(R.layout.item_baojian, new ArrayList<NewsItem>(), list) {
             @Override
-            protected void onBindData(Context context, int position, NewsItem item, int itemLayoutId, ViewHelper helper) {
-                helper.setText(R.id.tv_item , (position+1) + "、" + " " + item.articleTitle);
+            protected void onBindData(Context context, int position, final NewsItem item, int itemLayoutId, ViewHelper helper) {
+                helper.setText(R.id.tv_item, (position + 1) + "、" + " " + item.articleTitle);
+                helper.setRootOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(getActivity(), NewArticleDetailActivity.class);
+                        intent.putExtra(NewArticleDetailActivity.ARTICLE_ID, item.articleId);
+                        startActivity(intent);
+                    }
+                });
             }
         };
         adapter.setOnLoadMoreListener(new QuickRecycleViewAdapter.OnLoadMoreListener() {
             @Override
             public void onLoadMore() {
                 page++;
-                mPresenter.getYuerBaojianList(type,page,num);
+                mPresenter.getYuerBaojianList(type, page, num);
             }
         });
         list.setAdapter(adapter);
 
-        mPresenter.getYuerBaojianList(type,page,num);
+        mPresenter.getYuerBaojianList(type, page, num);
     }
 
     @Override
@@ -100,7 +111,7 @@ public class YuerbaojianFragment extends Fragment implements IView {
         refresh.setRefreshing(false);
     }
 
-    void showBaojian(ListItem<NewsItem> data){
+    void showBaojian(ListItem<NewsItem> data) {
         refresh.setRefreshing(false);
         if (data != null && data.total > 0) {
             setList(data.lists);
@@ -115,7 +126,7 @@ public class YuerbaojianFragment extends Fragment implements IView {
         }
     }
 
-    class YuerBaojianPresenterImpl extends BasePresenter<YuerbaojianFragment> implements YuerBaojianListPresenter{
+    class YuerBaojianPresenterImpl extends BasePresenter<YuerbaojianFragment> implements YuerBaojianListPresenter {
 
         public YuerBaojianPresenterImpl(YuerbaojianFragment view) {
             super(view);
@@ -126,13 +137,13 @@ public class YuerbaojianFragment extends Fragment implements IView {
         }
 
         @Override
-        public void getYuerBaojianList(String tag,int page,int num) {
+        public void getYuerBaojianList(String tag, int page, int num) {
             requestData(RetrofitWapper.getInstance().getNetService(NewsApi.class).getNewsByTag(tag, page, num), GET_YUER_BAOJIAN_LIST);
         }
 
         @Override
         protected void onResult(Result result, String key) {
-            switch (key){
+            switch (key) {
                 case GET_YUER_BAOJIAN_LIST:
                     showBaojian((ListItem<NewsItem>) result.data);
                     break;

@@ -8,10 +8,6 @@ public interface CommunityIndexPresenter {
 
     String GET_COMMUNITY_INDEX = "getCommunityIndex";
 
-    String GET_CATEGORY = "getCategory";
-
     void getCommunityIndex(int page, int num);
-
-    void setGetCategory();
 
 }

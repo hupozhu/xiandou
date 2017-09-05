@@ -8,6 +8,10 @@ public interface HomePresenter {
 
     String GET_HOME = "getHome";
 
+    String GET_CATEGORY = "getCategory";
+
     void getHome();
+
+    void getCategory();
 
 }

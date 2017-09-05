@@ -18,7 +18,8 @@
             <RelativeLayout
                 android:id="@+id/rl_question"
                 android:layout_width="match_parent"
-                android:layout_height="95dp">
+                android:layout_height="95dp"
+                android:background="@drawable/selectable_common_white_pressed_bg">
 
                 <ImageView
                     android:id="@+id/iv_question"
@@ -66,7 +67,8 @@
             <RelativeLayout
                 android:id="@+id/rl_health"
                 android:layout_width="match_parent"
-                android:layout_height="95dp">
+                android:layout_height="95dp"
+                android:background="@drawable/selectable_common_white_pressed_bg">
 
                 <ImageView
                     android:id="@+id/iv_knowledge"

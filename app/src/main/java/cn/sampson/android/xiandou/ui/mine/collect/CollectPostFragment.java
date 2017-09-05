@@ -48,7 +48,7 @@ public class CollectPostFragment extends BaseFragment implements IView, SwipeRef
     @Bind(R.id.refresh)
     SwipeRefreshLayout refresh;
     @Bind(R.id.view_root)
-    FrameLayout viewRoot;
+    RelativeLayout viewRoot;
 
     QuickRecycleViewAdapter<PostsItem> mAdapter;
     MyCollectionPresenter mPresenter;

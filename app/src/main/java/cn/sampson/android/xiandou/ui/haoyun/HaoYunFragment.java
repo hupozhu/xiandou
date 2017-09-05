@@ -26,15 +26,21 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import cn.sampson.android.xiandou.R;
+import cn.sampson.android.xiandou.config.AppCache;
+import cn.sampson.android.xiandou.core.manager.LogicManager;
 import cn.sampson.android.xiandou.core.presenter.HomePresenter;
+import cn.sampson.android.xiandou.core.retroft.Api.CommunityApi;
 import cn.sampson.android.xiandou.core.retroft.Api.NewsApi;
 import cn.sampson.android.xiandou.core.retroft.RetrofitWapper;
 import cn.sampson.android.xiandou.core.retroft.base.BasePresenter;
 import cn.sampson.android.xiandou.core.retroft.base.IView;
 import cn.sampson.android.xiandou.core.retroft.base.Result;
 import cn.sampson.android.xiandou.model.ListItem;
+import cn.sampson.android.xiandou.ui.BaseActivity;
 import cn.sampson.android.xiandou.ui.BaseFragment;
 import cn.sampson.android.xiandou.ui.WebViewActivity;
+import cn.sampson.android.xiandou.ui.community.PublishArticleActivity;
+import cn.sampson.android.xiandou.ui.community.domain.CommunityCategory;
 import cn.sampson.android.xiandou.ui.haoyun.beiyun.BeiYunActivity;
 import cn.sampson.android.xiandou.ui.haoyun.domain.Index;
 import cn.sampson.android.xiandou.ui.haoyun.domain.NewsItem;
@@ -115,6 +121,7 @@ public class HaoYunFragment extends BaseFragment implements View.OnClickListener
         llTaijiao.setOnClickListener(this);
         llYuer.setOnClickListener(this);
         rlHealth.setOnClickListener(this);
+        rlQuestion.setOnClickListener(this);
 
         mPresenter = new HomePresenterImpl(this, refreshRoot);
         advWidth = (ContextUtil.getScreenWidth() - ContextUtil.dip2Px(12) * 4) / 2;
@@ -192,8 +199,17 @@ public class HaoYunFragment extends BaseFragment implements View.OnClickListener
                 break;
 
             case R.id.rl_health:
+                if (LogicManager.loginIntercept((BaseActivity) getActivity())) {
+                    return;
+                }
+
                 Intent baojian = new Intent(getActivity(), YuerBaojianActivity.class);
                 getActivity().startActivity(baojian);
+                break;
+
+            case R.id.rl_question:
+                Intent question = new Intent(getActivity(), PublishArticleActivity.class);
+                getActivity().startActivity(question);
                 break;
         }
     }
@@ -219,9 +235,19 @@ public class HaoYunFragment extends BaseFragment implements View.OnClickListener
         }
     }
 
+    /**
+     * 处理类别
+     */
+    private void processCategory(ListItem<CommunityCategory> categories) {
+        if (categories != null && categories.total > 0) {
+            AppCache.setCommunityCategories(categories.lists);
+        }
+    }
+
     @Override
     public void onRefresh() {
         mPresenter.getHome();
+        mPresenter.getCategory();
     }
 
     class HomePresenterImpl extends BasePresenter<HaoYunFragment> implements HomePresenter {
@@ -237,10 +263,19 @@ public class HaoYunFragment extends BaseFragment implements View.OnClickListener
         }
 
         @Override
+        public void getCategory() {
+            requestData(RetrofitWapper.getInstance().getNetService(CommunityApi.class).getCategories(), GET_CATEGORY);
+        }
+
+        @Override
         protected void onResult(Result result, String key) {
             switch (key) {
                 case GET_HOME:
                     showHomePage((Index) result.data);
+                    break;
+
+                case GET_CATEGORY:
+                    processCategory((ListItem<CommunityCategory>) result.data);
                     break;
             }
         }

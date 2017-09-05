@@ -187,7 +187,6 @@ public class PublishArticleActivity extends BaseActivity implements IView {
             view.setLayoutParams(params);
             llTagContainer.addView(view);
         }
-
     }
 
     /**

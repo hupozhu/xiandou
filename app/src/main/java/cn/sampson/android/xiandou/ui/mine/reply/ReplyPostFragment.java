@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,7 +49,7 @@ public class ReplyPostFragment extends BaseFragment implements IView, SwipeRefre
     @Bind(R.id.refresh)
     SwipeRefreshLayout refresh;
     @Bind(R.id.view_root)
-    FrameLayout viewRoot;
+    RelativeLayout viewRoot;
 
     QuickRecycleViewAdapter<CommentItem> mAdapter;
     MyReplyCommentPresenter mPresenter;

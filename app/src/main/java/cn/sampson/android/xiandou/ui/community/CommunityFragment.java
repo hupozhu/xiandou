@@ -89,7 +89,7 @@ public class CommunityFragment extends BaseFragment implements SwipeRefreshLayou
         list.setLayoutManager(new LinearLayoutManager(getContext()));
         mAdapter = new QuickRecycleViewAdapter<PostsItem>(R.layout.item_community_news, new ArrayList<PostsItem>(), list) {
             @Override
-            protected void onBindData(Context context, int position, final PostsItem item, int itemLayoutId, ViewHelper helper) {
+            protected void onBindData(Context context, int position, final PostsItem item, final int itemLayoutId, ViewHelper helper) {
                 helper.setText(R.id.tv_title, item.title);
                 helper.setText(R.id.tv_tag, "#" + item.cateName + "#");
                 helper.setText(R.id.tv_content, item.content);
@@ -103,6 +103,15 @@ public class CommunityFragment extends BaseFragment implements SwipeRefreshLayou
                 } else {
                     layout.setVisibility(View.GONE);
                 }
+
+                helper.setOnClickListener(R.id.item_root, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(getActivity(), CommunityArticleDetailActivity.class);
+                        intent.putExtra(CommunityArticleDetailActivity.ARTICLE_ID, item.articleId);
+                        startActivity(intent);
+                    }
+                });
             }
         };
         mAdapter.setOnLoadMoreListener(new QuickRecycleViewAdapter.OnLoadMoreListener() {
@@ -156,23 +165,22 @@ public class CommunityFragment extends BaseFragment implements SwipeRefreshLayou
     }
 
     /**
-     * 处理类别
-     */
-    private void processCategory(ListItem<CommunityCategory> categories) {
-        if (categories != null && categories.total > 0) {
-            AppCache.setCommunityCategories(categories.lists);
-        }
-    }
-
-    /**
      * 展示资讯
      */
     private void showHot(ListItem<PostsItem> top) {
         mTopContainer.removeAllViews();
 
         if (top != null && top.total > 0) {
-            for (PostsItem item : top.lists) {
+            for (final PostsItem item : top.lists) {
                 View view = LayoutInflater.from(getContext()).inflate(R.layout.item_discovery_top, mTopContainer, false);
+                view.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(getActivity(), CommunityArticleDetailActivity.class);
+                        intent.putExtra(CommunityArticleDetailActivity.ARTICLE_ID, item.articleId);
+                        startActivity(intent);
+                    }
+                });
                 TextView title = UiUtils.find(view, R.id.tv_title);
                 title.setText(item.title);
                 mTopContainer.addView(view);
@@ -207,7 +215,6 @@ public class CommunityFragment extends BaseFragment implements SwipeRefreshLayou
     public void onRefresh() {
         page = 1;
         mPresenter.getCommunityIndex(page, num);
-        mPresenter.setGetCategory();
     }
 
     @Override
@@ -237,19 +244,10 @@ public class CommunityFragment extends BaseFragment implements SwipeRefreshLayou
         }
 
         @Override
-        public void setGetCategory() {
-            requestData(RetrofitWapper.getInstance().getNetService(CommunityApi.class).getCategories(), GET_CATEGORY);
-        }
-
-        @Override
         protected void onResult(Result result, String key) {
             switch (key) {
                 case GET_COMMUNITY_INDEX:
                     showCommunityIndex((Discovery) result.data);
-                    break;
-
-                case GET_CATEGORY:
-                    processCategory((ListItem<CommunityCategory>) result.data);
                     break;
             }
         }
